@@ -1,5 +1,9 @@
-<script>
+<script lang="ts">
   import '../app.css'
+  import Navbar from '$lib/components/navbar.svelte'
+  import Scrollbar from '$lib/components/scrollbar.svelte'
+
+  let section: string = 'home'
 </script>
 
 <svelte:head>
@@ -7,5 +11,7 @@
 </svelte:head>
 
 <div class="bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text">
+  <Navbar></Navbar>
   <slot />
 </div>
+<Scrollbar></Scrollbar>
