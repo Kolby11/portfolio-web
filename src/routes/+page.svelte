@@ -2,6 +2,7 @@
   import { onMount, onDestroy } from 'svelte'
   import { section } from '$lib/stores/scrollbar'
   import { get } from 'svelte/store'
+  import Timeline from '$lib/components/timeline.svelte'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -37,6 +38,9 @@
   <section id="about">
     <div class="h-screen min-h-fit px-10 pt-20">
       <h1 class="text-2xl">About</h1>
+      <div class="ml-auto mt-6 flex items-center justify-start">
+        <Timeline />
+      </div>
     </div>
   </section>
   <section id="skills" class="h-full">

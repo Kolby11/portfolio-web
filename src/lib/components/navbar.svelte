@@ -30,7 +30,7 @@
   })
 </script>
 
-<div class="fixed top-0 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl sm:flex">
+<div class="fixed top-0 z-50 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl sm:flex">
   <div class="items-center justify-between">
     {#each languages as language}
       <button class="mx-2 h-fit" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
