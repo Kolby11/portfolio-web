@@ -29,7 +29,12 @@
   let svgCoordinates: Coordinate[] = []
 
   onMount(() => {
-    const parent = document.querySelector('.relative.flex') // Adjust the selector as needed
+    calculateSvgCoordinates()
+  })
+
+  const calculateSvgCoordinates = () => {
+    svgCoordinates = []
+    const parent = document.querySelector('.relative.flex')
     if (parent) {
       const parentRect = parent.getBoundingClientRect()
 
@@ -54,7 +59,7 @@
         }
       })
     }
-  })
+  }
 
   const handleTitleMouseEnter = (e: Event, index: number) => {
     const underline = document.getElementById(`underline-${index}`)
@@ -80,6 +85,9 @@
       }
       opened = index
     }
+    setTimeout(() => {
+      calculateSvgCoordinates()
+    }, 0)
   }
 </script>
 
@@ -100,27 +108,29 @@
   <div>
     {#each items as item, index}
       <div class="relative py-4">
-        <div class="flex items-center">
-          <img src="icons/dark/circle-filled-white.svg" alt="circle" class="w-3" id="timeline-point-{index}" />
-          <button
-            class="ml-4 transition duration-300 hover:translate-x-1"
-            on:mouseenter={e => handleTitleMouseEnter(e, index)}
-            on:mouseleave={e => handleTitleMouseLeave(e, index)}
-            on:click={e => handleTitleClick(e, index)}
-          >
-            <p>
-              {item.title}
-            </p>
-            <div class="transition-width w-0 border-b duration-300" id="underline-{index}"></div>
-          </button>
-        </div>
-        {#if opened === index}
-          <div class="ml-8 mt-2 text-sm">
-            <p>
-              {item.text}
-            </p>
+        <div class="flex items-start">
+          <img src="icons/dark/circle-filled-white.svg" alt="circle" class="mt-1.5 w-3" id="timeline-point-{index}" />
+          <div>
+            <button
+              class="ml-4 transition duration-300 hover:translate-x-1"
+              on:mouseenter={e => handleTitleMouseEnter(e, index)}
+              on:mouseleave={e => handleTitleMouseLeave(e, index)}
+              on:click={e => handleTitleClick(e, index)}
+            >
+              <p>
+                {item.title}
+              </p>
+              <div class="transition-width w-0 border-b duration-300" id="underline-{index}"></div>
+            </button>
+            {#if opened === index}
+              <div class="ml-8 mt-2 text-sm">
+                <p>
+                  {item.text}
+                </p>
+              </div>
+            {/if}
           </div>
-        {/if}
+        </div>
       </div>
     {/each}
   </div>

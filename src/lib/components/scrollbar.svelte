@@ -80,8 +80,8 @@
   let isDragging: boolean = false
 </script>
 
-<div class="fixed right-0 top-20 hidden h-[80%] w-10 flex-col items-start text-dark-text sm:flex" id="scrollbar">
-  <div class="h-full border-r border-dark-secondary"></div>
+<div class="fixed right-0 top-20 hidden h-[80%] w-10 flex-col items-start sm:flex dark:text-dark-text" id="scrollbar">
+  <div class="border-light-secondary h-full border-r dark:border-dark-secondary"></div>
   <div
     class="absolute flex h-1/6 w-full bg-transparent"
     role="scrollbar"
@@ -93,7 +93,7 @@
     on:dragend={handleDrag}
     on:mousedown={handleMouseDown}
   >
-    <div class="relative h-full border-x border-dark-primary">
+    <div class="relative h-full border-x border-light-primary dark:border-dark-primary">
       <div class="block-select absolute top-0 flex h-full w-5 items-center justify-center">
         <p class="rotate-90 pb-4">{$section.slice(0, 1).toUpperCase() + $section.slice(1)}</p>
       </div>
