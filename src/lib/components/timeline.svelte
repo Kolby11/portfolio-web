@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { theme } from '$lib/stores/themeStore'
   import { onMount } from 'svelte'
 
   const items = [
@@ -100,7 +101,7 @@
           y1={coord.y}
           x2={svgCoordinates[index + 1].x}
           y2={svgCoordinates[index + 1].y}
-          stroke="#ffffff"
+          stroke={$theme === 'dark' ? '#ffffff' : '#000000'}
         />
       {/if}
     {/each}
@@ -109,7 +110,16 @@
     {#each items as item, index}
       <div class="relative py-4">
         <div class="flex items-start">
-          <img src="icons/dark/circle-filled-white.svg" alt="circle" class="mt-1.5 w-3" id="timeline-point-{index}" />
+          {#if $theme === 'dark'}
+            <img src="icons/dark/circle-filled-white.svg" alt="circle" class="mt-1.5 w-3" id="timeline-point-{index}" />
+          {:else}
+            <img
+              src="icons/light/circle-filled-black.svg"
+              alt="circle"
+              class="mt-1.5 w-3"
+              id="timeline-point-{index}"
+            />
+          {/if}
           <div>
             <button
               class="ml-4 transition duration-300 hover:translate-x-1"

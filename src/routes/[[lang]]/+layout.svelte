@@ -1,10 +1,18 @@
 <script lang="ts">
-  import '../app.css'
+  import '../../app.css'
   import Navbar from '$lib/components/navbar.svelte'
   import Scrollbar from '$lib/components/scrollbar.svelte'
   import Footer from '$lib/components/footer.svelte'
+  import { translation } from '$lib/stores/translation'
+  import { onMount } from 'svelte'
+  import { initTheme } from '$lib/stores/themeStore'
 
-  let section: string = 'home'
+  export let data
+  translation.set(data.translation)
+
+  onMount(() => {
+    initTheme()
+  })
 </script>
 
 <svelte:head>

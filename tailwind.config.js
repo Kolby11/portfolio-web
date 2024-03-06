@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
@@ -9,10 +10,10 @@ export default {
             DEFAULT: '#0A0A0A',
           },
           text: {
-            DEFAULT: '#FFFFFF',
+            DEFAULT: '#edeff2',
           },
           primary: {
-            DEFAULT: '#FFFFFF',
+            DEFAULT: '#edeff2',
           },
           secondary: {
             DEFAULT: '#9C9A9A',
@@ -20,7 +21,7 @@ export default {
         },
         light: {
           background: {
-            DEFAULT: '#FFFFFF',
+            DEFAULT: '#e4e7ed',
           },
           text: {
             DEFAULT: '#0A0A0A',

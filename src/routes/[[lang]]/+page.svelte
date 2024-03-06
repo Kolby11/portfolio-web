@@ -3,8 +3,7 @@
   import { section } from '$lib/stores/scrollbar'
   import { get } from 'svelte/store'
   import Timeline from '$lib/components/timeline.svelte'
-  import CodeSnippet from '$lib/components/codeSnippet.svelte'
-  import Footer from '$lib/components/footer.svelte'
+  import { translation } from '$lib/stores/translation'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -34,13 +33,36 @@
 <div class="flex h-full w-full flex-col" id="content">
   <section id="home">
     <div class="h-screen min-h-fit px-10 pt-20">
-      <h1 class="text-2xl">Home</h1>
-      <CodeSnippet />
+      <!-- <h1 class="text-2xl">{$translation.home.title}</h1> -->
+      <div
+        class="flex flex-col-reverse items-center justify-end sm:mt-8 md:mt-16 lg:mr-20 lg:mt-24 lg:flex-row xl:justify-center xl:px-20"
+      >
+        <div class="mt-8 w-full px-4 text-center lg:mr-16">
+          <h2
+            class="border-b-2 border-light-primary pb-2 text-4xl md:text-5xl lg:pl-2 lg:text-left dark:border-dark-primary"
+          >
+            Martin Kollár
+          </h2>
+          <p class="mt-2 px-4 text-left">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio hic explicabo consectetur est eius accusamus
+            quas eveniet placeat non illum dolores modi sint accusantium porro nesciunt in, maiores eligendi similique.
+          </p>
+        </div>
+        <div
+          class="flex aspect-square max-w-xs items-center justify-center overflow-hidden rounded-full sm:max-w-sm xl:max-w-md"
+        >
+          <img
+            src="/martin_kollar_square_dark.jpg"
+            alt="Martin Kollár"
+            class="scale-125 transition duration-500 hover:scale-110"
+          />
+        </div>
+      </div>
     </div>
   </section>
   <section id="about">
     <div class="h-screen min-h-fit px-10 pt-20">
-      <h1 class="text-2xl">About</h1>
+      <h1 class="text-2xl">{$translation.about.title}</h1>
       <div class="ml-auto mt-6 flex items-center justify-start">
         <Timeline />
       </div>
@@ -48,12 +70,12 @@
   </section>
   <section id="skills" class="h-full">
     <div class="h-screen min-h-fit px-10 pt-20">
-      <h1 class="text-2xl">Skills</h1>
+      <h1 class="text-2xl">{$translation.skills.title}</h1>
     </div>
   </section>
   <section id="contact" class="h-full">
     <div class="h-screen min-h-fit px-10 pt-20">
-      <h1 class="text-2xl">Contact</h1>
+      <h1 class="text-2xl">{$translation.contact.title}</h1>
       <div class="flex w-full items-center justify-evenly self-end">
         <a
           href="https://www.facebook.com/martin.kollar.kolby/"
@@ -72,7 +94,7 @@
           <img src="logos/github/github_logo_white.png" alt="linkedin" class="inline-block h-8" />
         </a>
         <a
-          href="https://www.linkedin.com/in/martin-kollar-2b57a3290/"
+          href="https://www.linkedin.com/in/martin-koll%C3%A1r-2b57a3290/"
           target="_blank"
           class="flex items-center justify-center brightness-0 dark:invert"
         >
