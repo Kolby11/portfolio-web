@@ -28,7 +28,7 @@
     <span class="text-blue-600 dark:text-blue-500">const</span>
     <span class="dark:text-sky-400">message</span>
     <span>=</span>
-    <span class="text-yellow-900 dark:text-orange-400">"Hi, how are you? This is a CI/CD Testing"</span>
+    <span class="text-yellow-900 dark:text-orange-400">"Hi, how are you?"</span>
   </p>
   <br />
   <p>
