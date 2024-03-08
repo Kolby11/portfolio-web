@@ -16,6 +16,10 @@ export async function loadTranslation(language: string) {
 }
 
 export type BaseTranslation = {
+  seo: {
+    description: string
+    keywords: string
+  }
   navbar: {
     [key: string]: string
   }

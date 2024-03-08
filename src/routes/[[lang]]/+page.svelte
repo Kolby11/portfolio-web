@@ -54,7 +54,7 @@
           <img
             src="/martin_kollar_square_dark.jpg"
             alt="Martin Kollár"
-            class="scale-125 transition duration-500 hover:scale-110"
+            class="transition duration-500 hover:scale-110"
           />
         </div>
       </div>

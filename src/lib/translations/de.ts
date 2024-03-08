@@ -1,6 +1,12 @@
 import type { BaseTranslation } from './loadTranslations'
 
 export const translationDE: BaseTranslation = {
+  seo: {
+    description:
+      'Martin Kollár - ein Webentwickler mit Schwerpunkt auf Innovation und Kreativität. Ein Überblick über meine Erfahrungen mit Programmierung, Projekten und Fähigkeiten im Bereich der Webentwicklung.',
+    keywords:
+      'Martin Kollar, Webentwickler, Programmierer, Programmierfähigkeiten, Projektmanagement, Full-Stack-Entwickler, Softwareingenieurwesen, Webdesign, Benutzererfahrung, Frontend-Entwicklung, Backend-Entwicklung, Anwendungsentwicklung, Programmierprojekte',
+  },
   navbar: {
     home: 'Haus',
     about: 'Über mich',

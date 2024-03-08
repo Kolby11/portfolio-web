@@ -1,6 +1,12 @@
 import type { BaseTranslation } from './loadTranslations'
 
 export const translationSK: BaseTranslation = {
+  seo: {
+    description:
+      'Martin Kollár - webdeveloper so zameraním na inovácie a kreativitu. Prehľad mojich skúseností s programovaním, projektami a zručnosťami v oblasti web developmentu.',
+    keywords:
+      'Martin Kollár, Web Developer, Programátor, Programovacie Zručnosti, Projektový Manažment, Full Stack Developer, Softvérové Inžinierstvo, Web Dizajn, Používateľská Skúsenosť, Vývoj Frontendu, Vývoj Backendu, Vývoj Aplikácií, Programovacie Projekty',
+  },
   navbar: {
     home: 'Domov',
     about: 'O mne',

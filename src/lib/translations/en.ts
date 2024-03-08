@@ -1,6 +1,12 @@
 import type { BaseTranslation } from './loadTranslations'
 
 export const translationEN: BaseTranslation = {
+  seo: {
+    description:
+      'Martin Kollár - a web developer focused on innovation and creativity. An overview of my experience with programming, projects, and skills in the field of web development.',
+    keywords:
+      'Martin Kollar, Web Developer, Programmer, Programming Skills, Project Management, Full Stack Developer, Software Engineering, Web Design, User Experience, Frontend Development, Backend Development, Application Development, Coding Projects',
+  },
   navbar: {
     home: 'Home',
     about: 'About',

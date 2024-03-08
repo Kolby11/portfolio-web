@@ -7,9 +7,9 @@ export async function load({ params }) {
 
   if (lang === undefined || !supportedLangs.includes(lang)) {
     const translation = await loadTranslation(defaultLang)
-    return { translation }
+    return { translation, lang: defaultLang }
   }
 
   const translation = await loadTranslation(lang)
-  return { translation }
+  return { translation, lang }
 }
