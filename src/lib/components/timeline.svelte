@@ -2,24 +2,7 @@
   import { theme } from '$lib/stores/themeStore'
   import { onMount } from 'svelte'
 
-  const items = [
-    { title: 'Entered High School', text: 'Entered High School with almost no prior coding experience', date: 2020 },
-    {
-      title: 'Started coding consistently',
-      text: 'Experimented with multiple languages, game engines, and frameworks. Started exploring ways to make my code cleaner and efficient.',
-      date: 2021,
-    },
-    {
-      title: 'Got Job at Binary Confidence s.r.o.',
-      text: 'Got my first job as a backend developer in Binary Confidence s.r.o. Worked with technologies such as Ansible, Hyper-V, Linux, etc..  Met with new concepts, technologies, interesting projects, and great people, furthering my knowledge. ',
-      date: 2023,
-    },
-    {
-      title: 'Graduated highschool',
-      text: 'For my graduation project I worked on my own first large-scale fullstack web application. I learned a lot about web development, and I was able to apply my knowledge in a real-world project. I also learned a lot about project architecture, cloud and deployment. ',
-      date: 2024,
-    },
-  ]
+  export let timeLineItems: { title: string; description: string; year: number }[] = []
 
   type Coordinate = {
     x: number
@@ -39,12 +22,12 @@
     if (parent) {
       const parentRect = parent.getBoundingClientRect()
 
-      items.forEach((element, i) => {
+      timeLineItems.forEach((element, i) => {
         const point = document.getElementById(`timeline-point-${i}`)
 
         // Handle first and last item
         let addY: number = 0
-        if (i === 0 || i === items.length - 1) {
+        if (i === 0 || i === timeLineItems.length - 1) {
           addY = 10
         }
 
@@ -107,7 +90,7 @@
     {/each}
   </svg>
   <div>
-    {#each items as item, index}
+    {#each timeLineItems as item, index}
       <div class="relative py-4">
         <div class="flex items-start">
           {#if $theme === 'dark'}
@@ -135,7 +118,7 @@
             {#if opened === index}
               <div class="ml-8 mt-2 text-sm">
                 <p>
-                  {item.text}
+                  {item.description}
                 </p>
               </div>
             {/if}

@@ -32,14 +32,14 @@
 
 <div class="flex h-full w-full flex-col" id="content">
   <section id="home">
-    <div class="h-screen min-h-fit px-10 pt-20">
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
       <!-- <h1 class="text-2xl">{$translation.home.title}</h1> -->
       <div
         class="flex flex-col-reverse items-center justify-end sm:mt-8 md:mt-16 lg:mr-20 lg:mt-24 lg:flex-row xl:justify-center xl:px-20"
       >
         <div class="mt-8 w-full px-4 text-center lg:mr-16">
           <h2
-            class="border-b-2 border-light-primary pb-2 text-4xl md:text-5xl lg:pl-2 lg:text-left dark:border-dark-primary"
+            class="border-b-2 border-light-primary pb-2 text-4xl dark:border-dark-primary md:text-5xl lg:pl-2 lg:text-left"
           >
             Martin Kollár
           </h2>
@@ -61,21 +61,30 @@
     </div>
   </section>
   <section id="about">
-    <div class="h-screen min-h-fit px-10 pt-20">
-      <h1 class="text-2xl">{$translation.about.title}</h1>
-      <div class="ml-auto mt-6 flex items-center justify-start">
-        <Timeline />
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+      <h1 class="text-3xl md:text-4xl">{$translation.about.title}</h1>
+      <div class="ml-auto mt-10 px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
+        <div class="md:w-1/2 md:pr-5">
+          <h2 class="text-2xl">Timeline</h2>
+          <Timeline timeLineItems={$translation.about.timeline.sections} />
+        </div>
+        <div class="md:w-1/2 md:pl-5">
+          <h2 class="text-2xl">{$translation.about.interestsAndHobbies.title}</h2>
+          <p>
+            {$translation.about.interestsAndHobbies.description}
+          </p>
+        </div>
       </div>
     </div>
   </section>
   <section id="skills" class="h-full">
-    <div class="h-screen min-h-fit px-10 pt-20">
-      <h1 class="text-2xl">{$translation.skills.title}</h1>
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+      <h1 class="text-3xl">{$translation.skills.title}</h1>
     </div>
   </section>
   <section id="contact" class="h-full">
-    <div class="h-screen min-h-fit px-10 pt-20">
-      <h1 class="text-2xl">{$translation.contact.title}</h1>
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+      <h1 class="text-3xl">{$translation.contact.title}</h1>
       <div class="flex w-full items-center justify-evenly self-end">
         <a
           href="https://www.facebook.com/martin.kollar.kolby/"

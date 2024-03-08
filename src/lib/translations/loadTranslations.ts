@@ -28,6 +28,15 @@ export type BaseTranslation = {
     description: string
     timeline: {
       title: string
+      sections: {
+        title: string
+        year: number
+        description: string
+      }[]
+    }
+    interestsAndHobbies: {
+      title: string
+      description: string
     }
   }
   skills: {
