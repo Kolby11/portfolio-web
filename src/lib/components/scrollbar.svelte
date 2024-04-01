@@ -1,6 +1,7 @@
 <script lang="ts">
   import { section } from '$lib/stores/scrollbar'
-  import { translation } from '$lib/stores/translation'
+  import { currentLanguage } from '$lib/stores/translation'
+  import { translations } from '$lib/data/translations'
   import { onMount } from 'svelte'
 
   let windowHeight: number
@@ -81,7 +82,7 @@
   let isDragging: boolean = false
 </script>
 
-<div class="fixed right-0 top-20 hidden h-[80%] w-10 flex-col items-start sm:flex dark:text-dark-text" id="scrollbar">
+<div class="fixed right-0 top-20 hidden h-[80%] w-10 flex-col items-start dark:text-dark-text md:flex" id="scrollbar">
   <div class="h-full border-r border-light-secondary dark:border-dark-secondary"></div>
   <div
     class="absolute flex h-1/6 w-full bg-transparent"
@@ -96,7 +97,9 @@
   >
     <div class="relative h-full border-x border-light-primary dark:border-dark-primary">
       <div class="block-select absolute top-0 flex h-full w-5 items-center justify-center">
-        <p class="rotate-90 whitespace-nowrap pb-4">{$translation.navbar[$section]}</p>
+        <p class="rotate-90 whitespace-nowrap pb-4">
+          {$section ? translations.navbar[$section][$currentLanguage] : ''}
+        </p>
       </div>
     </div>
   </div>

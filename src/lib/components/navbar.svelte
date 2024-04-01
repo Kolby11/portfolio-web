@@ -2,11 +2,11 @@
   import { goto } from '$app/navigation'
   import { smoothScroll } from '$lib/actions/smoothScroll'
   import { theme } from '$lib/stores/themeStore'
-  import { translation } from '$lib/stores/translation'
-  import { loadTranslation } from '$lib/translations/loadTranslations'
+  import { currentLanguage, setCurrentLang } from '$lib/stores/translation'
+  import { translations } from '$lib/data/translations'
   import { onMount } from 'svelte'
 
-  let sections: string[] = $translation?.navbar ? Object.keys($translation.navbar) : []
+  let sections: string[] = translations.navbar ? Object.keys(translations.navbar) : []
   let languages: string[] = ['sk', 'en', 'de']
 
   let showMenu = false
@@ -20,14 +20,16 @@
   }
 
   const setLanguage = async (language: string) => {
-    const newlang = await loadTranslation(language)
-    translation.set(newlang)
-    goto(`/${language}`)
+    setCurrentLang(language)
+    goto(`/${language}`, { noScroll: true })
   }
 </script>
 
 <!-- Mobile navbar -->
-<div class="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-lg" use:smoothScroll>
+<div
+  class="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-lg md:hidden"
+  use:smoothScroll
+>
   <button class="mr-4 flex items-center justify-center" on:click={toggleDarkMode}>
     <span class="material-symbols-outlined text-light-primary dark:text-dark-primary">
       {$theme === 'dark' ? 'light_mode' : 'dark_mode'}
@@ -37,7 +39,7 @@
     <span class="material-symbols-outlined" style="font-size: 32px !important;"> {showMenu ? 'close' : 'menu'} </span>
   </button>
   <div
-    class="fixed right-0 top-20 flex h-[calc(100vh-5rem)] w-fit flex-col items-end justify-start bg-light-background pr-8 text-lg text-light-primary sm:hidden dark:bg-dark-background dark:text-dark-primary"
+    class="fixed right-0 top-20 flex h-[calc(100vh-5rem)] w-fit flex-col items-end justify-start bg-light-background pr-8 text-lg text-light-primary dark:bg-dark-background dark:text-dark-primary sm:hidden"
   >
     {#if showMenu}
       <nav class="mt-4 flex h-fit flex-col items-end">
@@ -47,7 +49,7 @@
             class="my-2"
             on:click={e => {
               showMenu = false
-            }}>{$translation?.navbar[section]}</a
+            }}>{translations.navbar[section][$currentLanguage]}</a
           >
         {/each}
       </nav>
@@ -62,7 +64,7 @@
 
 <!-- Desktop navbar -->
 <div
-  class="fixed top-0 z-50 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-lg sm:flex"
+  class="fixed top-0 z-50 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-lg md:flex"
   use:smoothScroll
 >
   <div class="flex w-fit items-center justify-between">
@@ -83,7 +85,8 @@
             href="#{section}"
             class="items-center justify-center px-3 text-xl {i === sections.length - 1
               ? ''
-              : 'border-r border-light-secondary dark:border-dark-secondary'}">{$translation?.navbar[section]}</a
+              : 'border-r border-light-secondary dark:border-dark-secondary'}"
+            >{translations.navbar[section][$currentLanguage]}</a
           >
         </li>
       {/each}

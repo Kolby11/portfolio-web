@@ -1,8 +1,10 @@
 <script lang="ts">
   import { theme } from '$lib/stores/themeStore'
+  import type { lang } from '$lib/data/translations'
   import { onMount } from 'svelte'
+  import { currentLanguage } from '$lib/stores/translation'
 
-  export let timeLineItems: { title: string; description: string; year: number }[] = []
+  export let timeLineItems: { title: Record<lang, string>; description: Record<lang, string>; year: number }[] = []
 
   type Coordinate = {
     x: number
@@ -18,7 +20,7 @@
 
   const calculateSvgCoordinates = () => {
     svgCoordinates = []
-    const parent = document.querySelector('.relative.flex')
+    const parent = document.querySelector('#timeline')
     if (parent) {
       const parentRect = parent.getBoundingClientRect()
 
@@ -46,14 +48,14 @@
   }
 
   const handleTitleMouseEnter = (e: Event, index: number) => {
-    const underline = document.getElementById(`underline-${index}`)
+    const underline = document.getElementById(`timeline-underline-${index}`)
     if (underline) {
       underline.style.width = '100%'
     }
   }
 
   const handleTitleMouseLeave = (e: Event, index: number) => {
-    const underline = document.getElementById(`underline-${index}`)
+    const underline = document.getElementById(`timeline-underline-${index}`)
     if (underline && opened !== index) {
       underline.style.width = '0%'
     }
@@ -63,7 +65,7 @@
     if (opened === index) {
       opened = null
     } else {
-      const underline = document.getElementById(`underline-${opened}`)
+      const underline = document.getElementById(`timeline-underline-${opened}`)
       if (underline) {
         underline.style.width = '0%'
       }
@@ -75,7 +77,7 @@
   }
 </script>
 
-<div class="relative flex">
+<div class="relative flex" id="timeline">
   <svg class="absolute h-full w-full">
     {#each svgCoordinates as coord, index}
       {#if index < svgCoordinates.length - 1}
@@ -105,20 +107,23 @@
           {/if}
           <div>
             <button
-              class="ml-4 transition duration-300 hover:translate-x-1"
+              class="ml-4 text-left transition duration-300 hover:translate-x-1"
               on:mouseenter={e => handleTitleMouseEnter(e, index)}
               on:mouseleave={e => handleTitleMouseLeave(e, index)}
               on:click={e => handleTitleClick(e, index)}
             >
               <p>
-                {item.title}
+                {item.title[$currentLanguage]}
               </p>
-              <div class="transition-width w-0 border-b duration-300" id="underline-{index}"></div>
+              <div
+                class="transition-width w-0 border-b border-light-primary duration-300 dark:border-dark-primary"
+                id="timeline-underline-{index}"
+              ></div>
             </button>
             {#if opened === index}
               <div class="ml-8 mt-2 text-sm">
                 <p>
-                  {item.description}
+                  {item.description[$currentLanguage]}
                 </p>
               </div>
             {/if}

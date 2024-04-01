@@ -3,7 +3,12 @@
   import { section } from '$lib/stores/scrollbar'
   import { get } from 'svelte/store'
   import Timeline from '$lib/components/timeline.svelte'
-  import { translation } from '$lib/stores/translation'
+  import { currentLanguage } from '$lib/stores/translation'
+  import { translations } from '$lib/data/translations'
+  import Graph from '$lib/components/graph.svelte'
+  import { languageStats } from '$lib/data/languageStats'
+  import { initTheme } from '$lib/stores/themeStore'
+  import ProjectsDisplay from '$lib/components/projectsDisplay.svelte'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -62,16 +67,16 @@
   </section>
   <section id="about">
     <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
-      <h1 class="text-3xl md:text-4xl">{$translation.about.title}</h1>
+      <h1 class="text-3xl md:text-4xl">{translations.about.title[$currentLanguage]}</h1>
       <div class="ml-auto mt-10 px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
         <div class="md:w-1/2 md:pr-5">
           <h2 class="text-2xl">Timeline</h2>
-          <Timeline timeLineItems={$translation.about.timeline.sections} />
+          <Timeline timeLineItems={translations.about.timeline.sections} />
         </div>
         <div class="md:w-1/2 md:pl-5">
-          <h2 class="text-2xl">{$translation.about.interestsAndHobbies.title}</h2>
+          <h2 class="text-2xl">{translations.about.interestsAndHobbies.title[$currentLanguage]}</h2>
           <p>
-            {$translation.about.interestsAndHobbies.description}
+            {translations.about.interestsAndHobbies.description[$currentLanguage]}
           </p>
         </div>
       </div>
@@ -79,12 +84,47 @@
   </section>
   <section id="skills" class="h-full">
     <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
-      <h1 class="text-3xl">{$translation.skills.title}</h1>
+      <h1 class="text-3xl">{translations.skills.title[$currentLanguage]}</h1>
+      <div class="ml-auto mt-10 px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
+        <div class="md:w-1/2 md:pr-5">
+          <p>
+            {translations.skills.description[$currentLanguage]}
+          </p>
+          <div class="mt-8">
+            <Graph
+              data={{
+                itemsTitle: 'Program',
+                valueTitle: 'Hours spent',
+                items: languageStats.map(item => {
+                  return { name: item.name, value: item.time }
+                }),
+              }}
+            />
+          </div>
+        </div>
+        <div class="md:w-1/2 md:pl-5">
+          <h2 class="text-2xl">{translations.skills.skillTree.title[$currentLanguage]}</h2>
+          {#each translations.skills.skillTree.categories as category}
+            <div class="flex flex-col">
+              <p>{category.name[$currentLanguage]}</p>
+            </div>
+          {:else}
+            <div></div>
+          {/each}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="projects" class="h-full">
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+      <h1 class="text-3xl">{translations.projects.title[$currentLanguage]}</h1>
+      <div class="flex w-full items-center justify-evenly self-end"></div>
+      <ProjectsDisplay />
     </div>
   </section>
   <section id="contact" class="h-full">
     <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
-      <h1 class="text-3xl">{$translation.contact.title}</h1>
+      <h1 class="text-3xl">{translations.contact.title[$currentLanguage]}</h1>
       <div class="flex w-full items-center justify-evenly self-end">
         <a
           href="https://www.facebook.com/martin.kollar.kolby/"
