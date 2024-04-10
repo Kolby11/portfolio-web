@@ -56,11 +56,11 @@
         <div
           class="flex aspect-square max-w-xs items-center justify-center overflow-hidden rounded-full sm:max-w-sm xl:max-w-md"
         >
-          <img
+          <!-- <img
             src="/martin_kollar_square_dark.jpg"
             alt="Martin Kollár"
             class="transition duration-500 hover:scale-110"
-          />
+          /> -->
         </div>
       </div>
     </div>
@@ -118,8 +118,9 @@
   <section id="projects" class="h-full">
     <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
       <h1 class="text-3xl">{translations.projects.title[$currentLanguage]}</h1>
-      <div class="flex w-full items-center justify-evenly self-end"></div>
-      <ProjectsDisplay />
+      <div class="mt-6">
+        <ProjectsDisplay />
+      </div>
     </div>
   </section>
   <section id="contact" class="h-full">
