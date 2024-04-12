@@ -45,7 +45,7 @@
           description: 'My first larger scale web app',
         },
         {
-          name: 'PHP server',
+          name: 'Test 2',
           image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s',
           description: 'My first larger scale web app',
         },
@@ -69,19 +69,7 @@
   ]
 
   let selectedProjectCategory: ProjectCategory = projectCategories[1]
-  let showcasedProjects: Project[] = []
-
-  $: {
-    const projects = selectedProjectCategory.projects
-
-    if (projects.length > 2) {
-      showcasedProjects = [projects[projects.length - 1], projects[0], projects[1]]
-    } else if (projects.length > 1) {
-      showcasedProjects = [projects[0], projects[1]]
-    } else if (projects.length > 0) {
-      showcasedProjects = [projects[0]]
-    }
-  }
+  let selectedProject: Project = selectedProjectCategory.projects[0]
 
   const handleCategoryMouseEnter = (e: Event, category: ProjectCategory) => {
     const underline = document.getElementById(`projects-underline-${category.name}`)
@@ -109,14 +97,9 @@
     }
   }
 
-  // $: () => {
-  //   if (selectedCategory) {
-  //     const underline = document.getElementById(`projects-underline-${selectedCategory}`)
-  //     if (underline) {
-  //       underline.style.width = '100%'
-  //     }
-  //   }
-  // }
+  const handleProjectClick = (e: Event, project: Project) => {
+    selectedProject = project
+  }
 
   onMount(() => {
     if (selectedProjectCategory) {
@@ -141,7 +124,7 @@
             ? 'scale-125'
             : ''}"
         >
-          <p>
+          <p class="text-xs sm:text-sm md:text-lg">
             {projectCategory.name}
           </p>
           <div
@@ -152,40 +135,65 @@
       </li>
     {/each}
   </ul>
-  <div class="mt-6 flex items-center justify-center space-x-2 px-4">
+  <div class="mt-10 flex w-full flex-col items-center justify-between space-y-4 md:px-14 lg:flex-row-reverse">
+    <div class="flex flex-col items-center justify-center">
+      <img src={selectedProject.image} alt={selectedProject.name} class="w-96 object-cover" />
+      <h3 class="mt-2 text-lg">{selectedProject.name}</h3>
+      <p class="w-full border-b px-8 text-center">
+        {selectedProject.description}
+      </p>
+    </div>
+    <div class="grid w-fit grid-cols-4 gap-4 lg:grid-cols-3">
+      {#each selectedProjectCategory.projects as project, i}
+        <button
+          on:click={e => handleProjectClick(e, project)}
+          class="h-16 w-16 transition duration-300 hover:scale-105 sm:h-20 sm:w-20 md:h-28 md:w-28 lg:h-32 lg:w-32"
+        >
+          <img src={project.image} alt={project.name} class="aspect-square rounded-lg object-cover" />
+        </button>
+      {/each}
+    </div>
+  </div>
+
+  <!-- <div class="mt-10 flex items-center justify-center space-x-8 px-8">
     {#if showcasedProjects.length > 2}
       {#each showcasedProjects as project, i}
         {#if i === 0}
-          <div class="flex w-full flex-col items-center justify-center md:w-1/4">
+          <div
+            class="flex w-full flex-col items-center justify-center space-y-4 transition duration-500 hover:scale-105 md:w-1/4"
+          >
             <h3>{project.name}</h3>
-            <img src={project.image} alt={project.name} class="mt-10" />
+            <img src={project.image} alt={project.name} class="" />
           </div>
         {:else if i === 1}
-          <div class="flex w-full flex-col items-center justify-center">
-            <h3 class="text-xl">{project.name}</h3>
-            <img src={project.image} alt={project.name} class="mt-10" />
+          <div class="flex w-full flex-col items-center justify-center space-y-4">
+            <h3 class="text-xl font-semibold">{project.name}</h3>
+            <img src={project.image} alt={project.name} class="" />
+            <p class="w-1/2">{project.description}</p>
           </div>
         {:else if i === 2}
-          <div class="flex w-full flex-col items-center justify-center md:w-1/4">
+          <div
+            class="flex w-full flex-col items-center justify-center space-y-4 transition duration-500 hover:scale-105 md:w-1/4"
+          >
             <h3>{project.name}</h3>
-            <img src={project.image} alt={project.name} class="mt-10" />
+            <img src={project.image} alt={project.name} class="" />
           </div>
         {/if}
       {/each}
     {:else}
       {#each showcasedProjects as project, i}
         {#if i === 0}
-          <div class="flex w-full flex-col items-center justify-center">
+          <div class="flex w-full flex-col items-center justify-center hover:scale-110">
             <h3 class="text-xl">{project.name}</h3>
             <img src={project.image} alt={project.name} class="mt-10 md:w-1/2" />
           </div>
         {:else if i === 1}
-          <div class="flex w-full flex-col items-center justify-center">
+          <div class="flex w-full flex-col items-center justify-center hover:scale-110">
             <h3>{project.name}</h3>
             <img src={project.image} alt={project.name} class="mt-10 md:w-1/2" />
           </div>
         {/if}
       {/each}
     {/if}
-  </div>
+  </div> -->
 </div>
