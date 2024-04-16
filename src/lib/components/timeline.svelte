@@ -13,6 +13,9 @@
 
   let opened: number | null = null
   let svgCoordinates: Coordinate[] = []
+  let timelineElement: HTMLElement | null = null
+  let underlines: Record<number, HTMLDivElement> = {}
+  let timelinePoints: Record<number, HTMLImageElement> = {}
 
   onMount(() => {
     calculateSvgCoordinates()
@@ -20,12 +23,11 @@
 
   const calculateSvgCoordinates = () => {
     svgCoordinates = []
-    const parent = document.querySelector('#timeline')
-    if (parent) {
-      const parentRect = parent.getBoundingClientRect()
+    if (timelineElement) {
+      const parentRect = timelineElement.getBoundingClientRect()
 
       timeLineItems.forEach((element, i) => {
-        const point = document.getElementById(`timeline-point-${i}`)
+        const point = timelinePoints[i]
 
         // Handle first and last item
         let addY: number = 0
@@ -47,27 +49,15 @@
     }
   }
 
-  const handleTitleMouseEnter = (e: Event, index: number) => {
-    const underline = document.getElementById(`timeline-underline-${index}`)
-    if (underline) {
-      underline.style.width = '100%'
-    }
-  }
-
-  const handleTitleMouseLeave = (e: Event, index: number) => {
-    const underline = document.getElementById(`timeline-underline-${index}`)
-    if (underline && opened !== index) {
-      underline.style.width = '0%'
-    }
-  }
-
-  const handleTitleClick = (e: Event, index: number) => {
+  const handleTitleClick = (index: number) => {
     if (opened === index) {
       opened = null
     } else {
-      const underline = document.getElementById(`timeline-underline-${opened}`)
-      if (underline) {
-        underline.style.width = '0%'
+      if (opened !== null) {
+        const underline = underlines[opened]
+        if (underline) {
+          underline.style.width = '0%'
+        }
       }
       opened = index
     }
@@ -77,7 +67,7 @@
   }
 </script>
 
-<div class="relative flex" id="timeline">
+<div class="relative flex" bind:this={timelineElement}>
   <svg class="absolute h-full w-full">
     {#each svgCoordinates as coord, index}
       {#if index < svgCoordinates.length - 1}
@@ -96,28 +86,35 @@
       <div class="relative py-4">
         <div class="flex items-start">
           {#if $theme === 'dark'}
-            <img src="icons/dark/circle-filled-white.svg" alt="circle" class="mt-1.5 w-3" id="timeline-point-{index}" />
+            <img
+              src="icons/dark/circle-filled-white.svg"
+              alt="circle"
+              class="mt-1.5 w-3"
+              bind:this={timelinePoints[index]}
+            />
           {:else}
             <img
               src="icons/light/circle-filled-black.svg"
               alt="circle"
               class="mt-1.5 w-3"
-              id="timeline-point-{index}"
+              bind:this={timelinePoints[index]}
             />
           {/if}
           <div>
             <button
               class="ml-4 text-left transition duration-300 hover:translate-x-1"
-              on:mouseenter={e => handleTitleMouseEnter(e, index)}
-              on:mouseleave={e => handleTitleMouseLeave(e, index)}
-              on:click={e => handleTitleClick(e, index)}
+              on:mouseenter={() => (underlines[index].style.width = '100%')}
+              on:mouseleave={() => {
+                if (opened !== index) underlines[index].style.width = '0%'
+              }}
+              on:click={() => handleTitleClick(index)}
             >
               <p>
                 {item.title[$currentLanguage]}
               </p>
               <div
                 class="transition-width w-0 border-b border-light-primary duration-300 dark:border-dark-primary"
-                id="timeline-underline-{index}"
+                bind:this={underlines[index]}
               ></div>
             </button>
             {#if opened === index}
