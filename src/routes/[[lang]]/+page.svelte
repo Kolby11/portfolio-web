@@ -80,7 +80,7 @@
           </p>
         </div>
       </div>
-      <div class="absolute bottom-20 left-20 mt-10 w-full opacity-0 transition duration-500 hover:opacity-70">
+      <div class="absolute bottom-20 left-20 mt-10 opacity-0 transition duration-500 hover:opacity-70">
         <CodeSnippet fontSize="small" />
       </div>
     </div>
@@ -93,7 +93,7 @@
           <p>
             {translations.skills.description[$currentLanguage]}
           </p>
-          <div class="mt-8">
+          <div class="mt-96">
             <Graph
               data={{
                 itemsTitle: translations.skills.graph.title[$currentLanguage],
@@ -128,33 +128,46 @@
     </div>
   </section>
   <section id="contact" class="h-full">
-    <div class="h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
+    <div class="h-fit px-4 pb-24 pt-20 sm:px-10">
       <h1 class="text-3xl">{translations.contact.title[$currentLanguage]}</h1>
-      <div class="flex w-full items-center justify-evenly self-end">
-        <a
-          href="https://www.facebook.com/martin.kollar.kolby/"
-          target="_blank"
-          class="flex items-center justify-center brightness-0 dark:invert"
-        >
-          <img src="logos/facebook/facebook_logo_secondary.png" alt="linkedin" class="inline-block h-8" />
-        </a>
-
-        <a
-          href="https://github.com/Kolby11"
-          target="_blank"
-          class="flex items-center justify-center brightness-0 dark:invert"
-        >
-          <img src="logos/github/github_mark_white.png" alt="linkedin" class="inline-block h-8" />
-          <img src="logos/github/github_logo_white.png" alt="linkedin" class="inline-block h-8" />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/martin-koll%C3%A1r-2b57a3290/"
-          target="_blank"
-          class="flex items-center justify-center brightness-0 dark:invert"
-        >
-          <!-- <img src="logos/linkedin/linkedIn_icon.png" alt="linkedin" class="inline-block w-10" /> -->
-          <img src="logos/linkedin/linkedIn_logo.png" alt="linkedin" class="inline-block h-8" />
-        </a>
+      <div class="mt-20 sm:mt-40">
+        <div class="flex flex-col items-center justify-center text-center md:text-lg">
+          <p class="md:text-xl">{translations.contact.text[$currentLanguage]}</p>
+          <div class="mt-20 flex flex-col space-y-2 font-semibold">
+            <p>mato.kollar2004@gmail.com</p>
+            <p>+421 948 723 300</p>
+          </div>
+        </div>
+        <div class="mt-40 flex w-full items-center justify-evenly self-end xl:px-56">
+          <a
+            href="https://www.instagram.com/_kolby_1/"
+            target="_blank"
+            class="flex items-center justify-center brightness-0 dark:invert"
+          >
+            <img src="logos/instagram/instagram_logo_white.png" alt="instagram" class="inline-block h-8" />
+          </a>
+          <a
+            href="https://www.facebook.com/martin.kollar.kolby/"
+            target="_blank"
+            class="flex items-center justify-center brightness-0 dark:invert"
+          >
+            <img src="logos/facebook/facebook_logo_secondary.png" alt="facebook" class="inline-block h-8" />
+          </a>
+          <a
+            href="https://github.com/Kolby11"
+            target="_blank"
+            class="flex items-center justify-center brightness-0 dark:invert"
+          >
+            <img src="logos/github/github_mark_white.png" alt="github" class="inline-block h-8" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/martin-koll%C3%A1r/"
+            target="_blank"
+            class="flex items-center justify-center brightness-0 dark:invert"
+          >
+            <img src="logos/linkedin/linkedIn_icon.png" alt="linkedin" class="inline-block w-10" />
+          </a>
+        </div>
       </div>
     </div>
   </section>

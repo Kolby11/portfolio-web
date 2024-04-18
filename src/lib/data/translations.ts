@@ -59,6 +59,7 @@ export type BaseTranslation = {
   contact: {
     title: Record<lang, string>
     description: Record<lang, string>
+    text: Record<lang, string>
   }
   footer: {
     text: Record<lang, string>
@@ -336,6 +337,11 @@ export const translations: BaseTranslation = {
       sk: 'Vitajte na stránke kontaktu',
       en: 'Welcome to the contact page',
       de: 'Willkommen auf der Kontakt Seite',
+    },
+    text: {
+      sk: 'V prípade záujmu ma neváhajte kontaktovať:',
+      en: 'In case of interest, do not hesitate to contact me:',
+      de: 'Im Falle von Interesse, zögern Sie nicht, mich zu kontaktieren:',
     },
   },
   footer: {

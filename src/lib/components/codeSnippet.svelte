@@ -31,7 +31,7 @@
   }
 </script>
 
-<div class={`relative font-mono opacity-80 ${fontClasses[fontSize]}`}>
+<div class={`font-mono opacity-80 ${fontClasses[fontSize]}`}>
   <p>
     <span class="text-blue-600 dark:text-blue-500">const</span>
     <span class="dark:text-sky-400">message</span>
