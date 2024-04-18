@@ -37,6 +37,10 @@ export type BaseTranslation = {
   skills: {
     title: Record<lang, string>
     description: Record<lang, string>
+    graph: {
+      title: Record<lang, string>
+      valueTitle: Record<lang, string>
+    }
     skillTree: {
       title: Record<lang, string>
       categories: {
@@ -196,6 +200,18 @@ export const translations: BaseTranslation = {
       sk: 'Moja špecializácia je najmä vo fullstack developmente webových aplikácií a ich nasadenia do produkcie na cloud, no aktívne sa venujem aj iným odvetviam ako je backend development pre aplikácie. Ďalej som pracoval v oblasti game a mobile developmentu',
       en: '!Translate - Moja špecializácia je najmä vo fullstack developmente webových aplikácií a ich nasadenia do produkcie na cloud, no aktívne sa venujem aj iným odvetviam ako je backend development pre aplikácie. Ďalej som pracoval v oblasti game a mobile developmentu',
       de: '!Translate - Moja špecializácia je najmä vo fullstack developmente webových aplikácií a ich nasadenia do produkcie na cloud, no aktívne sa venujem aj iným odvetviam ako je backend development pre aplikácie. Ďalej som pracoval v oblasti game a mobile developmentu',
+    },
+    graph: {
+      title: {
+        sk: 'Programovacie jazyky',
+        en: 'Programming languages',
+        de: 'Programmiersprachen',
+      },
+      valueTitle: {
+        sk: 'Strávené hodiny',
+        en: 'Hours spent',
+        de: 'Stunden verbracht',
+      },
     },
     skillTree: {
       title: {

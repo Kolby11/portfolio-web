@@ -19,6 +19,7 @@
 
   onMount(() => {
     calculateSvgCoordinates()
+    window.addEventListener('resize', calculateSvgCoordinates)
   })
 
   const calculateSvgCoordinates = () => {

@@ -38,10 +38,10 @@
   <button class="flex h-fit w-fit items-center justify-center" on:click={toggleMenu}>
     <span class="material-symbols-outlined" style="font-size: 32px !important;"> {showMenu ? 'close' : 'menu'} </span>
   </button>
-  <div
-    class="fixed right-0 top-20 flex h-[calc(100vh-5rem)] w-fit flex-col items-end justify-start bg-light-background pr-8 text-lg text-light-primary dark:bg-dark-background dark:text-dark-primary sm:hidden"
-  >
-    {#if showMenu}
+  {#if showMenu}
+    <div
+      class="fixed right-0 top-20 flex h-[calc(100vh-5rem)] w-fit flex-col items-end justify-start bg-light-background pr-8 text-lg text-light-primary dark:bg-dark-background dark:text-dark-primary sm:hidden"
+    >
       <nav class="mt-4 flex h-fit flex-col items-end">
         {#each sections as section, i}
           <a
@@ -58,8 +58,8 @@
           <button class="mx-2 h-fit text-sm" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
         {/each}
       </div>
-    {/if}
-  </div>
+    </div>
+  {/if}
 </div>
 
 <!-- Desktop navbar -->

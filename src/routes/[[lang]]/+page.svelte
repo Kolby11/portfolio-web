@@ -7,8 +7,8 @@
   import { translations } from '$lib/data/translations'
   import Graph from '$lib/components/graph.svelte'
   import { languageStats } from '$lib/data/languageStats'
-  import { initTheme } from '$lib/stores/themeStore'
   import ProjectsDisplay from '$lib/components/projectsDisplay.svelte'
+  import CodeSnippet from '$lib/components/codeSnippet.svelte'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -37,8 +37,8 @@
 
 <div class="flex h-full w-full flex-col" id="content">
   <section id="home">
-    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
-      <!-- <h1 class="text-2xl">{$translation.home.title}</h1> -->
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
+      <!-- <h1 class="text-2xl">{translations.home.title[$currentLanguage]}</h1> -->
       <div
         class="flex flex-col-reverse items-center justify-end sm:mt-8 md:mt-16 lg:mr-20 lg:mt-24 lg:flex-row xl:justify-center xl:px-20"
       >
@@ -56,17 +56,17 @@
         <div
           class="flex aspect-square max-w-xs items-center justify-center overflow-hidden rounded-full sm:max-w-sm xl:max-w-md"
         >
-          <!-- <img
+          <img
             src="/martin_kollar_square_dark.jpg"
             alt="Martin Kollár"
             class="transition duration-500 hover:scale-110"
-          /> -->
+          />
         </div>
       </div>
     </div>
   </section>
   <section id="about">
-    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+    <div class="relative h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
       <h1 class="text-3xl md:text-4xl">{translations.about.title[$currentLanguage]}</h1>
       <div class="ml-auto mt-10 px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
         <div class="md:w-1/2 md:pr-5">
@@ -80,10 +80,13 @@
           </p>
         </div>
       </div>
+      <div class="absolute bottom-20 left-20 mt-10 w-full opacity-0 transition duration-500 hover:opacity-70">
+        <CodeSnippet fontSize="small" />
+      </div>
     </div>
   </section>
   <section id="skills" class="h-full">
-    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
       <h1 class="text-3xl">{translations.skills.title[$currentLanguage]}</h1>
       <div class="ml-auto mt-10 px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
         <div class="md:w-1/2 md:pr-5">
@@ -93,8 +96,9 @@
           <div class="mt-8">
             <Graph
               data={{
-                itemsTitle: 'Program',
-                valueTitle: 'Hours spent',
+                itemsTitle: translations.skills.graph.title[$currentLanguage],
+                valueTitle: translations.skills.graph.valueTitle[$currentLanguage],
+                valueUnit: 'h',
                 items: languageStats.map(item => {
                   return { name: item.name, value: item.time }
                 }),
@@ -116,7 +120,7 @@
     </div>
   </section>
   <section id="projects" class="h-full">
-    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
       <h1 class="text-3xl">{translations.projects.title[$currentLanguage]}</h1>
       <div class="mt-6">
         <ProjectsDisplay />
@@ -124,7 +128,7 @@
     </div>
   </section>
   <section id="contact" class="h-full">
-    <div class="h-fit min-h-[calc(100vh-5rem)] px-10 pt-20">
+    <div class="h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
       <h1 class="text-3xl">{translations.contact.title[$currentLanguage]}</h1>
       <div class="flex w-full items-center justify-evenly self-end">
         <a

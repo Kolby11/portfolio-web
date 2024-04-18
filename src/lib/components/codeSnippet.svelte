@@ -1,6 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
+  export let fontSize: 'small' | 'medium' | 'large' = 'medium'
+
+  let fontClasses = {
+    small: 'text-sm',
+    medium: 'text-base',
+    large: 'text-lg',
+  }
+
   let secret = 'secret'
   let keyboardSequence = ''
 
@@ -23,7 +31,7 @@
   }
 </script>
 
-<div class="relative font-mono opacity-80">
+<div class={`relative font-mono opacity-80 ${fontClasses[fontSize]}`}>
   <p>
     <span class="text-blue-600 dark:text-blue-500">const</span>
     <span class="dark:text-sky-400">message</span>
