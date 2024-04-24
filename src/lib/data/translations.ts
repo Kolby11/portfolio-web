@@ -47,6 +47,7 @@ export type BaseTranslation = {
         name: Record<lang, string>
         items: {
           name: string
+          description: Record<lang, string>
           seniority: seniority
         }[]
       }[]
@@ -230,22 +231,47 @@ export const translations: BaseTranslation = {
           items: [
             {
               name: 'Python',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.MEDIOR,
             },
             {
               name: 'Typescript',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.MEDIOR,
             },
             {
               name: 'Javascript',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.MEDIOR,
             },
             {
               name: 'c#',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
             {
               name: 'c++',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
           ],
@@ -259,18 +285,38 @@ export const translations: BaseTranslation = {
           items: [
             {
               name: 'Next.js',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
             {
               name: 'SvelteKit',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
             {
               name: 'Vue.js',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
             {
               name: 'Angular',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
           ],
@@ -284,10 +330,20 @@ export const translations: BaseTranslation = {
           items: [
             {
               name: 'Kotlin',
+              description: {
+                sk: 'Kotlin',
+                en: 'Kotlin',
+                de: 'Kotlin',
+              },
               seniority: seniority.JUNIOR,
             },
             {
               name: 'Flutter',
+              description: {
+                sk: 'Flutter',
+                en: 'Flutter',
+                de: 'Flutter',
+              },
               seniority: seniority.JUNIOR,
             },
           ],
@@ -301,10 +357,20 @@ export const translations: BaseTranslation = {
           items: [
             {
               name: 'Unity',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
             {
               name: 'Unreal engine',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
               seniority: seniority.JUNIOR,
             },
           ],
@@ -316,8 +382,24 @@ export const translations: BaseTranslation = {
             de: '!Translate - Cloud deploymet',
           },
           items: [
-            { name: 'Amazon Web Services (AWS)', seniority: seniority.JUNIOR },
-            { name: 'Google Cloud Platform (GCP)', seniority: seniority.JUNIOR },
+            {
+              name: 'Amazon Web Services (AWS)',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
+              seniority: seniority.JUNIOR,
+            },
+            {
+              name: 'Google Cloud Platform (GCP)',
+              description: {
+                sk: 'Python',
+                en: 'Python',
+                de: 'Python',
+              },
+              seniority: seniority.JUNIOR,
+            },
           ],
         },
       ],

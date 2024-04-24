@@ -4,7 +4,6 @@
   import { theme } from '$lib/stores/themeStore'
   import { currentLanguage, setCurrentLang } from '$lib/stores/translation'
   import { translations } from '$lib/data/translations'
-  import { onMount } from 'svelte'
 
   let sections: string[] = translations.navbar ? Object.keys(translations.navbar) : []
   let languages: string[] = ['sk', 'en', 'de']

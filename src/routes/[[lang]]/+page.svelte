@@ -9,6 +9,7 @@
   import { languageStats } from '$lib/data/languageStats'
   import ProjectsDisplay from '$lib/components/projectsDisplay.svelte'
   import CodeSnippet from '$lib/components/codeSnippet.svelte'
+  import SkillTree from '$lib/components/skillTree.svelte'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -88,12 +89,12 @@
   <section id="skills" class="h-full">
     <div class="h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
       <h1 class="text-3xl">{translations.skills.title[$currentLanguage]}</h1>
-      <div class="ml-auto mt-10 px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
-        <div class="md:w-1/2 md:pr-5">
-          <p>
+      <div class="ml-auto mt-10 flex flex-col px-4 max-md:space-y-8 md:items-start md:justify-between md:px-10">
+        <div class="flex flex-col items-start justify-start md:w-full md:flex-row md:space-x-4 md:pr-5">
+          <p class="md:mt-8 md:w-1/2">
             {translations.skills.description[$currentLanguage]}
           </p>
-          <div class="mt-96">
+          <div class="max-md:mt-6 md:w-1/2">
             <Graph
               data={{
                 itemsTitle: translations.skills.graph.title[$currentLanguage],
@@ -107,14 +108,7 @@
           </div>
         </div>
         <div class="md:w-1/2 md:pl-5">
-          <h2 class="text-2xl">{translations.skills.skillTree.title[$currentLanguage]}</h2>
-          {#each translations.skills.skillTree.categories as category}
-            <div class="flex flex-col">
-              <p>{category.name[$currentLanguage]}</p>
-            </div>
-          {:else}
-            <div></div>
-          {/each}
+          <SkillTree data={translations.skills.skillTree} />
         </div>
       </div>
     </div>
@@ -122,7 +116,7 @@
   <section id="projects" class="h-full">
     <div class="h-fit min-h-[calc(100vh-5rem)] px-4 pt-20 sm:px-10">
       <h1 class="text-3xl">{translations.projects.title[$currentLanguage]}</h1>
-      <div class="mt-6">
+      <div class="mt-6 h-fit">
         <ProjectsDisplay />
       </div>
     </div>
