@@ -82,37 +82,73 @@
   <h2 class="text-2xl">{data.title[$currentLanguage]}</h2>
   <ul class="mt-8 flex flex-col space-y-4">
     <!-- Previous items -->
-    {#if currentCategory - 2 === 0}
+    {#if currentCategory - 1 <= 0}
       <li class={getCategoryStyle(currentCategory - 2)}>
-        <button on:click={() => changeCategory(currentCategory - 2)}>{data.categories[1].name[$currentLanguage]}</button
+        <button on:click={() => changeCategory(data.categories.length - 1)}
+          >{data.categories[currentCategory - 1].name[$currentLanguage]}</button
         >
       </li>
-    {/if}
-    {#if currentCategory - 1 === 1}
       <li class={getCategoryStyle(currentCategory - 1)}>
-        <button on:click={() => changeCategory(currentCategory - 1)}>{data.categories[0].name[$currentLanguage]}</button
+        <button on:click={() => changeCategory(currentCategory - 1)}
+          >{data.categories[currentCategory - 1].name[$currentLanguage]}</button
+        >
+      </li>
+    {:else if currentCategory - 2 <= 0}
+      <li class={getCategoryStyle(currentCategory - 2)}>
+        <button on:click={() => changeCategory(data.categories.length - 2)}
+          >{data.categories[data.categories.length - 2].name[$currentLanguage]}</button
+        >
+      </li>
+      <li class={getCategoryStyle(currentCategory - 1)}>
+        <button on:click={() => changeCategory(data.categories.length - 1)}
+          >{data.categories[data.categories.length - 1].name[$currentLanguage]}</button
+        >
+      </li>
+    {:else}
+      <li class={getCategoryStyle(currentCategory - 2)}>
+        <button on:click={() => changeCategory(currentCategory - 2)}
+          >{data.categories[currentCategory - 2].name[$currentLanguage]}</button
+        >
+      </li>
+      <li class={getCategoryStyle(currentCategory - 1)}>
+        <button on:click={() => changeCategory(currentCategory - 1)}
+          >{data.categories[currentCategory - 1].name[$currentLanguage]}</button
         >
       </li>
     {/if}
-    {#each data.categories as category, index}
-      <!-- Use reactive categoryStyles for dynamic updates -->
-      <li class={categoryStyles[index]} bind:this={listItems[index]}>
-        <button on:click={() => changeCategory(index)}>{category.name[$currentLanguage]}</button>
+    <!-- Use reactive categoryStyles for dynamic updates -->
+    <li class={categoryStyles[currentCategory]} bind:this={listItems[currentCategory]}>
+      <button>{data.categories[currentCategory].name[$currentLanguage]}</button>
+    </li>
+    {#if currentCategory - 1 >= 1}
+      <li class={getCategoryStyle(currentCategory - 1)} bind:this={listItems[currentCategory]}>
+        <button on:click={() => changeCategory(currentCategory + 1)}>{data.categories[0].name[$currentLanguage]}</button
+        >
       </li>
-    {/each}
-    {#if currentCategory === data.categories.length - 1}
-      {console.log('currentCategory', currentCategory)}
-      <li class={getCategoryStyle(currentCategory + 1)}>
+    {:else}
+      <li class={getCategoryStyle(currentCategory - 1)} bind:this={listItems[currentCategory]}>
         <button on:click={() => changeCategory(currentCategory + 1)}>{data.categories[0].name[$currentLanguage]}</button
         >
       </li>
     {/if}
-    <!-- Upcoming items -->
-    {#if currentCategory === data.categories.length - 2}
-      <li class={getCategoryStyle(currentCategory + 2)}>
+    {#if currentCategory - 2 >= 0}
+      <li class={getCategoryStyle(currentCategory - 2)}>
+        <button on:click={() => changeCategory(currentCategory - +2)}
+          >{data.categories[1].name[$currentLanguage]}</button
+        >
+      </li>
+    {:else}
+      <li class={getCategoryStyle(currentCategory - 2)}>
         <button on:click={() => changeCategory(currentCategory + 2)}>{data.categories[1].name[$currentLanguage]}</button
         >
       </li>
     {/if}
+    <!-- Upcoming items -->
+    <!-- {#if currentCategory === data.categories.length - 2}
+      <li class={getCategoryStyle(currentCategory + 2)}>
+        <button on:click={() => changeCategory(currentCategory + 2)}>{data.categories[1].name[$currentLanguage]}</button
+        >
+      </li>
+    {/if} -->
   </ul>
 </div>

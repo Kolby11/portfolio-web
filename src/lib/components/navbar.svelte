@@ -4,11 +4,19 @@
   import { theme } from '$lib/stores/themeStore'
   import { currentLanguage, setCurrentLang } from '$lib/stores/translation'
   import { translations } from '$lib/data/translations'
+  import MaterialSymbolsLightCloseRounded from '~icons/material-symbols-light/close-rounded'
+  import MaterialSymbolsLightMenuRounded from '~icons/material-symbols-light/menu-rounded'
+  import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols/dark-mode-outline-rounded'
+  import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols/light-mode-outline-rounded'
+  import { onMount } from 'svelte'
 
   let sections: string[] = translations.navbar ? Object.keys(translations.navbar) : []
   let languages: string[] = ['sk', 'en', 'de']
 
   let showMenu = false
+
+  let sideBar: HTMLDivElement
+  let sideBarWidth: number = 0
 
   const toggleMenu = () => {
     showMenu = !showMenu
@@ -22,59 +30,73 @@
     setCurrentLang(language)
     goto(`/${language}`, { noScroll: true })
   }
+
+  onMount(() => {
+    if (!sideBar) return
+    sideBarWidth = sideBar.getBoundingClientRect().width
+  })
 </script>
 
 <!-- Mobile navbar -->
-<div
-  class="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-lg md:hidden"
-  use:smoothScroll
+
+<button
+  class={`fixed right-0 top-0 items-center justify-center p-8 transition duration-300 ${showMenu ? 'opacity-0' : 'opacity-100'}`}
+  on:click={toggleMenu}
 >
-  <button class="mr-4 flex items-center justify-center" on:click={toggleDarkMode}>
-    <span class="material-symbols-outlined text-light-primary dark:text-dark-primary">
-      {$theme === 'dark' ? 'light_mode' : 'dark_mode'}
-    </span>
-  </button>
+  <MaterialSymbolsLightMenuRounded style="font-size:x-large;" />
+</button>
+
+<div
+  bind:this={sideBar}
+  style="transform: translateX({showMenu ? 0 : sideBarWidth}px); transition: transform 0.3s ease-in-out;"
+  class={`fixed right-0 z-50 flex h-screen w-fit flex-col items-end px-8 pt-8 text-lg text-light-primary backdrop-blur-2xl dark:bg-dark-background dark:text-dark-primary md:hidden `}
+>
   <button class="flex h-fit w-fit items-center justify-center" on:click={toggleMenu}>
-    <span class="material-symbols-outlined" style="font-size: 32px !important;"> {showMenu ? 'close' : 'menu'} </span>
+    <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
   </button>
-  {#if showMenu}
-    <div
-      class="fixed right-0 top-20 flex h-[calc(100vh-5rem)] w-fit flex-col items-end justify-start bg-light-background pr-8 text-lg text-light-primary dark:bg-dark-background dark:text-dark-primary sm:hidden"
-    >
-      <nav class="mt-4 flex h-fit flex-col items-end">
+  <div class="flex h-full flex-col items-center">
+    {#if showMenu}
+      <nav class="mt-4 flex h-fit flex-col items-end gap-y-2">
         {#each sections as section, i}
           <a
+            use:smoothScroll
             href="#{section}"
-            class="my-2"
             on:click={e => {
               showMenu = false
             }}>{translations.navbar[section][$currentLanguage]}</a
           >
         {/each}
       </nav>
-      <div class="mb-4 mt-auto flex h-fit">
+      <div class="mb-4 mt-auto flex h-fit gap-x-4">
         {#each languages as language}
-          <button class="mx-2 h-fit text-sm" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
+          <button class="h-fit text-sm" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
         {/each}
       </div>
-    </div>
-  {/if}
+    {/if}
+  </div>
 </div>
 
 <!-- Desktop navbar -->
 <div
-  class="fixed top-0 z-50 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-lg md:flex"
+  class="fixed top-0 z-50 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl md:flex"
   use:smoothScroll
 >
-  <div class="flex w-fit items-center justify-between">
-    <button class="mr-4 flex items-center justify-center" on:click={toggleDarkMode}>
-      <span class="material-symbols-outlined text-light-primary dark:text-dark-primary">
-        {$theme === 'dark' ? 'light_mode' : 'dark_mode'}
-      </span>
+  <div class="flex gap-x-8">
+    <button class="relative mr-4 flex items-center justify-center" on:click={toggleDarkMode}>
+      <MaterialSymbolsDarkModeOutlineRounded
+        style="font-size:larger;"
+        class={`${$theme === 'dark' ? 'opacity-100' : 'opacity-0'} absolute left-0 transition duration-300`}
+      />
+      <MaterialSymbolsLightModeOutlineRounded
+        style="font-size:larger;"
+        class={`${$theme === 'dark' ? 'opacity-0' : 'opacity-100'} absolute left-0 transition duration-300`}
+      />
     </button>
-    {#each languages as language}
-      <button class="mx-2 h-fit" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
-    {/each}
+    <div class="flex w-fit items-center justify-between gap-x-4">
+      {#each languages as language}
+        <button class="h-fit" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
+      {/each}
+    </div>
   </div>
   <nav class="ml-auto">
     <ul class="flex items-center justify-center">

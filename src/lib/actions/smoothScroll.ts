@@ -1,5 +1,5 @@
 // src/actions/smoothScroll.js
-export function smoothScroll(node) {
+export function smoothScroll(node: HTMLElement) {
   const handleClick = event => {
     const anchor = event.target.closest('a[href^="#"]')
     if (!anchor) return
