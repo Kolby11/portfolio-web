@@ -19,136 +19,60 @@
     }[]
   }
 
-  let listItems: Record<string, HTMLLIElement> = {}
-  let oldPositions: Record<string, Coordinates> = {}
+  let categoriesLoop = [...data.categories]
 
   // Store for current category index
   let currentCategory = 2
-  let categoryStyles: string[] = []
 
   // Function to change category with wrap-around logic
   function changeCategory(index: number) {
+    // const distance = Math.abs(index - currentCategory)
+    // let newCategoriesLoop = [...categoriesLoop]
+
+    // if (index < currentCategory) {
+    //   const movedElements = newCategoriesLoop.splice(-distance, distance)
+    //   newCategoriesLoop = [...movedElements, ...newCategoriesLoop]
+    // } else if (index > currentCategory) {
+    //   // Move elements from the beginning to the end
+    //   const movedElements = newCategoriesLoop.splice(0, distance)
+    //   newCategoriesLoop = [...newCategoriesLoop, ...movedElements]
+    // }
+
+    // categoriesLoop = newCategoriesLoop
     currentCategory = index
   }
 
-  // Reactive statement to update styles based on currentCategory
-  $: if (currentCategory) {
-    categoryStyles = data.categories.map((_, index) => getCategoryStyle(index))
-    moveItems()
-  }
-
-  function getCategoryStyle(index: number) {
-    const baseClass = 'transition duration-500 hover:scale-110 cursor-pointer'
-    let distance = Math.abs(currentCategory - index)
-
-    if (distance > data.categories.length / 2) {
-      distance = data.categories.length - distance
-    }
-
-    // Apply style based on distance
-    switch (distance) {
-      case 0:
-        return `ml-6 text-xl ${baseClass}`
-      case 1:
-        return `ml-4 opacity-70 ${baseClass} hover:translate-x-4`
-      case 2:
-        return `opacity-50 ${baseClass} hover:translate-x-8`
-      default:
-        return `opacity-0 ${baseClass}`
+  $: getCategoryStyles = (index: number) => {
+    const distance = Math.abs(index - currentCategory)
+    if (distance === 0) {
+      return 'text-blue-500'
+    } else if (distance === 1) {
+      return 'text-gray-500'
+    } else if (distance === 2) {
+      return 'text-gray-300'
+    } else {
+      return 'hidden'
     }
   }
 
-  function moveItems() {
-    Object.values(listItems).forEach((listItem, index) => {
-      oldPositions[index] = {
-        x: listItem.getBoundingClientRect().left,
-        y: listItem.getBoundingClientRect().top,
-      }
-    })
-    Object.values(listItems).forEach((listItem, index) => {
-      const newPosition = {
-        x: listItem.getBoundingClientRect().left,
-        y: listItem.getBoundingClientRect().top,
-      }
-
-      const deltaX = oldPositions[index].x - newPosition.x
-      const deltaY = oldPositions[index].y - newPosition.y
-      listItem.style.transform = `translate(${deltaX}px, ${deltaY}px)`
-    })
+  $: getCategoryDistance = (index: number) => {
+    return Math.abs(index - currentCategory)
   }
 </script>
 
 <div>
   <h2 class="text-2xl">{data.title[$currentLanguage]}</h2>
-  <ul class="mt-8 flex flex-col space-y-4">
-    <!-- Previous items -->
-    {#if currentCategory - 1 <= 0}
-      <li class={getCategoryStyle(currentCategory - 2)}>
-        <button on:click={() => changeCategory(data.categories.length - 1)}
-          >{data.categories[currentCategory - 1].name[$currentLanguage]}</button
+  <ul class="mt-8 flex flex-col gap-y-4">
+    {#each categoriesLoop as category, index}
+      <!-- Use reactive categoryStyles for dynamic updates -->
+      <li class={getCategoryStyles(index)}>
+        <button
+          on:click={() => changeCategory(index)}
+          class={`transition hover:scale-105 ${getCategoryDistance(index) == 2 ? 'translate-x-0' : getCategoryDistance(index) == 1 ? 'translate-x-2' : getCategoryDistance(index) == 0 ? 'translate-x-4' : 'hidden'}`}
+        >
+          {category.name[$currentLanguage]}</button
         >
       </li>
-      <li class={getCategoryStyle(currentCategory - 1)}>
-        <button on:click={() => changeCategory(currentCategory - 1)}
-          >{data.categories[currentCategory - 1].name[$currentLanguage]}</button
-        >
-      </li>
-    {:else if currentCategory - 2 <= 0}
-      <li class={getCategoryStyle(currentCategory - 2)}>
-        <button on:click={() => changeCategory(data.categories.length - 2)}
-          >{data.categories[data.categories.length - 2].name[$currentLanguage]}</button
-        >
-      </li>
-      <li class={getCategoryStyle(currentCategory - 1)}>
-        <button on:click={() => changeCategory(data.categories.length - 1)}
-          >{data.categories[data.categories.length - 1].name[$currentLanguage]}</button
-        >
-      </li>
-    {:else}
-      <li class={getCategoryStyle(currentCategory - 2)}>
-        <button on:click={() => changeCategory(currentCategory - 2)}
-          >{data.categories[currentCategory - 2].name[$currentLanguage]}</button
-        >
-      </li>
-      <li class={getCategoryStyle(currentCategory - 1)}>
-        <button on:click={() => changeCategory(currentCategory - 1)}
-          >{data.categories[currentCategory - 1].name[$currentLanguage]}</button
-        >
-      </li>
-    {/if}
-    <!-- Use reactive categoryStyles for dynamic updates -->
-    <li class={categoryStyles[currentCategory]} bind:this={listItems[currentCategory]}>
-      <button>{data.categories[currentCategory].name[$currentLanguage]}</button>
-    </li>
-    {#if currentCategory - 1 >= 1}
-      <li class={getCategoryStyle(currentCategory - 1)} bind:this={listItems[currentCategory]}>
-        <button on:click={() => changeCategory(currentCategory + 1)}>{data.categories[0].name[$currentLanguage]}</button
-        >
-      </li>
-    {:else}
-      <li class={getCategoryStyle(currentCategory - 1)} bind:this={listItems[currentCategory]}>
-        <button on:click={() => changeCategory(currentCategory + 1)}>{data.categories[0].name[$currentLanguage]}</button
-        >
-      </li>
-    {/if}
-    {#if currentCategory - 2 >= 0}
-      <li class={getCategoryStyle(currentCategory - 2)}>
-        <button on:click={() => changeCategory(currentCategory - +2)}
-          >{data.categories[1].name[$currentLanguage]}</button
-        >
-      </li>
-    {:else}
-      <li class={getCategoryStyle(currentCategory - 2)}>
-        <button on:click={() => changeCategory(currentCategory + 2)}>{data.categories[1].name[$currentLanguage]}</button
-        >
-      </li>
-    {/if}
-    <!-- Upcoming items -->
-    <!-- {#if currentCategory === data.categories.length - 2}
-      <li class={getCategoryStyle(currentCategory + 2)}>
-        <button on:click={() => changeCategory(currentCategory + 2)}>{data.categories[1].name[$currentLanguage]}</button
-        >
-      </li>
-    {/if} -->
+    {/each}
   </ul>
 </div>
