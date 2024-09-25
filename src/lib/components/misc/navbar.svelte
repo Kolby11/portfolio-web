@@ -32,9 +32,16 @@
   }
 
   onMount(() => {
+    window.addEventListener('resize', redraw)
     if (!sideBar) return
     sideBarWidth = sideBar.getBoundingClientRect().width
   })
+
+  const redraw = () => {
+    if (sideBar) {
+      sideBarWidth = sideBar.getBoundingClientRect().width
+    }
+  }
 </script>
 
 <!-- Mobile navbar -->

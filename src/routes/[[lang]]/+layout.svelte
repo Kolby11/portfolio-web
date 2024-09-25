@@ -1,8 +1,8 @@
 <script lang="ts">
   import '../../app.css'
-  import Navbar from '$lib/components/navbar.svelte'
-  import Scrollbar from '$lib/components/scrollbar.svelte'
-  import Footer from '$lib/components/footer.svelte'
+  import Navbar from '$lib/components/misc/navbar.svelte'
+  import Scrollbar from '$lib/components/misc/scrollbar.svelte'
+  import Footer from '$lib/components/misc/footer.svelte'
   import { onMount } from 'svelte'
   import { initTheme } from '$lib/stores/themeStore'
   import { currentLanguage, setCurrentLang } from '$lib/stores/translation'

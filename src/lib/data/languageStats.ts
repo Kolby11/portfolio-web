@@ -19,4 +19,8 @@ export const languageStats = [
     name: 'Verse',
     time: 50,
   },
+  {
+    name: 'Rust',
+    time: 100,
+  },
 ]

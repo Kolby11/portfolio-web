@@ -92,7 +92,7 @@ export const translations: BaseTranslation = {
       de: 'Über mich',
     },
     skills: {
-      sk: 'Zručnosti',
+      sk: 'Skúsenosti',
       en: 'Skills',
       de: 'Fahigkeiten',
     },
@@ -186,15 +186,18 @@ export const translations: BaseTranslation = {
     interestsAndHobbies: {
       title: { sk: 'Záujmy a koníčky', en: 'Interests and hobbies', de: 'Interessen und Hobbys' },
       description: {
-        sk: 'Vo voľnom čase sa venujem posilňovaniu, ale s kamarátmi si tiež rád zahrám akýkoľvek iný šport. Taktiež sa učím hrať na gitare. Zaujímam sa o nové technológie, či už v oblasti programovania, robotiky alebo raketovej vedy a rád sa učím nové veci.',
-        en: 'In my free time, I workout at the gym, but I also like to play any other sport with my friends. I am also learning to play the guitar. I am interested in new technologies, be it in the field of programming, robotics or rocket science and I like to learn new things.',
-        de: 'In meiner Freizeit mache ich Krafttraining, treibe aber auch gerne andere Sportarten mit meinen Freunden. Ich lerne auch Gitarre spielen. Ich interessiere mich für neue Technologien, sei es im Bereich Programmierung, Robotik oder Raketenwissenschaft und lerne gerne Neues.',
+        sk: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lab',
+        en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lab',
+        de: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lab',
+        // sk: 'Vo voľnom čase sa venujem posilňovaniu, ale s kamarátmi si tiež rád zahrám akýkoľvek iný šport. Taktiež sa učím hrať na gitare. Zaujímam sa o nové technológie, či už v oblasti programovania, robotiky alebo raketovej vedy a rád sa učím nové veci.',
+        // en: 'In my free time, I workout at the gym, but I also like to play any other sport with my friends. I am also learning to play the guitar. I am interested in new technologies, be it in the field of programming, robotics or rocket science and I like to learn new things.',
+        // de: 'In meiner Freizeit mache ich Krafttraining, treibe aber auch gerne andere Sportarten mit meinen Freunden. Ich lerne auch Gitarre spielen. Ich interessiere mich für neue Technologien, sei es im Bereich Programmierung, Robotik oder Raketenwissenschaft und lerne gerne Neues.',
       },
     },
   },
   skills: {
     title: {
-      sk: 'Zručnosti',
+      sk: 'Skúsenosti',
       en: 'Skills',
       de: 'Fahigkeiten',
     },
