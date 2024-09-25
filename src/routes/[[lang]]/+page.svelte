@@ -9,8 +9,10 @@
   import { languageStats } from '$lib/data/languageStats'
   import ProjectsDisplay from '$lib/components/projectsDisplay.svelte'
   import CodeSnippet from '$lib/components/codeSnippet.svelte'
-  import SkillTree from '$lib/components/skillTree.svelte'
+  import SkillTree from '$lib/components/experience/skillTree.svelte'
   import ContentSection from '$lib/components/base/contentSection.svelte'
+  import ProgrammingLangages from '$lib/components/experience/programmingLangages.svelte'
+  import { programmingLangugagesLogos } from '$lib/data/programmingLanguages'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -87,7 +89,7 @@
           {translations.skills.description[$currentLanguage]}
         </p>
         <div class="max-md:mt-6 md:w-1/2">
-          <Graph
+          <!-- <Graph
             data={{
               itemsTitle: translations.skills.graph.title[$currentLanguage],
               valueTitle: translations.skills.graph.valueTitle[$currentLanguage],
@@ -96,7 +98,8 @@
                 return { name: item.name, value: item.time }
               }),
             }}
-          />
+          /> -->
+          <ProgrammingLangages logos={programmingLangugagesLogos}></ProgrammingLangages>
         </div>
       </div>
       <div class="md:w-1/2 md:pl-5">
