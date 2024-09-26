@@ -1,15 +1,16 @@
-import * as THREE from 'three'
+export type LogoObject = {
+  name: string
+  glbPath: string
+}
 
-const pythonLogoGeometry = new THREE.BoxGeometry(1, 1, 1)
-const pythonLogoMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-const pythonLogo = new THREE.Mesh(pythonLogoGeometry, pythonLogoMaterial)
+// const pythonLogo: LogoObject = { name: 'Python', glbPath: '/objects/python_logo.glb' }
 
-const typescriptLogoGeometry = new THREE.BoxGeometry(1, 1, 1)
-const typescriptLogoMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-const typescriptLogo = new THREE.Mesh(typescriptLogoGeometry, typescriptLogoMaterial)
+const typescriptLogo: LogoObject = {
+  name: 'Typescript',
+  glbPath: '/objects/typescript_logo.glb',
+}
 
-const rustLogoGeometry = new THREE.BoxGeometry(1, 1, 1)
-const rustLogoMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff })
-const rustLogo = new THREE.Mesh(rustLogoGeometry, rustLogoMaterial)
+// const rustLogo = '/static/objects/rust_logo.obj'
 
-export const programmingLangugagesLogos: THREE.Mesh[] = [pythonLogo, typescriptLogo, rustLogo]
+// export const programmingLangugagesLogos: string[] = [pythonLogo, typescriptLogo, rustLogo]
+export const programmingLangugagesLogos: LogoObject[] = [typescriptLogo]
