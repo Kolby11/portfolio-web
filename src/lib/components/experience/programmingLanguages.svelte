@@ -1,12 +1,16 @@
 <script lang="ts">
   import type { LogoObject } from '$lib/data/programmingLanguages'
+  import type { NumericRange } from '@sveltejs/kit'
   import { onMount } from 'svelte'
   import * as THREE from 'three'
   import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
+  import { gsap } from 'gsap'
 
   export let logos: LogoObject[]
 
   const loader = new GLTFLoader()
+
+  const maxRotationAngle = 10
 
   const defaultCameraPosition = 5
   let node: HTMLDivElement
@@ -117,10 +121,96 @@
     renderer.setSize(nodeRect.width, nodeRect.height)
   }
 
+  let isResetting = false
+  let isPointerInScene = false
+
+  function onPointerEnter() {
+    if (typeof window === 'undefined') return
+    console.log('Pointer entered')
+    isPointerInScene = true
+    window.addEventListener('pointermove', handlePointerMove)
+  }
+
+  function onPointerLeave() {
+    if (typeof window === 'undefined') return
+    console.log('Pointer left')
+    isPointerInScene = false
+    window.removeEventListener('pointermove', handlePointerMove)
+    resetAnimation()
+  }
+
+  function resetAnimation() {
+    isResetting = true
+    const startTime = performance.now()
+    const duration = 2000
+
+    function animateReset(currentTime: number) {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+
+      scene.traverse(object => {
+        if (object instanceof THREE.Object3D) {
+          object.rotation.x *= 1 - progress
+          object.rotation.y *= 1 - progress
+          object.rotation.z *= 1 - progress
+        }
+      })
+
+      renderer.render(scene, camera)
+
+      if (progress < 1 && isResetting) {
+        requestAnimationFrame(animateReset)
+      } else {
+        isResetting = false
+      }
+    }
+
+    requestAnimationFrame(animateReset)
+  }
+
+  function handlePointerMove(e: PointerEvent) {
+    if (!node || !isPointerInScene) return
+
+    const rect = node.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+    const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+
+    pointerMoveAnimate({ x, y })
+  }
+
+  function pointerMoveAnimate(relativePointerPosition: { x: number; y: number }) {
+    isResetting = false // Stop any ongoing reset animation
+
+    scene.traverse(object => {
+      if (object instanceof THREE.Object3D) {
+        const rotationFactorX = relativePointerPosition.x * maxRotationAngle
+        const rotationFactorY = -relativePointerPosition.y * maxRotationAngle
+
+        object.rotation.x = THREE.MathUtils.degToRad(rotationFactorY)
+        object.rotation.y = THREE.MathUtils.degToRad(rotationFactorX)
+      }
+    })
+
+    renderer.render(scene, camera)
+  }
+
   function animate() {
     requestAnimationFrame(animate)
-    renderer.render(scene, camera)
+
+    if (!isResetting && !isPointerInScene) {
+      renderer.render(scene, camera)
+    }
   }
 </script>
 
-<div bind:this={node} class="h-full w-full" style="min-height: 500px;"></div>
+<div
+  bind:this={node}
+  role="doc-abstract"
+  aria-roledescription="Programming languages display"
+  on:pointerenter={onPointerEnter}
+  on:pointerleave={onPointerLeave}
+  on:focus={() => {}}
+  on:blur={() => {}}
+  class="h-full w-full"
+  style="min-height: 500px;"
+></div>

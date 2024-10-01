@@ -11,7 +11,7 @@
   import CodeSnippet from '$lib/components/codeSnippet.svelte'
   import SkillTree from '$lib/components/experience/skillTree.svelte'
   import ContentSection from '$lib/components/base/contentSection.svelte'
-  import ProgrammingLangages from '$lib/components/experience/programmingLangages.svelte'
+  import ProgrammingLangages from '$lib/components/experience/programmingLanguages.svelte'
   import { programmingLangugagesLogos } from '$lib/data/programmingLanguages'
 
   let sections: NodeListOf<HTMLElement>
