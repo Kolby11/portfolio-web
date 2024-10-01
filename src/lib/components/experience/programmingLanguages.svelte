@@ -1,22 +1,25 @@
 <script lang="ts">
   import type { LogoObject } from '$lib/data/programmingLanguages'
-  import type { NumericRange } from '@sveltejs/kit'
   import { onMount } from 'svelte'
   import * as THREE from 'three'
   import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
-  import { gsap } from 'gsap'
 
   export let logos: LogoObject[]
 
   const loader = new GLTFLoader()
 
-  const maxRotationAngle = 10
-
+  const logoRotationSensitivity = 2
   const defaultCameraPosition = 5
+  const maxRotationSpeed = 0.2 // Maximum rotation speed
+  const minRotationSpeed = 0.1 // Minimum rotation speed
+
   let node: HTMLDivElement
   let scene: THREE.Scene
   let camera: THREE.PerspectiveCamera
   let renderer: THREE.WebGLRenderer
+  let logoModels: THREE.Object3D[] = []
+
+  let mousePosition = new THREE.Vector2()
 
   onMount(() => {
     if (typeof window === 'undefined' || !node) {
@@ -28,9 +31,11 @@
     initializeAndRender()
 
     window.addEventListener('resize', onWindowResize)
+    window.addEventListener('mousemove', handleMouseMove)
 
     return () => {
       window.removeEventListener('resize', onWindowResize)
+      window.removeEventListener('mousemove', handleMouseMove)
     }
   })
 
@@ -38,7 +43,6 @@
     scene = new THREE.Scene()
     camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000)
     renderer = new THREE.WebGLRenderer({ antialias: true })
-    // renderer.setClearColor(0x00ffff, 1) // Development only
     renderer.setClearColor(0x0000ff, 0)
   }
 
@@ -56,7 +60,6 @@
     renderer.setSize(nodeRect.width, nodeRect.height)
     node.appendChild(renderer.domElement)
 
-    // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
     scene.add(ambientLight)
 
@@ -72,28 +75,32 @@
   async function loadLogo(logo: LogoObject, index: number) {
     try {
       const gltf = await loadGLB(logo.glbPath)
+      gltf.scene.name = logo.name
+
       const model = gltf.scene
 
       // Position the model
       model.position.x = index * 2
+      model.position.y = 0
+      model.position.z = 0
 
-      // Ensure materials are correctly set up
+      // Make the model face the camera
+      model.lookAt(camera.position)
+
       model.traverse(child => {
         if (child instanceof THREE.Mesh) {
           if (child.material) {
-            // Enable texture wrapping if needed
             if (child.material.map) {
               child.material.map.wrapS = THREE.RepeatWrapping
               child.material.map.wrapT = THREE.RepeatWrapping
             }
-            // Ensure double-sided rendering
             child.material.side = THREE.DoubleSide
           }
         }
       })
 
-      // Add the model to the scene
       scene.add(model)
+      logoModels.push(model)
     } catch (error) {
       console.error(`Error loading logo: ${logo.glbPath}`, error)
     }
@@ -121,85 +128,35 @@
     renderer.setSize(nodeRect.width, nodeRect.height)
   }
 
-  let isResetting = false
-  let isPointerInScene = false
-
-  function onPointerEnter() {
-    if (typeof window === 'undefined') return
-    console.log('Pointer entered')
-    isPointerInScene = true
-    window.addEventListener('pointermove', handlePointerMove)
-  }
-
-  function onPointerLeave() {
-    if (typeof window === 'undefined') return
-    console.log('Pointer left')
-    isPointerInScene = false
-    window.removeEventListener('pointermove', handlePointerMove)
-    resetAnimation()
-  }
-
-  function resetAnimation() {
-    isResetting = true
-    const startTime = performance.now()
-    const duration = 2000
-
-    function animateReset(currentTime: number) {
-      const elapsed = currentTime - startTime
-      const progress = Math.min(elapsed / duration, 1)
-
-      scene.traverse(object => {
-        if (object instanceof THREE.Object3D) {
-          object.rotation.x *= 1 - progress
-          object.rotation.y *= 1 - progress
-          object.rotation.z *= 1 - progress
-        }
-      })
-
-      renderer.render(scene, camera)
-
-      if (progress < 1 && isResetting) {
-        requestAnimationFrame(animateReset)
-      } else {
-        isResetting = false
-      }
-    }
-
-    requestAnimationFrame(animateReset)
-  }
-
-  function handlePointerMove(e: PointerEvent) {
-    if (!node || !isPointerInScene) return
+  function handleMouseMove(event: MouseEvent) {
+    if (!node) return
 
     const rect = node.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
-    const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
-
-    pointerMoveAnimate({ x, y })
-  }
-
-  function pointerMoveAnimate(relativePointerPosition: { x: number; y: number }) {
-    isResetting = false // Stop any ongoing reset animation
-
-    scene.traverse(object => {
-      if (object instanceof THREE.Object3D) {
-        const rotationFactorX = relativePointerPosition.x * maxRotationAngle
-        const rotationFactorY = -relativePointerPosition.y * maxRotationAngle
-
-        object.rotation.x = THREE.MathUtils.degToRad(rotationFactorY)
-        object.rotation.y = THREE.MathUtils.degToRad(rotationFactorX)
-      }
-    })
-
-    renderer.render(scene, camera)
+    mousePosition.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+    mousePosition.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
   }
 
   function animate() {
     requestAnimationFrame(animate)
 
-    if (!isResetting && !isPointerInScene) {
-      renderer.render(scene, camera)
-    }
+    logoModels.forEach((model, index) => {
+      const logoPosition = new THREE.Vector3()
+      model.getWorldPosition(logoPosition)
+
+      const distance = new THREE.Vector2(logoPosition.x, logoPosition.y).distanceTo(mousePosition)
+
+      let rotationSpeed = Math.max(minRotationSpeed, Math.min(distance * logoRotationSensitivity, maxRotationSpeed))
+
+      // Calculate rotation based on mouse position
+      const targetRotationY = (mousePosition.x * Math.PI) / 4
+      const targetRotationX = (-mousePosition.y * Math.PI) / 4
+
+      // Apply rotation
+      model.rotation.y += (targetRotationY - model.rotation.y) * rotationSpeed
+      model.rotation.x += (targetRotationX - model.rotation.x) * rotationSpeed
+    })
+
+    renderer.render(scene, camera)
   }
 </script>
 
@@ -207,10 +164,6 @@
   bind:this={node}
   role="doc-abstract"
   aria-roledescription="Programming languages display"
-  on:pointerenter={onPointerEnter}
-  on:pointerleave={onPointerLeave}
-  on:focus={() => {}}
-  on:blur={() => {}}
   class="h-full w-full"
   style="min-height: 500px;"
 ></div>
