@@ -2,33 +2,37 @@
   import { goto } from '$app/navigation'
   import { smoothScroll } from '$lib/actions/smoothScroll'
   import { theme } from '$lib/stores/themeStore'
-  import { currentLanguage, setCurrentLang } from '$lib/stores/translation'
-  import { translations } from '$lib/data/translations'
+  import { currentLanguage, setCurrentLang, textContent } from '$lib/stores/textContent'
   import MaterialSymbolsLightCloseRounded from '~icons/material-symbols-light/close-rounded'
   import MaterialSymbolsLightMenuRounded from '~icons/material-symbols-light/menu-rounded'
   import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols/dark-mode-outline-rounded'
   import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols/light-mode-outline-rounded'
   import { onMount } from 'svelte'
+  import { LanguageCode } from '$lib/data/textContent/textContent'
 
-  let sections: string[] = translations.navbar ? Object.keys(translations.navbar) : []
-  let languages: string[] = ['sk', 'en', 'de']
+  let sections: string[] = $textContent.navbar ? Object.keys($textContent.navbar) : []
 
   let showMenu = false
 
   let sideBar: HTMLDivElement
   let sideBarWidth: number = 0
 
-  const toggleMenu = () => {
+  function toggleMenu() {
     showMenu = !showMenu
   }
 
-  const toggleDarkMode = () => {
+  function toggleDarkMode() {
     theme.update(current => (current === 'light' ? 'dark' : 'light'))
   }
 
-  const setLanguage = async (language: string) => {
+  async function setLanguage(language: LanguageCode) {
     setCurrentLang(language)
-    goto(`/${language}`, { noScroll: true })
+  }
+
+  function redraw() {
+    if (sideBar) {
+      sideBarWidth = sideBar.getBoundingClientRect().width
+    }
   }
 
   onMount(() => {
@@ -36,12 +40,6 @@
     if (!sideBar) return
     sideBarWidth = sideBar.getBoundingClientRect().width
   })
-
-  const redraw = () => {
-    if (sideBar) {
-      sideBarWidth = sideBar.getBoundingClientRect().width
-    }
-  }
 </script>
 
 <!-- Mobile navbar -->
@@ -70,12 +68,12 @@
             href="#{section}"
             on:click={e => {
               showMenu = false
-            }}>{translations.navbar[section][$currentLanguage]}</a
+            }}>{$textContent.navbar[section]}</a
           >
         {/each}
       </nav>
       <div class="mb-4 mt-auto flex h-fit gap-x-4">
-        {#each languages as language}
+        {#each Object.values(LanguageCode) as language}
           <button class="h-fit text-sm" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
         {/each}
       </div>
@@ -100,7 +98,7 @@
       />
     </button>
     <div class="flex w-fit items-center justify-between gap-x-4">
-      {#each languages as language}
+      {#each Object.values(LanguageCode) as language}
         <button class="h-fit" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
       {/each}
     </div>
@@ -113,8 +111,7 @@
             href="#{section}"
             class="items-center justify-center px-3 text-xl {i === sections.length - 1
               ? ''
-              : 'border-r border-light-secondary dark:border-dark-secondary'}"
-            >{translations.navbar[section][$currentLanguage]}</a
+              : 'border-r border-light-secondary dark:border-dark-secondary'}">{$textContent.navbar[section]}</a
           >
         </li>
       {/each}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { section } from '$lib/stores/scrollbar'
-  import { currentLanguage } from '$lib/stores/translation'
+  import { currentLanguage } from '$lib/stores/textContent'
   import { translations } from '$lib/data/translations'
   import { onMount } from 'svelte'
 

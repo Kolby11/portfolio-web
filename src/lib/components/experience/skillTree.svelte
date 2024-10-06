@@ -1,6 +1,6 @@
 <script lang="ts">
   import { seniority, type lang } from '$lib/data/translations'
-  import { currentLanguage } from '$lib/stores/translation'
+  import { currentLanguage } from '$lib/stores/textContent'
 
   type Coordinates = {
     x: number
@@ -8,12 +8,12 @@
   }
 
   export let data: {
-    title: Record<lang, string>
+    title: string
     categories: {
-      name: Record<lang, string>
+      name: string
       items: {
         name: string
-        description: Record<lang, string>
+        description: string
         seniority: seniority
       }[]
     }[]
@@ -61,7 +61,7 @@
 </script>
 
 <div>
-  <h2 class="text-2xl">{data.title[$currentLanguage]}</h2>
+  <h2 class="text-2xl">{data.title}</h2>
   <ul class="mt-8 flex flex-col gap-y-4">
     {#each categoriesLoop as category, index}
       <!-- Use reactive categoryStyles for dynamic updates -->
@@ -70,7 +70,7 @@
           on:click={() => changeCategory(index)}
           class={`transition hover:scale-105 ${getCategoryDistance(index) == 2 ? 'translate-x-0' : getCategoryDistance(index) == 1 ? 'translate-x-2' : getCategoryDistance(index) == 0 ? 'translate-x-4' : 'hidden'}`}
         >
-          {category.name[$currentLanguage]}</button
+          {category.name}</button
         >
       </li>
     {/each}

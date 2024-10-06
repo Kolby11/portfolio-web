@@ -2,17 +2,15 @@
   import { onMount } from 'svelte'
   import { section } from '$lib/stores/scrollbar'
   import { get } from 'svelte/store'
-  import Timeline from '$lib/components/timeline.svelte'
-  import { currentLanguage } from '$lib/stores/translation'
-  import { translations } from '$lib/data/translations'
-  import Graph from '$lib/components/graph.svelte'
-  import { languageStats } from '$lib/data/languageStats'
-  import ProjectsDisplay from '$lib/components/projectsDisplay.svelte'
+  import Timeline from '$lib/components/about/timeline.svelte'
+  import { currentLanguage, textContent } from '$lib/stores/textContent'
+  import ProjectsDisplay from '$lib/components/projects/projectsDisplay.svelte'
   import CodeSnippet from '$lib/components/codeSnippet.svelte'
   import SkillTree from '$lib/components/experience/skillTree.svelte'
   import ContentSection from '$lib/components/base/contentSection.svelte'
   import ProgrammingLangages from '$lib/components/experience/programmingLanguages.svelte'
   import { programmingLangugagesLogos } from '$lib/data/programmingLanguages'
+  import ItemShowcase from '$lib/components/experience/itemShowcase.svelte'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -64,16 +62,16 @@
     </div>
   </ContentSection>
   <ContentSection sectionName="about">
-    <h1 class="text-3xl md:text-4xl">{translations.about.title[$currentLanguage]}</h1>
+    <h1 class="text-3xl md:text-4xl">{$textContent.about.title}</h1>
     <div class="ml-auto mt-10 px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
-      <div class="md:w-1/2 md:pr-5">
-        <h2 class="text-2xl">Timeline</h2>
-        <Timeline timeLineItems={translations.about.timeline.sections} />
+      <div class="md:w-full md:pr-5">
+        <!-- <h2 class="text-2xl">Timeline</h2> -->
+        <Timeline timeLineItems={$textContent.about.timeline.sections} />
       </div>
       <div class="md:w-1/2 md:pl-5">
-        <h2 class="text-2xl">{translations.about.interestsAndHobbies.title[$currentLanguage]}</h2>
+        <h2 class="text-2xl">{$textContent.about.interestsAndHobbies.title}</h2>
         <p>
-          {translations.about.interestsAndHobbies.description[$currentLanguage]}
+          {$textContent.about.interestsAndHobbies.description}
         </p>
       </div>
     </div>
@@ -81,18 +79,19 @@
       <CodeSnippet fontSize="small" />
     </div>
   </ContentSection>
-  <ContentSection sectionName="skills">
-    <h1 class="text-3xl">{translations.skills.title[$currentLanguage]}</h1>
+  <ContentSection sectionName="experience">
+    <h1 class="text-3xl">{$textContent.experience.title}</h1>
     <div class="ml-auto mt-10 flex flex-col px-4 max-md:space-y-8 md:items-start md:justify-between md:px-10">
       <div class="flex flex-col items-start justify-start md:w-full md:flex-row md:space-x-4 md:pr-5">
-        <p class="md:mt-8 md:w-1/2">
-          {translations.skills.description[$currentLanguage]}
-        </p>
+        <div class="md:mt-8 md:w-1/2">
+          <ItemShowcase content={$textContent.experience.slideshowItems}></ItemShowcase>
+          <!-- {$textContent.experience.description} -->
+        </div>
         <div class="max-md:mt-6 md:w-1/2">
           <!-- <Graph
             data={{
-              itemsTitle: translations.skills.graph.title[$currentLanguage],
-              valueTitle: translations.skills.graph.valueTitle[$currentLanguage],
+              itemsTitle: translations.experience.graph.title[$currentLanguage],
+              valueTitle: translations.experience.graph.valueTitle[$currentLanguage],
               valueUnit: 'h',
               items: languageStats.map(item => {
                 return { name: item.name, value: item.time }
@@ -103,21 +102,21 @@
         </div>
       </div>
       <div class="md:w-1/2 md:pl-5">
-        <SkillTree data={translations.skills.skillTree} />
+        <SkillTree data={$textContent.experience.skillTree} />
       </div>
     </div>
   </ContentSection>
   <ContentSection sectionName="projects">
-    <h1 class="text-3xl">{translations.projects.title[$currentLanguage]}</h1>
+    <h1 class="text-3xl">{$textContent.projects.title}</h1>
     <div class="mt-6 h-fit">
       <ProjectsDisplay />
     </div>
   </ContentSection>
   <ContentSection sectionName="contact">
-    <h1 class="text-3xl">{translations.contact.title[$currentLanguage]}</h1>
+    <h1 class="text-3xl">{$textContent.contact.title}</h1>
     <div class="mt-20 sm:mt-40">
       <div class="flex flex-col items-center justify-center text-center md:text-lg">
-        <p class="md:text-xl">{translations.contact.text[$currentLanguage]}</p>
+        <p class="md:text-xl">{$textContent.contact.text}</p>
         <div class="mt-20 flex flex-col space-y-2 font-semibold">
           <p>mato.kollar2004@gmail.com</p>
           <p>+421 948 723 300</p>

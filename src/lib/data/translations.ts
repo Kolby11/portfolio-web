@@ -6,64 +6,67 @@ export enum seniority {
   SENIOR = 'senior',
 }
 
+export type Translation = Record<lang, string>
+
 export type BaseTranslation = {
   seo: {
-    description: Record<lang, string>
-    keywords: Record<lang, string>
+    description: Translation
+    keywords: Translation
   }
   navbar: {
-    [key: string]: Record<lang, string>
+    [key: string]: Translation
   }
   home: {
-    title: Record<lang, string>
-    description: Record<lang, string>
+    title: Translation
+    description: Translation
   }
   about: {
-    title: Record<lang, string>
-    description: Record<lang, string>
+    title: Translation
+    description: Translation
     timeline: {
-      title: Record<lang, string>
+      title: Translation
       sections: {
-        title: Record<lang, string>
+        title: Translation
         year: number
-        description: Record<lang, string>
+        description: Translation
       }[]
     }
     interestsAndHobbies: {
-      title: Record<lang, string>
-      description: Record<lang, string>
+      title: Translation
+      description: Translation
     }
   }
-  skills: {
-    title: Record<lang, string>
-    description: Record<lang, string>
+  experience: {
+    slideshowItems: { title: Translation; description: Translation }[]
+    title: Translation
+    description: Translation
     graph: {
-      title: Record<lang, string>
-      valueTitle: Record<lang, string>
+      title: Translation
+      valueTitle: Translation
     }
     skillTree: {
-      title: Record<lang, string>
+      title: Translation
       categories: {
-        name: Record<lang, string>
+        name: Translation
         items: {
           name: string
-          description: Record<lang, string>
+          description: Translation
           seniority: seniority
         }[]
       }[]
     }
   }
   projects: {
-    title: Record<lang, string>
-    description: Record<lang, string>
+    title: Translation
+    description: Translation
   }
   contact: {
-    title: Record<lang, string>
-    description: Record<lang, string>
-    text: Record<lang, string>
+    title: Translation
+    description: Translation
+    text: Translation
   }
   footer: {
-    text: Record<lang, string>
+    text: Translation
   }
 }
 
@@ -71,12 +74,12 @@ export const translations: BaseTranslation = {
   seo: {
     description: {
       sk: 'Martin Kollár - webdeveloper so zameraním na inovácie a kreativitu. Prehľad mojich skúseností s programovaním, projektami a zručnosťami v oblasti web developmentu.',
-      en: 'Martin Kollár - a web developer focused on innovation and creativity. An overview of my experience with programming, projects, and skills in the field of web development.',
+      en: 'Martin Kollár - a web developer focused on innovation and creativity. An overview of my experience with programming, projects, and experience in the field of web development.',
       de: 'Martin Kollár - ein Webentwickler mit Schwerpunkt auf Innovation und Kreativität. Ein Überblick über meine Erfahrungen mit Programmierung, Projekten und Fähigkeiten im Bereich der Webentwicklung.',
     },
     keywords: {
       sk: 'Martin Kollár, Web Developer, Programátor, Programovacie Zručnosti, Projektový Manažment, Full Stack Developer, Softvérové Inžinierstvo, Web Dizajn, Používateľská Skúsenosť, Vývoj Frontendu, Vývoj Backendu, Vývoj Aplikácií, Programovacie Projekty',
-      en: 'Martin Kollar, Web Developer, Programmer, Programming Skills, Project Management, Full Stack Developer, Software Engineering, Web Design, User Experience, Frontend Development, Backend Development, Application Development, Coding Projects',
+      en: 'Martin Kollar, Web Developer, Programmer, Programming Experience, Project Management, Full Stack Developer, Software Engineering, Web Design, User Experience, Frontend Development, Backend Development, Application Development, Coding Projects',
       de: 'Martin Kollar, Webentwickler, Programmierer, Programmierfähigkeiten, Projektmanagement, Full-Stack-Entwickler, Softwareingenieurwesen, Webdesign, Benutzererfahrung, Frontend-Entwicklung, Backend-Entwicklung, Anwendungsentwicklung, Programmierprojekte',
     },
   },
@@ -91,9 +94,9 @@ export const translations: BaseTranslation = {
       en: 'About me',
       de: 'Über mich',
     },
-    skills: {
+    experience: {
       sk: 'Skúsenosti',
-      en: 'Skills',
+      en: 'Experience',
       de: 'Fahigkeiten',
     },
     projects: {
@@ -195,10 +198,16 @@ export const translations: BaseTranslation = {
       },
     },
   },
-  skills: {
+  experience: {
+    slideshowItems: [
+      {
+        title: { sk: 'Web development', en: 'Web development', de: 'Web development' },
+        description: { sk: 'a', en: 'a', de: ' a' },
+      },
+    ],
     title: {
       sk: 'Skúsenosti',
-      en: 'Skills',
+      en: 'Experience',
       de: 'Fahigkeiten',
     },
     description: {

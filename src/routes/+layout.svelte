@@ -1,18 +1,20 @@
 <script lang="ts">
-  import '../../app.css'
+  import '../app.css'
   import Navbar from '$lib/components/misc/navbar.svelte'
   import Scrollbar from '$lib/components/misc/scrollbar.svelte'
   import Footer from '$lib/components/misc/footer.svelte'
   import { onMount } from 'svelte'
   import { initTheme } from '$lib/stores/themeStore'
-  import { currentLanguage, setCurrentLang } from '$lib/stores/translation'
+  import { currentLanguage } from '$lib/stores/textContent'
   import { translations } from '$lib/data/translations'
 
-  export let data
+  if ($currentLanguage) {
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = $currentLanguage
+    }
+  }
 
   onMount(() => {
-    document.documentElement.lang = data.lang
-    setCurrentLang(data.lang)
     initTheme()
   })
 </script>

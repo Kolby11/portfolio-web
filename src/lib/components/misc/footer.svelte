@@ -1,5 +1,5 @@
 <script>
-  import { currentLanguage } from '$lib/stores/translation'
+  import { currentLanguage } from '$lib/stores/textContent'
   import { translations } from '$lib/data/translations'
 </script>
 
