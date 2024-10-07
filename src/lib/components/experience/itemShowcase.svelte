@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import MaterialSymbolsArrowBackIosRounded from '~icons/material-symbols/arrow-back-ios-rounded'
+  import MaterialSymbolsArrowForwardIosRounded from '~icons/material-symbols/arrow-forward-ios-rounded'
 
   export let content: { title: string; description: string }[]
 
@@ -69,7 +71,7 @@
 
 <div class="flex h-full w-full gap-x-4 p-2">
   <div class="flex w-fit flex-col items-center justify-center">
-    <button on:click={clickPrev}>prev</button>
+    <button on:click={clickPrev}><MaterialSymbolsArrowBackIosRounded /></button>
   </div>
   <div class="flex h-full grow flex-col">
     <h2 class="text-2xl">{content[selectedItemIndex].title}</h2>
@@ -91,6 +93,6 @@
     </div>
   </div>
   <div class="flex w-fit flex-col items-center justify-center">
-    <button on:click={clickNext}>next</button>
+    <button on:click={clickNext}><MaterialSymbolsArrowForwardIosRounded /></button>
   </div>
 </div>

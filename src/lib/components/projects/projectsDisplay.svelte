@@ -1,4 +1,6 @@
 <script lang="ts">
+  import MaterialSymbolsArrowBackIosRounded from '~icons/material-symbols/arrow-back-ios-rounded'
+  import MaterialSymbolsArrowForwardIosRounded from '~icons/material-symbols/arrow-forward-ios-rounded'
   import { onMount } from 'svelte'
 
   type Project = {
@@ -78,35 +80,10 @@
   let selectedProject: Project = selectedProjectCategory.projects[0]
   let selectedProjectImageIndex: number = 0
 
-  const handleCategoryMouseEnter = (e: Event, category: ProjectCategory) => {
-    const underline = document.getElementById(`projects-underline-${category.name}`)
-    if (underline) {
-      underline.style.width = '100%'
-    }
-  }
-
-  const handleCategoryMouseLeave = (e: Event, category: ProjectCategory) => {
-    const underline = document.getElementById(`projects-underline-${category.name}`)
-    if (underline && selectedProjectCategory !== category) {
-      underline.style.width = '0%'
-    }
-  }
-
-  const handleCategoryClick = (e: Event, category: ProjectCategory) => {
-    if (selectedProjectCategory === category) {
-      return
-    } else {
-      const underline = document.getElementById(`projects-underline-${selectedProjectCategory.name}`)
-      if (underline) {
-        underline.style.width = '0%'
-      }
-      selectedProjectCategory = category
-    }
-  }
-
-  const handleProjectClick = (e: Event, project: Project, projectCategory?: ProjectCategory) => {
+  const handleProjectClick = (e: Event, project: Project, projectCategory: ProjectCategory) => {
     selectedProject = project
-    projectCategory && (selectedProjectCategory = projectCategory)
+    selectedProjectCategory = projectCategory
+    selectedProjectImageIndex = 0
   }
 
   function clickPrevImage() {
@@ -114,7 +91,6 @@
       selectedProjectImageIndex = selectedProject.images.length - 1
       return
     }
-
     selectedProjectImageIndex -= 1
   }
 
@@ -123,44 +99,46 @@
       selectedProjectImageIndex = 0
       return
     }
-
     selectedProjectImageIndex += 1
   }
 
-  onMount(() => {
-    if (selectedProjectCategory) {
-      const underline = document.getElementById(`projects-underline-${selectedProjectCategory.name}`)
-      if (underline) {
-        underline.style.width = '100%'
-      }
+  function fillProjectsForAnimation(projects: Project[], minCount: number = 6): Project[] {
+    let filledProjects: Project[] = []
+    while (filledProjects.length < minCount) {
+      filledProjects = [...filledProjects, ...projects]
     }
-  })
+    return filledProjects
+  }
 </script>
 
 <div class="flex w-full flex-col items-center">
   <div class="mt-10 flex w-full flex-col items-start justify-between gap-y-8 px-4 md:px-10 lg:flex-row">
-    <div class="flex w-fit flex-col gap-4">
-      <div>
-        {#each projectCategories as projectCategory, projectCategoryIndex}
-          <h4 class="mb-2 text-center text-lg">{projectCategory.name}</h4>
-        {/each}
-        <div class={`grid w-full grid-cols-3 flex-wrap gap-4 transition`}>
-          {#each projectCategory.projects as project, i}
-            <button
-              on:click={e => handleProjectClick(e, project, projectCategory)}
-              class={`size-28 shadow-gray-50 transition duration-300 sm:size-28 md:size-32 lg:size-44 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
-            >
-              <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
-            </button>
-          {/each}
+    <div class="grid grid-cols-1 gap-8 overflow-hidden sm:grid-cols-2 md:grid-cols-3">
+      {#each projectCategories as projectCategory, projectCategoryIndex}
+        <div class="scroll-container">
+          <div class={projectCategoryIndex % 2 === 0 ? 'scroll-content' : 'scroll-content-reverse'}>
+            <div class="flex flex-col items-center">
+              <!-- <h4 class="mb-2 text-center text-lg">{projectCategory.name}</h4> -->
+              <div class="flex flex-col gap-4 transition">
+                {#each fillProjectsForAnimation(projectCategory.projects) as project, i}
+                  <button
+                    on:click={e => handleProjectClick(e, project, projectCategory)}
+                    class={`size-28 shadow-gray-50 transition duration-300 sm:size-28 md:size-32 lg:size-44 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
+                  >
+                    <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
+                  </button>
+                {/each}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      {/each}
     </div>
     <div class="flex flex-col items-center justify-center sm:px-0 lg:w-1/2">
       <h3 class="text-2xl">{selectedProject.name}</h3>
       <div class="flex h-full w-full items-center justify-center gap-x-4 p-2">
         <div class="flex w-fit flex-col items-center justify-center">
-          <button on:click={clickPrevImage}>prev</button>
+          <button on:click={clickPrevImage}><MaterialSymbolsArrowBackIosRounded /></button>
         </div>
         <div class="w-full">
           <img
@@ -170,7 +148,7 @@
           />
         </div>
         <div class="flex w-fit flex-col items-center justify-center">
-          <button on:click={clickNextImage}>next</button>
+          <button on:click={clickNextImage}><MaterialSymbolsArrowForwardIosRounded /></button>
         </div>
       </div>
       <p class="w-full border-b px-8 text-center">
@@ -179,3 +157,35 @@
     </div>
   </div>
 </div>
+
+<style lang="scss">
+  @keyframes scrollDown {
+    0% {
+      transform: translateY(-50%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  .scroll-container {
+    height: 600px; /* Adjust based on your needs */
+  }
+
+  .scroll-content {
+    animation: scrollDown 60s linear infinite;
+  }
+
+  .scroll-content-reverse {
+    animation: scrollUp 60s linear infinite;
+  }
+</style>
