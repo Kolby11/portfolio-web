@@ -1,0 +1,64 @@
+@use "tailwindcss" as *;
+@layer theme, base, components, utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-base: #FF3D00;
+  --color-primary-600: #FF3D00;
+  --color-primary-400: #FF4F24;
+  --color-primary-300: #FD8D6C;
+  --color-others-rose: #FD8D6C;
+  --color-others-green: #00C572;
+  --color-others-blue: #0084AD;
+  --color-success: #05df72;
+  --color-failure: #fb2c36;
+
+  --color-background: #e4e7ed;
+  --color-text: #0A0A0A;
+  --color-primary: #0A0A0A;
+  --color-secondary: #9C9A9A;
+
+  --color-dark-background: #0A0A0A;
+  --color-dark-text: #edeff2;
+  --color-dark-primary: #edeff2;
+  --color-dark-secondary: #9C9A9A;
+}
+
+/* Custom font */
+body{
+  font-family: 'Inter', sans-serif;
+  @apply bg-[var(--color-background)] text-[var(--color-text)];
+}
+
+/* Custom icons  */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  height: 10px;
+  @apply bg-[var(--color-background)];
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  height: 10px;
+  @apply bg-[var(--color-primary)];
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.safe-area {
+  max-width: 1140px;
+}

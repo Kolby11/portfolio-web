@@ -1,5 +1,5 @@
 <script lang="ts">
-  import '../app.css'
+  import '../app.scss'
   import Navbar from '$lib/components/global/navbar.svelte'
   import Scrollbar from '$lib/components/global/scrollbar.svelte'
   import Footer from '$lib/components/global/footer.svelte'
