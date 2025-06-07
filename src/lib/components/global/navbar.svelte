@@ -1,16 +1,14 @@
 <script lang="ts">
-  import { goto } from '$app/navigation'
   import { smoothScroll } from '$lib/actions/smoothScroll'
+  import { t, locale, locales } from 'svelte-i18n'
   import { theme } from '$lib/stores/themeStore'
-  import { currentLanguage, setCurrentLang, textContent } from '$lib/stores/textContent'
   import MaterialSymbolsLightCloseRounded from '~icons/material-symbols-light/close-rounded'
   import MaterialSymbolsLightMenuRounded from '~icons/material-symbols-light/menu-rounded'
   import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols/dark-mode-outline-rounded'
   import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols/light-mode-outline-rounded'
   import { onMount } from 'svelte'
-  import { LanguageCode } from '$lib/data/textContent/textContent'
 
-  let sections: string[] = $textContent.navbar ? Object.keys($textContent.navbar) : []
+  export let sections: string[] = []
 
   let showMenu = false
 
@@ -25,8 +23,8 @@
     theme.update(current => (current === 'light' ? 'dark' : 'light'))
   }
 
-  async function setLanguage(language: LanguageCode) {
-    setCurrentLang(language)
+  async function setLanguage(language: string) {
+    locale.set(language)
   }
 
   function redraw() {
@@ -68,12 +66,14 @@
             href="#{section}"
             on:click={e => {
               showMenu = false
-            }}>{$textContent.navbar[section]}</a
+            }}
           >
+            {$t(`navbar.${section}`)}
+          </a>
         {/each}
       </nav>
       <div class="mb-4 mt-auto flex h-fit gap-x-4">
-        {#each Object.values(LanguageCode) as language}
+        {#each $locales as language}
           <button class="h-fit text-sm" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
         {/each}
       </div>
@@ -98,7 +98,7 @@
       />
     </button>
     <div class="flex w-fit items-center justify-between gap-x-4">
-      {#each Object.values(LanguageCode) as language}
+      {#each $locales as language}
         <button class="h-fit" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
       {/each}
     </div>
@@ -111,8 +111,10 @@
             href="#{section}"
             class="items-center justify-center px-3 text-xl {i === sections.length - 1
               ? ''
-              : 'border-r border-light-secondary dark:border-dark-secondary'}">{$textContent.navbar[section]}</a
+              : 'border-r border-light-secondary dark:border-dark-secondary'}"
           >
+            {$t(`navbar.${section}`)}
+          </a>
         </li>
       {/each}
     </ul>

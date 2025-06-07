@@ -1,7 +1,6 @@
 <script lang="ts">
+  import { t } from 'svelte-i18n'
   import { section } from '$lib/stores/scrollbar'
-  import { currentLanguage } from '$lib/stores/textContent'
-  import { translations } from '$lib/data/translations'
   import { onMount } from 'svelte'
 
   let windowHeight: number
@@ -98,7 +97,7 @@
     <div class="relative h-full border-x border-light-primary dark:border-dark-primary">
       <div class="block-select absolute top-0 flex h-full w-5 items-center justify-center">
         <p class="rotate-90 whitespace-nowrap pb-4">
-          {$section ? translations.navbar[$section][$currentLanguage] : ''}
+          {$section && $t(`navbar.${$section}`)}
         </p>
       </div>
     </div>

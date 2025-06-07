@@ -9,6 +9,7 @@
 		"oderwat.indent-rainbow",
 		"yzhang.markdown-all-in-one",
 		"bradlc.vscode-tailwindcss",
-		"pkief.material-icon-theme"
+		"pkief.material-icon-theme",
+		"lokalise.i18n-ally"
 	]
 }

@@ -1,17 +1,21 @@
 <script lang="ts">
   import '../app.css'
-  import Navbar from '$lib/components/misc/navbar.svelte'
-  import Scrollbar from '$lib/components/misc/scrollbar.svelte'
-  import Footer from '$lib/components/misc/footer.svelte'
+  import Navbar from '$lib/components/global/navbar.svelte'
+  import Scrollbar from '$lib/components/global/scrollbar.svelte'
+  import Footer from '$lib/components/global/footer.svelte'
   import { onMount } from 'svelte'
   import { initTheme } from '$lib/stores/themeStore'
-  import { currentLanguage } from '$lib/stores/textContent'
-  import { translations } from '$lib/data/translations'
 
-  if ($currentLanguage) {
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = $currentLanguage
+  import '$lib/i18n'
+  import { browser } from '$app/environment'
+  import { locale, waitLocale, t } from 'svelte-i18n'
+  import type { LayoutLoad } from './$types'
+
+  export const load: LayoutLoad = async () => {
+    if (browser) {
+      locale.set(window.navigator.language)
     }
+    await waitLocale()
   }
 
   onMount(() => {
@@ -20,13 +24,13 @@
 </script>
 
 <svelte:head>
-  <title>Martin Kollár - Porfolio</title>
-  <meta name="description" content={translations.seo.description[$currentLanguage]} />
-  <meta name="keywords" content={translations.seo.keywords[$currentLanguage]} />
+  <title>Martin Kollár - Portfolio</title>
+  <meta name="description" content={$t('seo.description')} />
+  <meta name="keywords" content={$t('seo.keywords')} />
 </svelte:head>
 
 <div class="bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text">
-  <Navbar></Navbar>
+  <Navbar sections={['home', 'about', 'experience', 'projects', 'contact']}></Navbar>
   <slot />
   <Scrollbar></Scrollbar>
   <Footer></Footer>

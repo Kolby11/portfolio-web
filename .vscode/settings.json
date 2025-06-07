@@ -6,11 +6,9 @@
   "editor.detectIndentation": true,
   "editor.indentSize": "tabSize",
   "workbench.editor.labelFormat": "short",
-  
   // Prettier
   "prettier.printWidth": 120,
   "prettier.useEditorConfig": true,
-
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
@@ -20,8 +18,14 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "prettier.documentSelectors": ["**/*.svelte"],
+  "prettier.documentSelectors": [
+    "**/*.svelte"
+  ],
   "[svelte]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "i18n-ally.localesPaths": [
+    "src/lib/i18n/locales"
+  ],
+  "i18n-ally.keystyle": "nested",
 }

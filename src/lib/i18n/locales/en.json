@@ -1,0 +1,188 @@
+{
+  "seo": {
+    "description": "Martin Kollár - a web developer focused on innovation and creativity. An overview of my experience with programming, projects, and experience in the field of web development.",
+    "keywords": "Martin Kollar, Web Developer, Programmer, Programming Experience, Project Management, Full Stack Developer, Software Engineering, Web Design, User Experience, Frontend Development, Backend Development, Application Development, Coding Projects"
+  },
+  "personal_info": {
+    "name": "Martin Kollar",
+    "email": "mato.kollar2004@gmail.com"
+  },
+  "common": {
+    "navbar": {
+      "home": "Home",
+      "about": "About me",
+      "experience": "Experience",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "footer": {
+      "text": "Made with ❤️ by Martin Kollár"
+    }
+  },
+  "errors": {},
+  "home": {
+    "title": "Home",
+    "description": "Welcome to the homepage"
+  },
+  "about": {
+    "title": "About me",
+    "description": "Welcome to the about me page",
+    "timeline": {
+      "title": "Timeline",
+      "sections": [
+        {
+          "title": "First lines of code",
+          "year": 2019,
+          "description": "In 2019, I started programming for the first time and learned the basics of programming in Python. After entering high school, I started to devote myself intensively to programming and web development."
+        },
+        {
+          "title": "Started coding consistently",
+          "year": 2021,
+          "description": "Experimented with multiple languages, game engines, and frameworks. Started exploring ways to make my code cleaner and efficient."
+        },
+        {
+          "title": "Got Job at Binary Confidence s.r.o.",
+          "year": 2023,
+          "description": "Got my first job as a backend developer in Binary Confidence s.r.o. Worked with technologies such as Ansible, Hyper-V, Linux, etc.. Met with new concepts, technologies, interesting projects, and great people, furthering my knowledge."
+        },
+        {
+          "title": "Graduated highschool",
+          "year": 2024,
+          "description": "For my graduation project I worked on my own first large-scale fullstack web application. I learned a lot about web development, and I was able to apply my knowledge in a real-world project. I also learned a lot about project architecture, cloud and deployment."
+        }
+      ]
+    },
+    "interestsAndHobbies": {
+      "title": "Interests and hobbies",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lab"
+    }
+  },
+  "experience": {
+    "slideshowItems": [
+      {
+        "title": "Web development",
+        "description": "a"
+      }
+    ],
+    "title": "Experience",
+    "description": "My specialization is mainly in fullstack web application development and their deployment to production on the cloud, but I am also actively involved in other areas such as backend development for applications. Furthermore, I have worked in game and mobile development.",
+    "graph": {
+      "title": "Programming languages",
+      "valueTitle": "Hours spent"
+    },
+    "skillTree": {
+      "title": "Skill tree",
+      "categories": [
+        {
+          "name": "Programming languages",
+          "items": [
+            {
+              "name": "Python",
+              "description": "Python",
+              "seniority": "medior"
+            },
+            {
+              "name": "Typescript",
+              "description": "Python",
+              "seniority": "medior"
+            },
+            {
+              "name": "Javascript",
+              "description": "Python",
+              "seniority": "medior"
+            },
+            {
+              "name": "c#",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "c++",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Web application Development",
+          "items": [
+            {
+              "name": "Next.js",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "SvelteKit",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Vue.js",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Angular",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Mobile application Development",
+          "items": [
+            {
+              "name": "Kotlin",
+              "description": "Kotlin",
+              "seniority": "junior"
+            },
+            {
+              "name": "Flutter",
+              "description": "Flutter",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Game development",
+          "items": [
+            {
+              "name": "Unity",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Unreal engine",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Cloud deployment",
+          "items": [
+            {
+              "name": "Amazon Web Services (AWS)",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Google Cloud Platform (GCP)",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Welcome to the contact page"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Welcome to the contact page",
+    "text": "In case of interest, do not hesitate to contact me:"
+  }
+}

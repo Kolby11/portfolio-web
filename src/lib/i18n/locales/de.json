@@ -1,0 +1,188 @@
+{
+  "seo": {
+    "description": "Martin Kollár - ein Webentwickler mit Schwerpunkt auf Innovation und Kreativität. Ein Überblick über meine Erfahrungen mit Programmierung, Projekten und Fähigkeiten im Bereich der Webentwicklung.",
+    "keywords": "Martin Kollar, Webentwickler, Programmierer, Programmierfähigkeiten, Projektmanagement, Full-Stack-Entwickler, Softwareingenieurwesen, Webdesign, Benutzererfahrung, Frontend-Entwicklung, Backend-Entwicklung, Anwendungsentwicklung, Programmierprojekte"
+  },
+  "personal_info": {
+    "name": "Martin Kollar",
+    "email": "mato.kollar2004@gmail.com"
+  },
+  "common": {
+    "navbar": {
+      "home": "Haus",
+      "about": "Über mich",
+      "experience": "Fahigkeiten",
+      "projects": "Projekten",
+      "contact": "Kontakt"
+    },
+    "footer": {
+      "text": "Hergestellt mit ❤️ von Martin Kollár"
+    }
+  },
+  "errors": {},
+  "home": {
+    "title": "Haus",
+    "description": "Willkommen auf der Hausseite"
+  },
+  "about": {
+    "title": "Über mich",
+    "description": "Willkommen auf der Über mich Seite",
+    "timeline": {
+      "title": "Zeitachse",
+      "sections": [
+        {
+          "title": "Erste Zeilen des Codes",
+          "year": 2019,
+          "description": "Im Jahr 2019 stieg ich zum ersten Mal in die Programmierung ein und begann, die Grundlagen der Python-Programmierung zu erlernen. Nach dem Abitur begann ich, mich intensiv der Programmierung und Webentwicklung zu widmen."
+        },
+        {
+          "title": "Begann konsequent zu programmieren",
+          "year": 2021,
+          "description": "Experimentierte mit mehreren Sprachen, Spiel-Engines und Frameworks. Begann, Wege zu erkunden, um meinen Code sauberer und effizienter zu gestalten."
+        },
+        {
+          "title": "Job bei Binary Confidence s.r.o. bekommen",
+          "year": 2023,
+          "description": "Ich bekam meine erste Stelle als Backend-Entwickler bei Binary Confidence s.r.o. Ich arbeitete mit Technologien wie Ansible, Hyper-V, Linux usw. Ich traf auf neue Konzepte, Technologien, interessante Projekte und großartige Leute, die mein Wissen erweiterten."
+        },
+        {
+          "title": "Abitur gemacht",
+          "year": 2024,
+          "description": "Für mein Abschlussprojekt arbeitete ich an meiner ersten großen Fullstack-Webanwendung. Ich habe viel über Webentwicklung gelernt und konnte mein Wissen in einem realen Projekt anwenden. Ich habe auch viel über Projektarchitektur, Cloud und Bereitstellung gelernt."
+        }
+      ]
+    },
+    "interestsAndHobbies": {
+      "title": "Interessen und Hobbys",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lab"
+    }
+  },
+  "experience": {
+    "slideshowItems": [
+      {
+        "title": "Web development",
+        "description": "a"
+      }
+    ],
+    "title": "Fahigkeiten",
+    "description": "Meine Spezialisierung liegt hauptsächlich in der Fullstack-Webanwendungsentwicklung und deren Bereitstellung in der Cloud, aber ich widme mich auch aktiv anderen Bereichen wie der Backend-Entwicklung für Anwendungen. Des Weiteren habe ich in der Spiele- und Mobilentwicklung gearbeitet.",
+    "graph": {
+      "title": "Programmiersprachen",
+      "valueTitle": "Stunden verbracht"
+    },
+    "skillTree": {
+      "title": "Fähigkeitsbaum",
+      "categories": [
+        {
+          "name": "Programmiersprachen",
+          "items": [
+            {
+              "name": "Python",
+              "description": "Python",
+              "seniority": "medior"
+            },
+            {
+              "name": "Typescript",
+              "description": "Python",
+              "seniority": "medior"
+            },
+            {
+              "name": "Javascript",
+              "description": "Python",
+              "seniority": "medior"
+            },
+            {
+              "name": "c#",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "c++",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Webanwendungsentwicklung",
+          "items": [
+            {
+              "name": "Next.js",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "SvelteKit",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Vue.js",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Angular",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Mobile Anwendungsentwicklung",
+          "items": [
+            {
+              "name": "Kotlin",
+              "description": "Kotlin",
+              "seniority": "junior"
+            },
+            {
+              "name": "Flutter",
+              "description": "Flutter",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Spielentwicklung",
+          "items": [
+            {
+              "name": "Unity",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Unreal engine",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        },
+        {
+          "name": "Cloud-Bereitstellung",
+          "items": [
+            {
+              "name": "Amazon Web Services (AWS)",
+              "description": "Python",
+              "seniority": "junior"
+            },
+            {
+              "name": "Google Cloud Platform (GCP)",
+              "description": "Python",
+              "seniority": "junior"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projekten",
+    "description": "Willkommen auf der Kontakt Seite"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Willkommen auf der Kontakt Seite",
+    "text": "Im Falle von Interesse, zögern Sie nicht, mich zu kontaktieren:"
+  }
+}
