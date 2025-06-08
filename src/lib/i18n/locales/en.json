@@ -1,4 +1,5 @@
 {
+  "errors": {},
   "seo": {
     "description": "Martin Kollár - a web developer focused on innovation and creativity. An overview of my experience with programming, projects, and experience in the field of web development.",
     "keywords": "Martin Kollar, Web Developer, Programmer, Programming Experience, Project Management, Full Stack Developer, Software Engineering, Web Design, User Experience, Frontend Development, Backend Development, Application Development, Coding Projects"
@@ -7,22 +8,25 @@
     "name": "Martin Kollar",
     "email": "mato.kollar2004@gmail.com"
   },
-  "common": {
-    "navbar": {
-      "home": "Home",
-      "about": "About me",
-      "experience": "Experience",
-      "projects": "Projects",
-      "contact": "Contact"
-    },
-    "footer": {
-      "text": "Made with ❤️ by Martin Kollár"
-    }
+  "navbar": {
+    "home": "Home",
+    "about": "About me",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
   },
-  "errors": {},
+  "footer": {
+    "text": "Made with ❤️ by Martin Kollár"
+  },
   "home": {
     "title": "Home",
-    "description": "Welcome to the homepage"
+    "description": "I am a software developer with a strong interest in learning about new concepts, different fields, and innovative ideas. I started In my career, I have committed to self-learning in software development, which has been complemented by a year of professional experience in this domain. My expertise covers a range of areas, including full-stack development and basic networking. Outside of work, I engage in various personal projects and am actively enhancing my skills in networking, cloud deployment, and AI development. Furthermore, I am in the process of learning multiple languages. In addition to my technical pursuits, I am also learning to play the guitar and regularly attend the gym. I have a keen interest in various sports activities, embracing any opportunity to participate in different types of sports.",
+    "fields": {
+      "application_development": "Application Development",
+      "software_engineering": "Software Engineering",
+      "dev_ops": "Dev Ops",
+      "robotics": "Robotics"
+    }
   },
   "about": {
     "title": "About me",

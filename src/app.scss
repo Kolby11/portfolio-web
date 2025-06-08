@@ -1,4 +1,4 @@
-@use "tailwindcss" as *;
+@import "tailwindcss";
 @layer theme, base, components, utilities;
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -59,6 +59,6 @@ body{
   background: #555;
 }
 
-.safe-area {
-  max-width: 1140px;
+.safe-area { 
+  @apply w-full px-4 sm:px-8 md:px-10 lg:px-12 xl:px-20 md:pr-20 max-w-[1140px] mx-auto transition-all;
 }

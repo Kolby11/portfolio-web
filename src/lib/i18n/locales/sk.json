@@ -5,7 +5,7 @@
     "keywords": "Martin Kollár, Web Developer, Programátor, Programovacie Zručnosti, Projektový Manažment, Full Stack Developer, Softvérové Inžinierstvo, Web Dizajn, Používateľská Skúsenosť, Vývoj Frontendu, Vývoj Backendu, Vývoj Aplikácií, Programovacie Projekty"
   },
   "personal_info": {
-    "name": "Martin Kollar",
+    "name": "Martin Kollár",
     "email": "mato.kollar2004@gmail.com"
   },
   "navbar": {
@@ -20,7 +20,13 @@
   },
   "home": {
     "title": "Domov",
-    "description": "Vitajte na domovskej stránke"
+    "description": "Som softvérový vývojár s veľkým záujmom o vzdelávanie sa v rôznych odvetviach a poznávaniu inovatívnych technológií. Moju kariéru som začal samoštúdiom a svoju prvú pozíciu ako softvérový vývojár som dostal už na strednej škole. Počas rokov praxe som pracoval v rôznych odvetviach ako sú Full-stack vývoj aplikácií, DevOps, Testing.",
+    "fields": {
+      "application_development": "Vývoj aplikácií",
+      "software_engineering": "Softvérové Inžinierstvo",
+      "dev_ops": "Dev Ops",
+      "robotics": "Robotika"
+    }
   },
   "about": {
     "title": "O mne",

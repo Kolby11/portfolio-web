@@ -1,4 +1,5 @@
 {
+  "errors": {},
   "seo": {
     "description": "Martin Kollár - ein Webentwickler mit Schwerpunkt auf Innovation und Kreativität. Ein Überblick über meine Erfahrungen mit Programmierung, Projekten und Fähigkeiten im Bereich der Webentwicklung.",
     "keywords": "Martin Kollar, Webentwickler, Programmierer, Programmierfähigkeiten, Projektmanagement, Full-Stack-Entwickler, Softwareingenieurwesen, Webdesign, Benutzererfahrung, Frontend-Entwicklung, Backend-Entwicklung, Anwendungsentwicklung, Programmierprojekte"
@@ -7,22 +8,25 @@
     "name": "Martin Kollar",
     "email": "mato.kollar2004@gmail.com"
   },
-  "common": {
-    "navbar": {
-      "home": "Haus",
-      "about": "Über mich",
-      "experience": "Fahigkeiten",
-      "projects": "Projekten",
-      "contact": "Kontakt"
-    },
-    "footer": {
-      "text": "Hergestellt mit ❤️ von Martin Kollár"
-    }
+  "navbar": {
+    "home": "Haus",
+    "about": "Über mich",
+    "experience": "Fahigkeiten",
+    "projects": "Projekten",
+    "contact": "Kontakt"
   },
-  "errors": {},
+  "footer": {
+    "text": "Hergestellt mit ❤️ von Martin Kollár"
+  },
   "home": {
     "title": "Haus",
-    "description": "Willkommen auf der Hausseite"
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "fields": {
+      "application_development": "Application Developer",
+      "software_engineering": "Software Engineering",
+      "dev_ops": "Dev Ops",
+      "robotics": "Robotics"
+    }
   },
   "about": {
     "title": "Über mich",
