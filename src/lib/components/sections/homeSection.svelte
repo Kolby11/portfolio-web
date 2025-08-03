@@ -23,7 +23,7 @@
         >
           {$t('personal_info.name')}
         </h2>
-        <NewsTicker items={FIELDS.map(item => $t(`home.fields.${item}`))} />
+        <NewsTicker items={FIELDS.map(item => `home.fields.${item}`)} />
         <p class="mt-20 text-left">{$t('home.description')}</p>
       </div>
     </div>

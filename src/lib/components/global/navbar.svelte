@@ -1,30 +1,26 @@
 <script lang="ts">
+  import LanguageSelection from './languageSelection.svelte'
   import { smoothScroll } from '$lib/actions/smoothScroll'
-  import { t, locale, locales } from 'svelte-i18n'
-  import { theme } from '$lib/stores/themeStore'
+  import { t } from 'svelte-i18n'
   import MaterialSymbolsLightCloseRounded from '~icons/material-symbols-light/close-rounded'
   import MaterialSymbolsLightMenuRounded from '~icons/material-symbols-light/menu-rounded'
-  import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols/dark-mode-outline-rounded'
-  import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols/light-mode-outline-rounded'
+
   import { onMount } from 'svelte'
+  import ThemeSelection from './themeSelection.svelte'
 
-  export let sections: string[] = []
+  type NavbarProps = {
+    sections: string[]
+  }
 
-  let showMenu = false
+  const { sections = [] }: NavbarProps = $props()
+
+  let showMenu = $state(false)
 
   let sideBar: HTMLDivElement
-  let sideBarWidth: number = 0
+  let sideBarWidth: number = $state(0)
 
   function toggleMenu() {
     showMenu = !showMenu
-  }
-
-  function toggleDarkMode() {
-    theme.update(current => (current === 'light' ? 'dark' : 'light'))
-  }
-
-  async function setLanguage(language: string) {
-    locale.set(language)
   }
 
   function redraw() {
@@ -37,14 +33,17 @@
     window.addEventListener('resize', redraw)
     if (!sideBar) return
     sideBarWidth = sideBar.getBoundingClientRect().width
+
+    return () => {
+      window.removeEventListener('resize', redraw)
+    }
   })
 </script>
 
 <!-- Mobile navbar -->
-
 <button
-  class={`fixed right-0 top-0 items-center justify-center p-8 transition duration-300 ${showMenu ? 'opacity-0' : 'opacity-100'}`}
-  on:click={toggleMenu}
+  class={`fixed top-0 right-0 items-center justify-center p-8 transition duration-300 ${showMenu ? 'opacity-0' : 'opacity-100'}`}
+  onclick={toggleMenu}
 >
   <MaterialSymbolsLightMenuRounded style="font-size:x-large;" />
 </button>
@@ -52,9 +51,9 @@
 <div
   bind:this={sideBar}
   style="transform: translateX({showMenu ? 0 : sideBarWidth}px); transition: transform 0.3s ease-in-out;"
-  class={`fixed right-0 z-50 flex h-screen w-fit flex-col items-end px-8 pt-8 text-lg text-light-primary backdrop-blur-2xl dark:bg-dark-background dark:text-dark-primary md:hidden `}
+  class={`text-light-primary dark:bg-dark-background dark:text-dark-primary fixed right-0 z-50 flex h-screen w-fit flex-col items-end px-8 pt-8 text-lg backdrop-blur-2xl md:hidden `}
 >
-  <button class="flex h-fit w-fit items-center justify-center" on:click={toggleMenu}>
+  <button class="flex h-fit w-fit items-center justify-center" onclick={toggleMenu}>
     <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
   </button>
   <div class="flex h-full flex-col items-center">
@@ -64,7 +63,8 @@
           <a
             use:smoothScroll
             href="#{section}"
-            on:click={e => {
+            class="border-b border-transparent transition-all duration-200 hover:border-gray-400"
+            onclick={e => {
               showMenu = false
             }}
           >
@@ -72,10 +72,9 @@
           </a>
         {/each}
       </nav>
-      <div class="mb-4 mt-auto flex h-fit gap-x-4">
-        {#each $locales as language}
-          <button class="h-fit text-sm" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
-        {/each}
+      <div class="mt-auto mb-4 flex flex-col items-end gap-y-2">
+        <ThemeSelection />
+        <LanguageSelection />
       </div>
     {/if}
   </div>
@@ -87,21 +86,8 @@
   use:smoothScroll
 >
   <div class="flex gap-x-8">
-    <button class="relative mr-4 flex items-center justify-center" on:click={toggleDarkMode}>
-      <MaterialSymbolsDarkModeOutlineRounded
-        style="font-size:larger;"
-        class={`${$theme === 'dark' ? 'opacity-100' : 'opacity-0'} absolute left-0 transition duration-300`}
-      />
-      <MaterialSymbolsLightModeOutlineRounded
-        style="font-size:larger;"
-        class={`${$theme === 'dark' ? 'opacity-0' : 'opacity-100'} absolute left-0 transition duration-300`}
-      />
-    </button>
-    <div class="flex w-fit items-center justify-between gap-x-4">
-      {#each $locales as language}
-        <button class="h-fit" on:click={e => setLanguage(language)}>{language.toUpperCase()}</button>
-      {/each}
-    </div>
+    <ThemeSelection />
+    <LanguageSelection />
   </div>
   <nav class="ml-auto">
     <ul class="flex items-center justify-center">
@@ -109,11 +95,14 @@
         <li>
           <a
             href="#{section}"
-            class="items-center justify-center px-3 text-xl {i === sections.length - 1
+            class="group flex items-center justify-center border-transparent px-3 text-xl duration-200 {i ===
+            sections.length - 1
               ? ''
-              : 'border-r border-light-secondary dark:border-dark-secondary'}"
+              : 'border-light-secondary dark:border-dark-secondary border-r'}"
           >
-            {$t(`navbar.${section}`)}
+            <span class="border-b border-transparent transition-all duration-300 group-hover:border-b">
+              {$t(`navbar.${section}`)}
+            </span>
           </a>
         </li>
       {/each}

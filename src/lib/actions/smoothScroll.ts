@@ -1,14 +1,17 @@
 // src/actions/smoothScroll.js
 export function smoothScroll(node: HTMLElement) {
-  const handleClick = event => {
-    const anchor = event.target.closest('a[href^="#"]')
+  const handleClick = (event: MouseEvent) => {
+    const targetElement = event.target as Element | null
+    const anchor = targetElement?.closest('a[href^="#"]')
     if (!anchor) return
 
     event.preventDefault()
     const targetId = anchor.getAttribute('href')
-    const target = document.querySelector(targetId)
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
+    if (targetId) {
+      const target = document.querySelector(targetId)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+      }
     }
   }
 

@@ -84,9 +84,6 @@
       model.position.y = 0
       model.position.z = 0
 
-      // Make the model face the camera
-      model.lookAt(camera.position)
-
       model.traverse(child => {
         if (child instanceof THREE.Mesh) {
           if (child.material) {
@@ -139,21 +136,21 @@
   function animate() {
     requestAnimationFrame(animate)
 
+    const raycaster = new THREE.Raycaster()
+    raycaster.setFromCamera(mousePosition, camera)
+
     logoModels.forEach((model, index) => {
-      const logoPosition = new THREE.Vector3()
-      model.getWorldPosition(logoPosition)
-
-      const distance = new THREE.Vector2(logoPosition.x, logoPosition.y).distanceTo(mousePosition)
-
-      let rotationSpeed = Math.max(minRotationSpeed, Math.min(distance * logoRotationSensitivity, maxRotationSpeed))
-
-      // Calculate rotation based on mouse position
-      const targetRotationY = (mousePosition.x * Math.PI) / 4
-      const targetRotationX = (-mousePosition.y * Math.PI) / 4
-
-      // Apply rotation
-      model.rotation.y += (targetRotationY - model.rotation.y) * rotationSpeed
-      model.rotation.x += (targetRotationX - model.rotation.x) * rotationSpeed
+      model.lookAt(new THREE.Vector3(raycaster.ray.direction.x, raycaster.ray.direction.y, 0.5))
+      // const logoPosition = new THREE.Vector3()
+      // model.getWorldPosition(logoPosition)
+      // const distance = new THREE.Vector2(logoPosition.x, logoPosition.y).distanceTo(mousePosition)
+      // let rotationSpeed = Math.max(minRotationSpeed, Math.min(distance * logoRotationSensitivity, maxRotationSpeed))
+      // // Calculate rotation based on mouse position
+      // const targetRotationY = (mousePosition.x * Math.PI) / 4
+      // const targetRotationX = (-mousePosition.y * Math.PI) / 4
+      // // Apply rotation
+      // model.rotation.y += (targetRotationY - model.rotation.y) * rotationSpeed
+      // model.rotation.x += (targetRotationX - model.rotation.x) * rotationSpeed
     })
 
     renderer.render(scene, camera)

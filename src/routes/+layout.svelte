@@ -3,24 +3,17 @@
   import Navbar from '$lib/components/global/navbar.svelte'
   import Scrollbar from '$lib/components/global/scrollbar.svelte'
   import Footer from '$lib/components/global/footer.svelte'
-  import { onMount } from 'svelte'
-  import { initTheme } from '$lib/stores/themeStore'
 
   import '$lib/i18n'
   import { browser } from '$app/environment'
   import { locale, waitLocale, t } from 'svelte-i18n'
-  import type { LayoutLoad } from './$types'
 
-  export const load: LayoutLoad = async () => {
+  export const load = async () => {
     if (browser) {
       locale.set(window.navigator.language)
     }
     await waitLocale()
   }
-
-  onMount(() => {
-    initTheme()
-  })
 </script>
 
 <svelte:head>

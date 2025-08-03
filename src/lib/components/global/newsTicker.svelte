@@ -1,12 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { t } from 'svelte-i18n'
 
   type NewsTickerProps = {
     items: string[]
     pixelPerSecond?: number
   }
 
-  const { items, pixelPerSecond = 150 }: NewsTickerProps = $props()
+  const { items, pixelPerSecond = 100 }: NewsTickerProps = $props()
 
   let duplicatedItems = $state([...items, ...items, ...items])
   let tickerElement: HTMLUListElement
@@ -43,7 +44,7 @@
       style="--start-pos: {startPos}px; --end-pos: {endPos}px; --animation-duration: {animationDuration}s;"
     >
       {#each duplicatedItems as item, idx}
-        <li class="flex-shrink-0">{item}</li>
+        <li class="flex-shrink-0">{$t(item)}</li>
         <div class="size-2 flex-shrink-0 rounded-full bg-black dark:bg-white"></div>
       {/each}
     </ul>

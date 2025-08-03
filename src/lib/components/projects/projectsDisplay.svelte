@@ -1,7 +1,6 @@
 <script lang="ts">
   import MaterialSymbolsArrowBackIosRounded from '~icons/material-symbols/arrow-back-ios-rounded'
   import MaterialSymbolsArrowForwardIosRounded from '~icons/material-symbols/arrow-forward-ios-rounded'
-  import { onMount } from 'svelte'
 
   type Project = {
     name: string
@@ -112,18 +111,18 @@
 </script>
 
 <div class="flex w-full flex-col items-center">
-  <div class="mt-10 flex w-full flex-col items-start justify-between gap-y-8 px-4 md:px-10 lg:flex-row">
-    <div class="grid grid-cols-1 gap-8 overflow-hidden sm:grid-cols-2 md:grid-cols-3">
-      {#each projectCategories as projectCategory, projectCategoryIndex}
-        <div class="scroll-container">
-          <div class={projectCategoryIndex % 2 === 0 ? 'scroll-content' : 'scroll-content-reverse'}>
+  <div class="flex w-full flex-col items-start justify-between gap-y-8 lg:flex-row">
+    <div class="scroll-container w-fit overflow-hidden">
+      <div class="hidden grid-cols-3 gap-8 overflow-hidden md:grid">
+        {#each projectCategories as projectCategory, projectCategoryIndex}
+          <div class={projectCategoryIndex % 2 === 0 ? 'scroll-content-vertical' : 'scroll-content-vertical-reverse'}>
             <div class="flex flex-col items-center">
               <!-- <h4 class="mb-2 text-center text-lg">{projectCategory.name}</h4> -->
               <div class="flex flex-col gap-4 transition">
                 {#each fillProjectsForAnimation(projectCategory.projects) as project, i}
                   <button
                     on:click={e => handleProjectClick(e, project, projectCategory)}
-                    class={`size-28 shadow-gray-50 transition duration-300 sm:size-28 md:size-32 lg:size-44 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
+                    class={`size-14 shadow-gray-50 transition duration-300 sm:size-24 md:size-28 lg:size-32 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
                   >
                     <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
                   </button>
@@ -131,8 +130,29 @@
               </div>
             </div>
           </div>
-        </div>
-      {/each}
+        {/each}
+      </div>
+      <div class="flex flex-col gap-2 md:hidden">
+        {#each projectCategories as projectCategory, projectCategoryIndex}
+          <div
+            class={projectCategoryIndex % 2 === 0 ? 'scroll-content-horizontal' : 'scroll-content-horizontal-reverse'}
+          >
+            <div class="flex items-center">
+              <!-- <h4 class="mb-2 text-center text-lg">{projectCategory.name}</h4> -->
+              <div class="flex gap-2 transition">
+                {#each fillProjectsForAnimation(projectCategory.projects) as project, i}
+                  <button
+                    on:click={e => handleProjectClick(e, project, projectCategory)}
+                    class={`size-14 shadow-gray-50 transition duration-300 sm:size-24 md:size-28 lg:size-32 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
+                  >
+                    <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
+                  </button>
+                {/each}
+              </div>
+            </div>
+          </div>
+        {/each}
+      </div>
     </div>
     <div class="flex flex-col items-center justify-center sm:px-0 lg:w-1/2">
       <h3 class="text-2xl">{selectedProject.name}</h3>
@@ -177,15 +197,39 @@
     }
   }
 
+  @keyframes scrollRight {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes scrollRight {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
   .scroll-container {
     height: 600px; /* Adjust based on your needs */
   }
 
-  .scroll-content {
+  .scroll-content-vertical {
     animation: scrollDown 60s linear infinite;
   }
 
-  .scroll-content-reverse {
+  .scroll-content-vertical-reverse {
     animation: scrollUp 60s linear infinite;
+  }
+  .scroll-content-horizontal {
+    animation: scrollRight 60s linear infinite;
+  }
+
+  .scroll-content-horizontal-reverse {
+    animation: scrollLeft 60s linear infinite;
   }
 </style>

@@ -5,11 +5,12 @@
 
   export let content: { title: string; description: string }[]
 
-  const selectedBottomBarScale: number = 10 // In %
+  const selectedBottomBarScale: number = 20 // In %
 
   let bottomBars: Record<number, HTMLSpanElement> = {}
   let bottomBarContainer: HTMLDivElement
 
+  let barGap: number = 4 // Gap between bottom bars in px
   let baseBottomBarWidth: number
   let prevSelectedItemIndex: number
   let selectedItemIndex: number = 0
@@ -18,7 +19,7 @@
     if (bottomBarContainer && Object.values(bottomBars).length) {
       const containerWidth = bottomBarContainer.clientWidth
       const barCount = Object.values(bottomBars).length
-      baseBottomBarWidth = (containerWidth - (barCount - 1) * 8) / barCount // 8px for gap
+      baseBottomBarWidth = (containerWidth - (barCount - 1) * barGap) / barCount
       Object.values(bottomBars).forEach(bar => {
         bar.style.width = `${baseBottomBarWidth}px`
       })
@@ -71,11 +72,13 @@
 
 <div class="flex h-full w-full gap-x-4 p-2">
   <div class="flex w-fit flex-col items-center justify-center">
-    <button on:click={clickPrev}><MaterialSymbolsArrowBackIosRounded /></button>
+    <button on:click={clickPrev} class="flex w-10 justify-end transition duration-300 ease-in-out hover:-translate-x-2"
+      ><MaterialSymbolsArrowBackIosRounded /></button
+    >
   </div>
   <div class="flex h-full grow flex-col">
     <h2 class="text-2xl">{content[selectedItemIndex].title}</h2>
-    <p class="mt-4 min-h-72 text-light-text dark:text-dark-text">
+    <p class="text-light-text dark:text-dark-text mt-4 min-h-72">
       {content[selectedItemIndex].description}
     </p>
 
@@ -84,15 +87,15 @@
         <span
           bind:this={bottomBars[index]}
           class={`h-[2px] bg-black transition-all duration-300 ease-in-out dark:bg-white ${
-            selectedItemIndex === index
-              ? 'bg-opacity-100 drop-shadow-2xl dark:bg-opacity-100'
-              : 'bg-opacity-50 dark:bg-opacity-50'
+            selectedItemIndex === index ? 'opacity-100 drop-shadow-2xl dark:opacity-100' : 'opacity-30 dark:opacity-50'
           }`}
         ></span>
       {/each}
     </div>
   </div>
   <div class="flex w-fit flex-col items-center justify-center">
-    <button on:click={clickNext}><MaterialSymbolsArrowForwardIosRounded /></button>
+    <button on:click={clickNext} class="flex w-10 justify-start transition duration-300 ease-in-out hover:translate-x-2"
+      ><MaterialSymbolsArrowForwardIosRounded /></button
+    >
   </div>
 </div>

@@ -12,6 +12,7 @@
   import ItemShowcase from '$lib/components/experience/itemShowcase.svelte'
   import { t } from 'svelte-i18n'
   import HomeSection from '$lib/components/sections/homeSection.svelte'
+  import ExperienceSection from '$lib/components/sections/experienceSection.svelte'
 
   let sections: NodeListOf<HTMLElement>
 
@@ -52,18 +53,6 @@
     ]
   }
 
-  function getSlideshowItems() {
-    // Similar structure for slideshow items
-    return [
-      {
-        title: $t('experience.slideshow.item1.title'),
-        description: $t('experience.slideshow.item1.description'),
-        image: $t('experience.slideshow.item1.image'),
-      },
-      // Add more slideshow items as needed
-    ]
-  }
-
   function getSkillTreeData() {
     // Structure for skill tree data
     return {
@@ -83,7 +72,6 @@
 
   // Reactive statements to update data when language changes
   $: timelineItems = getTimelineItems()
-  $: slideshowItems = getSlideshowItems()
   $: skillTreeData = getSkillTreeData()
 </script>
 
@@ -107,26 +95,11 @@
     </div>
   </ContentSection>
 
-  <ContentSection sectionName="experience">
-    <h1 class="text-3xl">{$t('experience.title')}</h1>
-    <div class="mt-10 ml-auto flex flex-col px-4 max-md:space-y-8 md:items-start md:justify-between md:px-10">
-      <div class="flex flex-col items-start justify-start md:w-full md:flex-row md:space-x-4 md:pr-5">
-        <div class="md:mt-8 md:w-1/2">
-          <ItemShowcase content={slideshowItems}></ItemShowcase>
-        </div>
-        <div class="max-md:mt-6 md:w-1/2">
-          <ProgrammingLangages logos={programmingLangugagesLogos}></ProgrammingLangages>
-        </div>
-      </div>
-      <div class="md:w-1/2 md:pl-5">
-        <!-- <SkillTree data={skillTreeData} /> -->
-      </div>
-    </div>
-  </ContentSection>
+  <ExperienceSection />
 
   <ContentSection sectionName="projects">
     <h1 class="text-3xl">{$t('projects.title')}</h1>
-    <div class="mt-6 h-fit">
+    <div class="mt-10 h-fit w-fit">
       <ProjectsDisplay />
     </div>
   </ContentSection>

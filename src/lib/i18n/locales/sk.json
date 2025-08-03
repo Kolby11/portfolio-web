@@ -8,6 +8,18 @@
     "name": "Martin Kollár",
     "email": "mato.kollar2004@gmail.com"
   },
+  "controls": {
+    "language": {
+      "title": "Jazyk",
+      "toggle": "Prepnúť jazyk"
+    },
+    "theme": {
+      "title": "Téma",
+      "toggle": "Prepnúť medzi svetlým a tmavým režimom",
+      "dark": "Tmavý",
+      "light": "Svetlý"
+    }
+  },
   "navbar": {
     "home": "Domov",
     "about": "O mne",
@@ -62,12 +74,24 @@
     }
   },
   "experience": {
-    "slideshowItems": [
-      {
-        "title": "Web development",
-        "description": "a"
+    "slideshowItems": {
+      "web_development": {
+        "title": "Vývoj webových aplikácií",
+        "description": "Vývoj webových aplikácií zahŕňa vytváranie interaktívnych a dynamických webových stránok a aplikácií pomocou technológií ako HTML, CSS, JavaScript a rôzne frameworky ako React, Angular alebo Vue.js."
+      },
+      "mobile_development": {
+        "title": "Vývoj mobilných aplikácií",
+        "description": "Vývoj mobilných aplikácií zahŕňa vytváranie aplikácií pre mobilné zariadenia, ako sú smartfóny a tablety. Môže zahŕňať natívny vývoj pre iOS a Android, alebo použitie multiplatformových frameworkov ako Flutter."
+      },
+      "game_development": {
+        "title": "Vývoj hier",
+        "description": "Vývoj hier zahŕňa tvorbu interaktívnych herných zážitkov pomocou rôznych technológií a nástrojov. Môže zahŕňať programovanie, dizajn, animáciu a zvukovú produkciu."
+      },
+      "dev_ops": {
+        "title": "DevOps",
+        "description": "DevOps je prax, ktorá spája vývojárov a prevádzkový tím s cieľom zlepšiť spoluprácu a efektivitu pri vývoji a nasadzovaní softvéru. Využíva automatizáciu, kontinuálnu integráciu a nasadenie na zlepšenie kvality a rýchlosti dodania softvéru."
       }
-    ],
+    },
     "title": "Skúsenosti",
     "description": "Moja špecializácia je najmä vo fullstack developmente webových aplikácií a ich nasadenia do produkcie na cloud, no aktívne sa venujem aj iným odvetviam ako je backend development pre aplikácie. Ďalej som pracoval v oblasti game a mobile developmentu",
     "graph": {
