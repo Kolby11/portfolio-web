@@ -1,23 +1,30 @@
 import { browser } from '$app/environment'
 import { get, writable, type Writable } from 'svelte/store'
 
-const getInitialTheme = (): string => {
-  if (browser) {
-    return localStorage.getItem('theme') || 'light'
-  }
-  return 'light'
+export enum THEME {
+  light = 'light',
+  dark = 'dark',
+  purple = 'purple',
 }
 
-export const theme: Writable<string> = writable(getInitialTheme())
+const getInitialTheme = (): THEME => {
+  if (browser) {
+    return (localStorage.getItem('theme') as THEME) || THEME.light
+  }
+  return THEME.light
+}
+
+export const theme: Writable<THEME> = writable(getInitialTheme())
 
 // Apply the actual theme class to the document element
-function applyThemeClass(value: string) {
+function applyThemeClass(value: THEME) {
   if (browser) {
-    if (value === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
+    document.documentElement.classList.add('theme-' + value)
+
+    const themesToRemove = Object.values(THEME).filter(theme => theme !== value)
+    themesToRemove.forEach(theme => {
+      document.documentElement.classList.remove('theme-' + theme)
+    })
   }
 }
 

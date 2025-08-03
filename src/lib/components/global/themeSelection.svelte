@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { theme } from '$lib/stores/themeStore'
+  import { THEME, theme } from '$lib/stores/themeStore'
   import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols/dark-mode-outline-rounded'
   import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols/light-mode-outline-rounded'
   import { t } from 'svelte-i18n'
@@ -11,7 +11,7 @@
   const { class: className = '' }: ThemeSelectionProps = $props()
 
   function toggleDarkMode() {
-    theme.update(current => (current === 'light' ? 'dark' : 'light'))
+    theme.update(current => (current === THEME.light ? THEME.dark : THEME.light))
   }
 </script>
 

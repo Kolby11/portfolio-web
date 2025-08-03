@@ -85,7 +85,7 @@
   class="fixed top-0 z-50 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl md:flex"
   use:smoothScroll
 >
-  <div class="flex gap-x-8">
+  <div class="flex gap-x-4 lg:gap-x-8">
     <ThemeSelection />
     <LanguageSelection />
   </div>

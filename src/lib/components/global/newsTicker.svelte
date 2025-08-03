@@ -45,7 +45,7 @@
     >
       {#each duplicatedItems as item, idx}
         <li class="flex-shrink-0">{$t(item)}</li>
-        <div class="size-2 flex-shrink-0 rounded-full bg-black dark:bg-white"></div>
+        <div class="bg-text size-2 flex-shrink-0 rounded-full"></div>
       {/each}
     </ul>
   </div>

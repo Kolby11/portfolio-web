@@ -1,27 +1,47 @@
 @import "tailwindcss";
 @layer theme, base, components, utilities;
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant ocean (&:where(.ocean, .ocean *));
 
-@theme {
-  --color-primary-base: #FF3D00;
-  --color-primary-600: #FF3D00;
-  --color-primary-400: #FF4F24;
-  --color-primary-300: #FD8D6C;
-  --color-others-rose: #FD8D6C;
-  --color-others-green: #00C572;
-  --color-others-blue: #0084AD;
-  --color-success: #05df72;
-  --color-failure: #fb2c36;
-
+@theme, .theme-light {
+  /* Light theme (default) */
   --color-background: #e4e7ed;
   --color-text: #0A0A0A;
-  --color-primary: #0A0A0A;
+  --color-primary: var(--color-violet-500);
   --color-secondary: #9C9A9A;
+  --color-accent: #FF3D00;
+  --color-success: #05df72;
+  --color-failure: #fb2c36;
+  
+  /* Semantic shadow colors for light mode */
+  --color-shadow-light: #FF3D00;
+  --color-shadow-medium: #FF4F24;
+}
 
-  --color-dark-background: #0A0A0A;
-  --color-dark-text: #edeff2;
-  --color-dark-primary: #edeff2;
-  --color-dark-secondary: #9C9A9A;
+/* Dark theme */
+.theme-dark {
+  --color-background: #0A0A0A;
+  --color-text: #edeff2;
+  --color-primary: var(--color-violet-400);
+  --color-secondary: #9C9A9A;
+  --color-accent: #FF4F24;
+  
+  /* Different shadow colors for dark mode */
+  --color-shadow-light: #A78BFA;
+  --color-shadow-medium: #8B5CF6;
+}
+
+/* Alternative theme example */
+.theme-purple {
+  --color-background: #2E1A47;
+  --color-text: #F3E8FF;
+  --color-primary: #D6BCFA;
+  --color-secondary: #A78BFA;
+  --color-accent: #8B5CF6;
+  
+  /* Semantic shadow colors for purple theme */
+  --color-shadow-light: #A78BFA;
+  --color-shadow-medium: #D6BCFA;
 }
 
 /* Custom font */
@@ -60,5 +80,5 @@ body{
 }
 
 .safe-area { 
-  @apply w-full px-4 sm:px-8 md:px-10 lg:px-12 xl:px-20 md:pr-20 max-w-[1250px] mx-auto transition-all;
+  @apply w-full px-4 sm:px-8 md:px-20 xl:px-20 max-w-[1250px] mx-auto transition-all;
 }

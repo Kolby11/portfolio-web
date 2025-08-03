@@ -1,6 +1,6 @@
 <script lang="ts">
   import { t } from 'svelte-i18n'
-  import { section } from '$lib/stores/scrollbar'
+  import { currentSection } from '$lib/stores/scrollbar'
   import { onMount } from 'svelte'
 
   let windowHeight: number
@@ -81,8 +81,8 @@
   let isDragging: boolean = false
 </script>
 
-<div class="fixed right-0 top-20 hidden h-[80%] w-10 flex-col items-start dark:text-dark-text md:flex" id="scrollbar">
-  <div class="h-full border-r border-light-secondary dark:border-dark-secondary"></div>
+<div class="dark:text-dark-text fixed top-20 right-0 hidden h-[80%] w-10 flex-col items-start md:flex" id="scrollbar">
+  <div class="border-light-secondary dark:border-dark-secondary h-full border-r"></div>
   <div
     class="absolute flex h-1/6 w-full bg-transparent"
     role="scrollbar"
@@ -94,10 +94,10 @@
     on:dragend={handleDrag}
     on:mousedown={handleMouseDown}
   >
-    <div class="relative h-full border-x border-light-primary dark:border-dark-primary">
+    <div class="border-light-primary dark:border-dark-primary relative h-full border-x">
       <div class="block-select absolute top-0 flex h-full w-5 items-center justify-center">
-        <p class="rotate-90 whitespace-nowrap pb-4">
-          {$section && $t(`navbar.${$section}`)}
+        <p class="rotate-90 pb-4 whitespace-nowrap">
+          {$currentSection && $t(`navbar.${$currentSection}`)}
         </p>
       </div>
     </div>

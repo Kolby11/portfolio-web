@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store'
 
-export const section = writable<string>('')
+export const currentSection = writable<string>('')
