@@ -17,7 +17,7 @@
       </p>
     </div>
   </div>
-  <div class="absolute bottom-20 left-20 mt-10 opacity-0 transition duration-500 hover:opacity-70">
+  <!-- <div class="absolute bottom-20 left-20 mt-10 opacity-0 transition duration-500 hover:opacity-70">
     <CodeSnippet fontSize="small" />
-  </div>
+  </div> -->
 </ContentSection>

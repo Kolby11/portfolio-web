@@ -32,13 +32,14 @@
   },
   "home": {
     "title": "Home",
-    "description": "I am a software developer with a strong interest in learning about new concepts, different fields, and innovative ideas. I started In my career, I have committed to self-learning in software development, which has been complemented by a year of professional experience in this domain. My expertise covers a range of areas, including full-stack development and basic networking. Outside of work, I engage in various personal projects and am actively enhancing my skills in networking, cloud deployment, and AI development. Furthermore, I am in the process of learning multiple languages. In addition to my technical pursuits, I am also learning to play the guitar and regularly attend the gym. I have a keen interest in various sports activities, embracing any opportunity to participate in different types of sports.",
+    "description": "I'm a software engineer specializing in full-stack web application development, passionate about creating efficient solutions. I enjoy working across different fields, including mobile and game development, and I'm always eager to explore new technologies and push my skills further.",
     "fields": {
       "application_development": "Application Development",
       "software_engineering": "Software Engineering",
       "dev_ops": "Dev Ops",
       "robotics": "Robotics"
-    }
+    },
+    "resume": "Resume"
   },
   "about": {
     "title": "About me",

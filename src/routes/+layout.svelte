@@ -27,7 +27,7 @@
 <div class="bg-background text-text">
   <Navbar sections={['home', 'about', 'experience', 'projects', 'contact']}></Navbar>
   <slot />
-  <SocialsDisplay {socialLinks} class="fixed bottom-4 left-4 max-lg:hidden xl:bottom-16 xl:left-16" />
+  <SocialsDisplay {socialLinks} class="fixed bottom-4 left-4 max-lg:hidden xl:bottom-10 xl:left-10" />
   <Scrollbar />
   <Footer {socialLinks} />
 </div>

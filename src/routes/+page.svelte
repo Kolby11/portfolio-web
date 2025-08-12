@@ -3,14 +3,11 @@
   import { onMount } from 'svelte'
   import { currentSection } from '$lib/stores/scrollbar'
   import { get } from 'svelte/store'
-  import ProjectsDisplay from '$lib/components/projects/projectsDisplay.svelte'
-  import ContentSection from '$lib/components/global/contentSection.svelte'
   import { t } from 'svelte-i18n'
   import HomeSection from '$lib/components/sections/homeSection.svelte'
   import ExperienceSection from '$lib/components/sections/experienceSection.svelte'
   import AboutSection from '$lib/components/sections/aboutSection.svelte'
   import ProjectSection from '$lib/components/sections/projectSection.svelte'
-  import SocialsDisplay from '$lib/components/global/socialsDisplay.svelte'
 
   let sections: NodeListOf<HTMLElement>
 
