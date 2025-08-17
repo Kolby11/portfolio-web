@@ -1,9 +1,16 @@
 <script lang="ts">
-  export let sectionName: string
+  import { type Snippet } from 'svelte'
+
+  type ContentSectionProps = {
+    children: Snippet
+    sectionName: string
+  }
+
+  const { sectionName, children }: ContentSectionProps = $props()
 </script>
 
 <section id={sectionName}>
   <div class="safe-area h-fit min-h-[calc(100vh-5rem)] pt-20 sm:pt-28 md:pt-40">
-    <slot />
+    {@render children()}
   </div>
 </section>

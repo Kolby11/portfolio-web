@@ -3,8 +3,8 @@
   import { currentSection } from '$lib/stores/scrollbar'
   import { onMount } from 'svelte'
 
-  let windowHeight: number
-  let currentPos: number = 0
+  let windowHeight: number = $state(0)
+  let currentPos: number = $state(0)
 
   let scrollbar: HTMLElement | null
   let scrollbarThumb: HTMLElement | null
@@ -90,13 +90,13 @@
     aria-valuenow={currentPos}
     tabindex="0"
     id="scrollbarThumb"
-    on:drag={handleDrag}
-    on:dragend={handleDrag}
-    on:mousedown={handleMouseDown}
+    ondrag={handleDrag}
+    ondragend={handleDrag}
+    onmousedown={handleMouseDown}
   >
     <div class="border-light-primary dark:border-dark-primary relative h-full border-x">
       <div class="block-select absolute top-0 flex h-full w-5 items-center justify-center">
-        <p class="rotate-90 pb-4 whitespace-nowrap">
+        <p style="writing-mode: sideways-rl;" class="pl-4 whitespace-nowrap">
           {$currentSection && $t(`navbar.${$currentSection}`)}
         </p>
       </div>
