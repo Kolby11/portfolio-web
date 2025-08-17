@@ -2,8 +2,12 @@
   import { theme } from '$lib/stores/themeStore'
   import { onMount } from 'svelte'
 
-  export let vertical: boolean = false
-  export let timeLineItems: { title: string; description: string; year: number }[] = []
+  type TimelineProps = {
+    vertical: boolean
+    timelineItems: { title: string; description: string; year: number }[]
+  }
+
+  let { vertical = false, timelineItems = [] }: TimelineProps = $props()
 
   const timelinePointRadius = 5
   const textOffset = 20
@@ -13,18 +17,22 @@
     y: number
   }
 
-  let opened: number | null = null
-  let svgCoordinates: Coordinate[] = []
+  let opened: number | null = $state(null)
+  let svgCoordinates: Coordinate[] = $state([])
   let timelineSVGElement: SVGSVGElement
   let underlines: Record<number, SVGLineElement> = {}
   let timelineSVGPoints: Record<number, SVGCircleElement> = {}
   let textElements: Record<number, SVGTextElement> = {}
 
-  $: {
-    if (timelineSVGElement) {
+  // Create a derived sorted array instead of mutating the original
+  let sortedTimelineItems = $derived([...timelineItems].sort((i1, i2) => i1.year - i2.year))
+
+  // Effect that watches for changes in the sorted items and SVG element
+  $effect(() => {
+    if (timelineSVGElement && sortedTimelineItems.length > 0) {
       calculateSvgCoordinates()
     }
-  }
+  })
 
   onMount(() => {
     window.addEventListener('resize', calculateSvgCoordinates)
@@ -33,35 +41,29 @@
     }
   })
 
-  function sortTimeLineItems() {
-    timeLineItems = timeLineItems.sort((i1, i2) => i1.year - i2.year)
-  }
-
   const calculateSvgCoordinates = () => {
-    sortTimeLineItems()
     svgCoordinates = []
 
     if (!timelineSVGElement) return
 
     const svgElementRect = timelineSVGElement.getBoundingClientRect()
-    const totalItems = timeLineItems.length
+    const totalItems = sortedTimelineItems.length
+
+    if (totalItems === 0) return
 
     if (vertical) {
-      const pointDeltaY = svgElementRect.height / (totalItems - 1)
-      svgCoordinates = timeLineItems.map((_, index) => ({
+      const pointDeltaY = totalItems > 1 ? svgElementRect.height / (totalItems - 1) : 0
+      svgCoordinates = sortedTimelineItems.map((_, index) => ({
         x: timelinePointRadius,
-        y: index * pointDeltaY,
+        y: totalItems > 1 ? index * pointDeltaY : svgElementRect.height / 2,
       }))
     } else {
-      const pointDeltaX = svgElementRect.width / (totalItems - 1)
-      svgCoordinates = timeLineItems.map((_, index) => ({
-        x: index * pointDeltaX,
+      const pointDeltaX = totalItems > 1 ? svgElementRect.width / (totalItems - 1) : 0
+      svgCoordinates = sortedTimelineItems.map((_, index) => ({
+        x: totalItems > 1 ? index * pointDeltaX : svgElementRect.width / 2,
         y: timelinePointRadius,
       }))
     }
-
-    // Force a re-render
-    svgCoordinates = [...svgCoordinates]
   }
 
   const handleTitleClick = (index: number) => {
@@ -87,7 +89,7 @@
     {/if}
   {/each}
 
-  {#each timeLineItems as item, index}
+  {#each sortedTimelineItems as item, index}
     <circle
       bind:this={timelineSVGPoints[index]}
       cx={svgCoordinates[index]?.x ?? 0}
