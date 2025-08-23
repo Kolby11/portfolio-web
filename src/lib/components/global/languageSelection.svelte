@@ -14,9 +14,9 @@
 <div class="flex w-fit items-center justify-between gap-x-4 {className}">
   {#each $locales as language}
     <button
-      class="h-fit transition-all duration-200 {$locale === language
+      class="h-fit transition-all duration-200 outline-none {$locale === language
         ? 'border-b border-current'
-        : 'border-b border-transparent hover:border-gray-400'}"
+        : 'border-b border-transparent hover:border-disabled focus-visible:border-disabled'}"
       onclick={() => setLanguage(language)}
     >
       {language.toUpperCase()}

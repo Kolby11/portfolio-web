@@ -6,13 +6,15 @@
 @theme, .theme-light {
   /* Light theme (default) */
   --color-background: #e4e7ed;
+  --color-background-secondary: #e4e7ed;
+  --color-disabled: #9FA1A6;
   --color-text: #0A0A0A;
-  --color-primary: var(--color-violet-500);
+  --color-primary: var(--color-purple-700);
   --color-secondary: #9C9A9A;
   --color-accent: #FF3D00;
   --color-success: #05df72;
   --color-failure: #fb2c36;
-  
+
   /* Semantic shadow colors for light mode */
   --color-shadow-light: #FF3D00;
   --color-shadow-medium: #FF4F24;
@@ -20,12 +22,14 @@
 
 /* Dark theme */
 .theme-dark {
-  --color-background: #0A0A0A;
+  --color-background: #0d1117;
+  --color-background-secondary: #47576a;
+  --color-disabled: #76787d;
   --color-text: #edeff2;
   --color-primary: var(--color-violet-400);
   --color-secondary: #9C9A9A;
   --color-accent: #FF4F24;
-  
+
   /* Different shadow colors for dark mode */
   --color-shadow-light: #A78BFA;
   --color-shadow-medium: #8B5CF6;
@@ -38,14 +42,14 @@
   --color-primary: #D6BCFA;
   --color-secondary: #A78BFA;
   --color-accent: #8B5CF6;
-  
+
   /* Semantic shadow colors for purple theme */
   --color-shadow-light: #A78BFA;
   --color-shadow-medium: #D6BCFA;
 }
 
 /* Custom font */
-body{
+body {
   font-family: 'Inter', sans-serif;
   @apply bg-[var(--color-background)] text-[var(--color-text)];
 }
@@ -79,6 +83,6 @@ body{
   background: #555;
 }
 
-.safe-area { 
+.safe-area {
   @apply w-full px-4 sm:px-8 md:px-20 lg:px-32 xl:px-28 max-w-[1250px] mx-auto transition-all;
 }

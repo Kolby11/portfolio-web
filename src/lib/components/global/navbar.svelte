@@ -51,7 +51,7 @@
 <div
   bind:this={sideBar}
   style="transform: translateX({showMenu ? 0 : sideBarWidth}px); transition: transform 0.3s ease-in-out;"
-  class={`text-light-primary dark:bg-dark-background dark:text-dark-primary fixed right-0 z-50 flex h-screen w-fit flex-col items-end px-8 pt-8 text-lg backdrop-blur-2xl md:hidden `}
+  class={`text-light-primary bg-backkground fixed right-0 z-50 flex h-screen w-fit flex-col items-end px-8 pt-8 text-lg backdrop-blur-2xl md:hidden `}
 >
   <button class="flex h-fit w-fit items-center justify-center" onclick={toggleMenu}>
     <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
@@ -95,10 +95,10 @@
         <li>
           <a
             href="#{section}"
-            class="group flex items-center justify-center border-transparent px-3 text-xl duration-200 {i ===
+            class="group flex items-center hover:text-primary transition focus-within:-translate-y-0.5 hover:-translate-y-0.5 focus-visible:text-primary outline-none justify-center px-3 text-xl duration-200 {i ===
             sections.length - 1
               ? ''
-              : 'border-light-secondary dark:border-dark-secondary border-r'}"
+              : 'border-text border-r'}"
           >
             <span class="border-b border-transparent transition-all duration-300 group-hover:border-b">
               {$t(`navbar.${section}`)}

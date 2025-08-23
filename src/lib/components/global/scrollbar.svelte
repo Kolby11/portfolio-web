@@ -1,7 +1,7 @@
 <script lang="ts">
   import { t } from 'svelte-i18n'
-  import { currentSection } from '$lib/stores/scrollbar'
   import { onMount } from 'svelte'
+  import { sectionStore } from '$lib/stores/section.svelte'
 
   let windowHeight: number = $state(0)
   let currentPos: number = $state(0)
@@ -97,7 +97,7 @@
     <div class="border-light-primary dark:border-dark-primary relative h-full border-x">
       <div class="block-select absolute top-0 flex h-full w-5 items-center justify-center">
         <p style="writing-mode: sideways-rl;" class="pl-4 whitespace-nowrap">
-          {$currentSection && $t(`navbar.${$currentSection}`)}
+          {sectionStore.currentSection && $t(`navbar.${sectionStore.currentSection}`)}
         </p>
       </div>
     </div>
