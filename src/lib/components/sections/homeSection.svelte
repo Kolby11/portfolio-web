@@ -3,28 +3,29 @@
   import ContentSection from '../global/contentSection.svelte'
   import NewsTicker from '../global/newsTicker.svelte'
 
-  import MaterialSymbolsKeyboardArrowDownRounded from '~icons/material-symbols/keyboard-arrow-down-rounded';
+  import MaterialSymbolsKeyboardArrowDownRounded from '~icons/material-symbols/keyboard-arrow-down-rounded'
 
   const FIELDS = ['application_development', 'software_engineering', 'dev_ops', 'robotics']
 </script>
 
 <ContentSection sectionName="home">
   <div class="flex flex-col items-center justify-center gap-x-6 gap-y-20 md:flex-row md:items-start">
-    <div class="mt-10 w-full grow md:mt-10 md:w-1/3 xl:mt-14 2xl:mt-20 xl:w-2/3">
-      <div class="flex w-full flex-grow flex-col justify-start px-4 text-center">
-        <h2
-          class="border-light-primary dark:border-dark-primary border-b-2 text-left text-5xl font-medium lg:pb-1 lg:text-7xl xl:text-8xl"
-        >
+    <div class="mt-10 w-full grow md:mt-10 md:w-1/3 xl:mt-14 xl:w-2/3 2xl:mt-20">
+      <div class="flex w-full flex-grow flex-col justify-start px-4">
+        <h1 class="border-light-primary dark:border-dark-primary border-b-2 text-nowrap">
           <a href="/" class="no-underline">
             {$t('personal_info.name')}
           </a>
-        </h2>
+        </h1>
         <NewsTicker items={FIELDS.map(item => `home.fields.${item}`)} />
         <p class="mt-12 text-left text-sm md:text-lg">{@html $t('home.description')}</p>
-        <div class="mt-12 flex gap-x-4 self-start items-stretch">
+        <div class="mt-12 flex items-stretch gap-x-4 self-start">
           <button class="rounded-2xl border-2 px-8 py-2" title={$t('home.resume')}>{$t('home.resume')}</button>
-          <button class="rounded-full flex justify-center items-center bg-text h-12 w-12">
-            <MaterialSymbolsKeyboardArrowDownRounded font-size={35} class="text-background mt-1 hover:translate-y-0.5 transition"/>
+          <button class="bg-text flex h-12 w-12 items-center justify-center rounded-full">
+            <MaterialSymbolsKeyboardArrowDownRounded
+              font-size={35}
+              class="text-background mt-1 transition hover:translate-y-0.5"
+            />
           </button>
         </div>
       </div>

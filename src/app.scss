@@ -3,10 +3,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant ocean (&:where(.ocean, .ocean *));
 
+
 @theme, .theme-light {
   /* Light theme (default) */
   --color-background: #e4e7ed;
-  --color-background-secondary: #e4e7ed;
+  --color-background-secondary: #9f9f9f;
   --color-disabled: #9FA1A6;
   --color-text: #0A0A0A;
   --color-primary: var(--color-purple-700);
@@ -14,14 +15,16 @@
   --color-accent: #FF3D00;
   --color-success: #05df72;
   --color-failure: #fb2c36;
-
+  
   /* Semantic shadow colors for light mode */
   --color-shadow-light: #FF3D00;
   --color-shadow-medium: #FF4F24;
 }
 
+
 /* Dark theme */
 .theme-dark {
+  --color-background-secondary: #9f9f9f;
   --color-background: #0d1117;
   --color-background-secondary: #47576a;
   --color-disabled: #76787d;
@@ -51,6 +54,7 @@
 /* Custom font */
 body {
   font-family: 'Inter', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
   @apply bg-[var(--color-background)] text-[var(--color-text)];
 }
 
@@ -85,4 +89,13 @@ body {
 
 .safe-area {
   @apply w-full px-4 sm:px-8 md:px-20 lg:px-32 xl:px-28 max-w-[1250px] mx-auto transition-all;
+}
+
+h1, h2, h3, h4, h5, h6{
+  line-height: 0.9;
+}
+h1{
+  font-family: monospace;
+  line-height: 0.9;
+  font-size: clamp(40px, 6vw, 80px);
 }
