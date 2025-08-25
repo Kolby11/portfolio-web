@@ -5,7 +5,7 @@
 </script>
 
 <ContentSection sectionName="about">
-  <h1 class="border-b text-3xl md:text-4xl">{$t('about.title')}</h1>
+  <h2 class="section-heading">{$t('about.title')}</h2>
   <div class="mt-10 ml-auto px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
     <div class="md:w-full md:pr-5">
       <!-- <Timeline timeLineItems={timelineItems} /> -->

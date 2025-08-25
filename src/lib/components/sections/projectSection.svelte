@@ -5,7 +5,7 @@
 </script>
 
 <ContentSection sectionName="projects">
-  <h1 class="text-3xl">{$t('projects.title')}</h1>
+  <h2 class="text-3xl">{$t('projects.title')}</h2>
   <div class="mt-10 h-fit w-fit">
     <ProjectsDisplay />
   </div>

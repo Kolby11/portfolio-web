@@ -90,19 +90,14 @@
     <LanguageSelection />
   </div>
   <nav class="ml-auto">
-    <ul class="flex items-center justify-center">
+    <ul class="justify- flex items-center gap-x-6">
       {#each sections as section, i}
         <li>
           <a
             href="#{section}"
-            class="group flex items-center hover:text-primary transition focus-within:-translate-y-0.5 hover:-translate-y-0.5 focus-visible:text-primary outline-none justify-center px-3 text-xl duration-200 {i ===
-            sections.length - 1
-              ? ''
-              : 'border-text border-r'}"
+            class="underline-expand-center flex items-center justify-center text-xl transition duration-200 outline-none"
           >
-            <span class="border-b border-transparent transition-all duration-300 group-hover:border-b">
-              {$t(`navbar.${section}`)}
-            </span>
+            {$t(`navbar.${section}`)}
           </a>
         </li>
       {/each}

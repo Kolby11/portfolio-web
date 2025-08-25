@@ -4,7 +4,7 @@
 </script>
 
 <ContentSection sectionName="contact">
-  <h1 class="text-3xl">{$t('contact.title')}</h1>
+  <h2 class="section-heading">{$t('contact.title')}</h2>
   <div class="mt-20 sm:mt-40">
     <div class="flex flex-col items-center justify-center text-center md:text-lg">
       <p class="md:text-xl">{$t('contact.text')}</p>
