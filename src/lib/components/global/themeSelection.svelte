@@ -3,6 +3,7 @@
   import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols/dark-mode-outline-rounded'
   import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols/light-mode-outline-rounded'
   import { t } from 'svelte-i18n'
+  import { fade } from 'svelte/transition'
 
   type ThemeSelectionProps = {
     class?: string

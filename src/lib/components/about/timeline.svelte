@@ -3,7 +3,7 @@
   import { onMount } from 'svelte'
 
   type TimelineProps = {
-    vertical: boolean
+    vertical?: boolean
     timelineItems: { title: string; description: string; year: number }[]
   }
 
@@ -11,6 +11,7 @@
 
   const timelinePointRadius = 5
   const textOffset = 20
+  const margin = 60 // Add margin to prevent overflow
 
   type Coordinate = {
     x: number
@@ -52,16 +53,20 @@
     if (totalItems === 0) return
 
     if (vertical) {
-      const pointDeltaY = totalItems > 1 ? svgElementRect.height / (totalItems - 1) : 0
+      // For vertical layout, use margin on top and bottom
+      const availableHeight = svgElementRect.height - 2 * margin
+      const pointDeltaY = totalItems > 1 ? availableHeight / (totalItems - 1) : 0
       svgCoordinates = sortedTimelineItems.map((_, index) => ({
-        x: timelinePointRadius,
-        y: totalItems > 1 ? index * pointDeltaY : svgElementRect.height / 2,
+        x: timelinePointRadius + margin,
+        y: margin + (totalItems > 1 ? index * pointDeltaY : availableHeight / 2),
       }))
     } else {
-      const pointDeltaX = totalItems > 1 ? svgElementRect.width / (totalItems - 1) : 0
+      // For horizontal layout, use margin on left and right
+      const availableWidth = svgElementRect.width - 2 * margin
+      const pointDeltaX = totalItems > 1 ? availableWidth / (totalItems - 1) : 0
       svgCoordinates = sortedTimelineItems.map((_, index) => ({
-        x: totalItems > 1 ? index * pointDeltaX : svgElementRect.width / 2,
-        y: timelinePointRadius,
+        x: margin + (totalItems > 1 ? index * pointDeltaX : availableWidth / 2),
+        y: timelinePointRadius + margin,
       }))
     }
   }
@@ -105,6 +110,7 @@
       font-size="12"
       text-anchor={vertical ? 'start' : 'middle'}
       dominant-baseline={vertical ? 'middle' : 'hanging'}
+      class="cursor-pointer hover:opacity-80"
       on:click={() => handleTitleClick(index)}
     >
       {item.title} ({item.year})
@@ -113,22 +119,28 @@
       bind:this={underlines[index]}
       x1={vertical ? svgCoordinates[index]?.x + textOffset : svgCoordinates[index]?.x - 50}
       y1={vertical ? svgCoordinates[index]?.y + 15 : svgCoordinates[index]?.y + textOffset + 20}
-      x2={vertical ? svgCoordinates[index]?.x + textOffset : svgCoordinates[index]?.x + 50}
+      x2={vertical ? svgCoordinates[index]?.x + textOffset + 100 : svgCoordinates[index]?.x + 50}
       y2={vertical ? svgCoordinates[index]?.y + 15 : svgCoordinates[index]?.y + textOffset + 20}
       stroke={$theme === 'dark' ? '#ffffff' : '#000000'}
       stroke-width="1"
       opacity={opened === index ? 1 : 0}
+      class="transition-opacity duration-200"
     />
     {#if opened === index}
-      <text
-        x={vertical ? svgCoordinates[index]?.x + textOffset : svgCoordinates[index]?.x}
-        y={vertical ? svgCoordinates[index]?.y + textOffset : svgCoordinates[index]?.y + textOffset * 2}
-        fill={$theme === 'dark' ? '#ffffff' : '#000000'}
-        font-size="10"
-        text-anchor={vertical ? 'start' : 'middle'}
+      <foreignObject
+        x={vertical ? svgCoordinates[index]?.x + textOffset : svgCoordinates[index]?.x - 150}
+        y={vertical ? svgCoordinates[index]?.y + 25 : svgCoordinates[index]?.y + textOffset * 2}
+        width={vertical ? '200' : '300'}
+        height="100"
       >
-        {item.description}
-      </text>
+        <div
+          class="bg-opacity-90 rounded p-2 text-xs {$theme === 'dark'
+            ? 'bg-gray-800 text-white'
+            : 'bg-white text-black'} shadow-lg"
+        >
+          {item.description}
+        </div>
+      </foreignObject>
     {/if}
   {/each}
 </svg>
