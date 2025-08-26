@@ -32,7 +32,7 @@
   },
   "home": {
     "title": "Domov",
-    "description": "Som softvérový inžinier špecializujúci sa na <span class='text-primary underline font-light'>vývoj full-stack</span> webových aplikácií a s nadšením vytváram efektívne riešenia. Baví ma pracovať v rôznych oblastiach vrátane vývoja mobilných aplikácií a hier a objavovať nové technológie.",
+    "description": "Som softvérový inžinier špecializujúci sa na <span class='text-primary underline font-semibold'>vývoj full-stack</span> webových aplikácií a s nadšením vytváram efektívne riešenia. Baví ma pracovať v rôznych oblastiach vrátane vývoja mobilných aplikácií a hier a objavovať nové technológie.",
     "fields": {
       "application_development": "Vývoj aplikácií",
       "software_engineering": "Softvérové Inžinierstvo",
@@ -95,114 +95,29 @@
     },
     "title": "Pracovné Skúsenosti",
     "description": "Moja špecializácia je najmä vo fullstack developmente webových aplikácií a ich nasadenia do produkcie na cloud, no aktívne sa venujem aj iným odvetviam ako je backend development pre aplikácie. Ďalej som pracoval v oblasti game a mobile developmentu",
+    "job_history": {
+      "binary_confidence": {
+        "role": "Backend Developer / DevOps",
+        "range": "2023 - Súčasnosť",
+        "bulletPoints": [
+          "Automatizácia nasadzovania aplikácií a správa infraštruktúry pomocou Ansible playbooks, vrátane konfigurácie serverov, databáz a monitorovacích nástrojov",
+          "Návrh a implementácia viacerých Python mikroservisov s REST API, vrátane systémov pre spracovanie dát, autentifikáciu užívateľov a integráciu s externými službami",
+          "Vývoj komplexnej automatizovanej testovacej súpravy simulujúcej používateľské správanie pomocou Python, PyQt5 a Selenium, ktorá znížila čas manuálneho testovania o 70%"
+        ]
+      },
+      "principle_guy": {
+        "role": "Fullstack Web Developer",
+        "range": "2024 - Súčasnosť",
+        "bulletPoints": [
+          "Vývoj responzívnej web aplikácie v Next.js s TypeScript, implementácia SSR/SSG, optimalizácia výkonu a SEO, vrátane integrácie s externými API",
+          "Nasadenie a správa produkčných aplikácií na Google Firebase platforme, konfigurácia CI/CD pipeline, monitoring výkonu a automatické škálovanie",
+          "Návrh a implementácia NoSQL databázovej architektúry vo Firestore, vrátane bezpečnostných pravidiel, indexovania a optimalizácie dotazov pre vysoký výkon"
+        ]
+      }
+    },
     "graph": {
       "title": "Programovacie jazyky",
       "valueTitle": "Strávené hodiny"
-    },
-    "skillTree": {
-      "title": "Strom zručností",
-      "categories": [
-        {
-          "name": "Programovacie jazyky",
-          "items": [
-            {
-              "name": "Python",
-              "description": "Python",
-              "seniority": "medior"
-            },
-            {
-              "name": "Typescript",
-              "description": "Python",
-              "seniority": "medior"
-            },
-            {
-              "name": "Javascript",
-              "description": "Python",
-              "seniority": "medior"
-            },
-            {
-              "name": "c#",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "c++",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Vývoj webových aplikácii",
-          "items": [
-            {
-              "name": "Next.js",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "SvelteKit",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Vue.js",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Angular",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Vývoj mobilných aplikácii",
-          "items": [
-            {
-              "name": "Kotlin",
-              "description": "Kotlin",
-              "seniority": "junior"
-            },
-            {
-              "name": "Flutter",
-              "description": "Flutter",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Vývoj hier",
-          "items": [
-            {
-              "name": "Unity",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Unreal engine",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Nasadenie do cloudu",
-          "items": [
-            {
-              "name": "Amazon Web Services (AWS)",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Google Cloud Platform (GCP)",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        }
-      ]
     }
   },
   "projects": {

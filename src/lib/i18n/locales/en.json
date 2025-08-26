@@ -99,110 +99,25 @@
       "title": "Programming languages",
       "valueTitle": "Hours spent"
     },
-    "skillTree": {
-      "title": "Skill tree",
-      "categories": [
-        {
-          "name": "Programming languages",
-          "items": [
-            {
-              "name": "Python",
-              "description": "Python",
-              "seniority": "medior"
-            },
-            {
-              "name": "Typescript",
-              "description": "Python",
-              "seniority": "medior"
-            },
-            {
-              "name": "Javascript",
-              "description": "Python",
-              "seniority": "medior"
-            },
-            {
-              "name": "c#",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "c++",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Web application Development",
-          "items": [
-            {
-              "name": "Next.js",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "SvelteKit",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Vue.js",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Angular",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Mobile application Development",
-          "items": [
-            {
-              "name": "Kotlin",
-              "description": "Kotlin",
-              "seniority": "junior"
-            },
-            {
-              "name": "Flutter",
-              "description": "Flutter",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Game development",
-          "items": [
-            {
-              "name": "Unity",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Unreal engine",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        },
-        {
-          "name": "Cloud deployment",
-          "items": [
-            {
-              "name": "Amazon Web Services (AWS)",
-              "description": "Python",
-              "seniority": "junior"
-            },
-            {
-              "name": "Google Cloud Platform (GCP)",
-              "description": "Python",
-              "seniority": "junior"
-            }
-          ]
-        }
-      ]
+    "job_history": {
+      "binary_confidence": {
+        "role": "Backend Developer / DevOps",
+        "range": "2023 - Present",
+        "bulletPoints": [
+          "Automated application deployment and infrastructure management using Ansible playbooks, including server configuration, database setup, and monitoring tools implementation",
+          "Designed and implemented multiple Python microservices with REST APIs, including systems for data processing, user authentication, and external service integrations",
+          "Developed comprehensive automated testing suite simulating user behavior using Python, PyQt5, and Selenium, reducing manual testing time by 70%"
+        ]
+      },
+      "principle_guy": {
+        "role": "Fullstack Web Developer",
+        "range": "2024 - Present",
+        "bulletPoints": [
+          "Developed responsive web applications using Next.js with TypeScript, implemented SSR/SSG, performance optimization and SEO, including external API integrations",
+          "Deployed and managed production applications on Google Firebase platform, configured CI/CD pipelines, performance monitoring, and automatic scaling",
+          "Designed and implemented NoSQL database architecture in Firestore, including security rules, indexing, and query optimization for high performance"
+        ]
+      }
     }
   },
   "projects": {

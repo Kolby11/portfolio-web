@@ -27,9 +27,9 @@
   <p class="text-text-light font-mono text-lg">
     {work.range}
   </p>
-  <ul class="mt-4">
+  <ul class="mt-4" role="list">
     {#each work.bulletPoints as point}
-      <li class="text-text-light">
+      <li class="text-text-light" role="listitem">
         {point}
       </li>
     {/each}
@@ -37,8 +37,12 @@
 </div>
 
 <style lang="scss">
-  li::before {
-    content: '▹';
-    color: var(--color-primary);
+  li {
+    list-style: square;
+    list-style-position: inside;
   }
+  // li::before {
+  //   content: '▹';
+  //   color: var(--color-primary);
+  // }
 </style>
