@@ -12,7 +12,7 @@
   --color-disabled: #9FA1A6;
   --color-text: #101010;
   --color-text-light: #45474d;
-  --color-primary: #be00d4;
+  --color-primary: #8637cb;
   --color-secondary: #9C9A9A;
   --color-accent: #FF3D00;
   --color-success: #05df72;
@@ -27,11 +27,11 @@
 /* Dark theme */
 .theme-dark {
   --color-background: #151a23;
-  --color-background-secondary: #47576a;
+  --color-background-secondary: #3a434e;
   --color-disabled: #76787d;
   --color-text: #ebebeb;
   --color-text-light: #c4c2c9;
-  --color-primary: var(--color-fuchsia-400);
+  --color-primary: #b942f0;
   --color-secondary: #9C9A9A;
   --color-accent: #FF4F24;
 
@@ -68,7 +68,7 @@ body {
 /* Custom selection colors */
 *::selection {
   background: var(--color-background-secondary);
-  color: var(--color-background);
+  color: var(--color-text);
 }
 *::-moz-selection {
   background: #cc0000;

@@ -9,13 +9,6 @@
   import { locale, waitLocale, t } from 'svelte-i18n'
   import SocialsDisplay from '$lib/components/global/socialsDisplay.svelte'
   import { socialLinks } from '$lib/data/socials'
-
-  export const load = async () => {
-    if (browser) {
-      locale.set(window.navigator.language)
-    }
-    await waitLocale()
-  }
 </script>
 
 <svelte:head>
