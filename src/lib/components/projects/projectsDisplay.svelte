@@ -8,80 +8,56 @@
     description: string
   }
 
-  type ProjectCategory = {
-    name: string
-    projects: Project[]
-  }
-
-  const projectCategories: ProjectCategory[] = [
+  const allProjects: Project[] = [
     {
-      name: 'Game dev',
-      projects: [
-        {
-          name: 'Cook Smart 1',
-          images: [
-            'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
-          ],
-          description: 'My first larger scale web app',
-        },
-        {
-          name: '2D shooter',
-          images: [
-            'https://cdn.vox-cdn.com/thumbor/di767SB3CWfzdTtffECHRTO2UAg=/0x0:960x540/1400x788/filters:focal(480x270:481x271)/cdn.vox-cdn.com/uploads/chorus_asset/file/14363954/8963287663_e8780835e8_b.1419979648.jpg',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s',
-            'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
-          ],
-          description: 'Simple 2d game',
-        },
+      name: 'Cook Smart 1',
+      images: [
+        'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
       ],
+      description: 'My first larger scale web app',
     },
     {
-      name: 'Web app dev',
-      projects: [
-        {
-          name: 'Cook Smart',
-          images: [
-            'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
-          ],
-          description: 'My first larger scale web app',
-        },
-        {
-          name: 'PHP server',
-          images: [
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s',
-          ],
-          description: 'My first larger scale web app',
-        },
-        {
-          name: 'Test 2',
-          images: [
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s',
-          ],
-          description: 'My first larger scale web app',
-        },
+      name: '2D shooter',
+      images: [
+        'https://cdn.vox-cdn.com/thumbor/di767SB3CWfzdTtffECHRTO2UAg=/0x0:960x540/1400x788/filters:focal(480x270:481x271)/cdn.vox-cdn.com/uploads/chorus_asset/file/14363954/8963287663_e8780835e8_b.1419979648.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s',
+        'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
       ],
+      description: 'Simple 2d game',
     },
     {
-      name: 'Mobile app dev',
-      projects: [
-        {
-          name: 'Exercise app',
-          images: [
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s',
-          ],
-          description: 'My first larger scale web app',
-        },
+      name: 'Cook Smart',
+      images: [
+        'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
       ],
+      description: 'My first larger scale web app',
+    },
+    {
+      name: 'PHP server',
+      images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s'],
+      description: 'My first larger scale web app',
+    },
+    {
+      name: 'Test 2',
+      images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s'],
+      description: 'My first larger scale web app',
+    },
+    {
+      name: 'Exercise app',
+      images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s'],
+      description: 'My first larger scale web app',
     },
   ]
 
-  let selectedProjectCategory: ProjectCategory = projectCategories[1]
-  let selectedProject: Project = selectedProjectCategory.projects[0]
+  // Split projects into two columns
+  const leftColumnProjects = allProjects.filter((_, index) => index % 2 === 0)
+  const rightColumnProjects = allProjects.filter((_, index) => index % 2 === 1)
+
+  let selectedProject: Project = allProjects[0]
   let selectedProjectImageIndex: number = 0
 
-  const handleProjectClick = (e: Event, project: Project, projectCategory: ProjectCategory) => {
+  const handleProjectClick = (e: Event, project: Project) => {
     selectedProject = project
-    selectedProjectCategory = projectCategory
     selectedProjectImageIndex = 0
   }
 
@@ -112,53 +88,65 @@
 
 <div class="flex w-full flex-col items-center">
   <div class="flex w-full flex-col items-start justify-between gap-y-8 lg:flex-row">
-    <div class="scroll-container w-fit overflow-hidden">
-      <div class="hidden grid-cols-3 gap-8 overflow-hidden md:grid">
-        {#each projectCategories as projectCategory, projectCategoryIndex}
-          <div class={projectCategoryIndex % 2 === 0 ? 'scroll-content-vertical' : 'scroll-content-vertical-reverse'}>
-            <div class="flex flex-col items-center">
-              <!-- <h4 class="mb-2 text-center text-lg">{projectCategory.name}</h4> -->
-              <div class="flex flex-col gap-4 transition">
-                {#each fillProjectsForAnimation(projectCategory.projects) as project, i}
-                  <button
-                    on:click={e => handleProjectClick(e, project, projectCategory)}
-                    class={`size-14 shadow-gray-50 transition duration-300 sm:size-24 md:size-28 lg:size-32 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
-                  >
-                    <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
-                  </button>
-                {/each}
-              </div>
+    <div class="scroll-container w-fit overflow-x-visible overflow-y-hidden">
+      <div class="hidden grid-cols-2 gap-8 overflow-x-visible md:grid">
+        <!-- Left Column -->
+        <div class="scroll-content-vertical">
+          <div class="flex flex-col items-center">
+            <div class="flex flex-col gap-4 transition">
+              {#each fillProjectsForAnimation(leftColumnProjects) as project, i}
+                <button
+                  onclick={e => handleProjectClick(e, project)}
+                  class={`size-14 shadow-gray-50 transition duration-300 sm:size-20 md:size-24 lg:size-28 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
+                >
+                  <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
+                </button>
+              {/each}
             </div>
           </div>
-        {/each}
+        </div>
+
+        <!-- Right Column -->
+        <div class="scroll-content-vertical-reverse">
+          <div class="flex flex-col items-center">
+            <div class="flex flex-col gap-4 transition">
+              {#each fillProjectsForAnimation(rightColumnProjects) as project, i}
+                <button
+                  onclick={e => handleProjectClick(e, project)}
+                  class={`size-14 shadow-gray-50 transition duration-300 sm:size-20 md:size-24 lg:size-28 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
+                >
+                  <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
+                </button>
+              {/each}
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- Mobile horizontal scroll -->
       <div class="flex flex-col gap-2 md:hidden">
-        {#each projectCategories as projectCategory, projectCategoryIndex}
-          <div
-            class={projectCategoryIndex % 2 === 0 ? 'scroll-content-horizontal' : 'scroll-content-horizontal-reverse'}
-          >
-            <div class="flex items-center">
-              <!-- <h4 class="mb-2 text-center text-lg">{projectCategory.name}</h4> -->
-              <div class="flex gap-2 transition">
-                {#each fillProjectsForAnimation(projectCategory.projects) as project, i}
-                  <button
-                    on:click={e => handleProjectClick(e, project, projectCategory)}
-                    class={`size-14 shadow-gray-50 transition duration-300 sm:size-24 md:size-28 lg:size-32 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
-                  >
-                    <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
-                  </button>
-                {/each}
-              </div>
+        <div class="scroll-content-horizontal">
+          <div class="flex items-center">
+            <div class="flex gap-2 transition">
+              {#each fillProjectsForAnimation(allProjects) as project, i}
+                <button
+                  onclick={e => handleProjectClick(e, project)}
+                  class={`size-14 shadow-gray-50 transition duration-300 sm:size-20 md:size-24 lg:size-28 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
+                >
+                  <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
+                </button>
+              {/each}
             </div>
           </div>
-        {/each}
+        </div>
       </div>
     </div>
+
     <div class="flex flex-col items-center justify-center sm:px-0 lg:w-1/2">
       <h3 class="text-2xl">{selectedProject.name}</h3>
       <div class="flex h-full w-full items-center justify-center gap-x-4 p-2">
         <div class="flex w-fit flex-col items-center justify-center">
-          <button on:click={clickPrevImage}><MaterialSymbolsArrowBackIosRounded /></button>
+          <button onclick={clickPrevImage}><MaterialSymbolsArrowBackIosRounded /></button>
         </div>
         <div class="w-full">
           <img
@@ -168,7 +156,7 @@
           />
         </div>
         <div class="flex w-fit flex-col items-center justify-center">
-          <button on:click={clickNextImage}><MaterialSymbolsArrowForwardIosRounded /></button>
+          <button onclick={clickNextImage}><MaterialSymbolsArrowForwardIosRounded /></button>
         </div>
       </div>
       <p class="w-full border-b px-8 text-center">
@@ -205,7 +193,8 @@
       transform: translateX(-50%);
     }
   }
-  @keyframes scrollRight {
+
+  @keyframes scrollLeft {
     0% {
       transform: translateX(-50%);
     }
@@ -215,7 +204,7 @@
   }
 
   .scroll-container {
-    height: 600px; /* Adjust based on your needs */
+    height: 400px; /* Adjust based on your needs */
   }
 
   .scroll-content-vertical {
@@ -225,6 +214,7 @@
   .scroll-content-vertical-reverse {
     animation: scrollUp 60s linear infinite;
   }
+
   .scroll-content-horizontal {
     animation: scrollRight 60s linear infinite;
   }

@@ -32,7 +32,7 @@
   },
   "home": {
     "title": "Domov",
-    "description": "Som softvérový inžinier špecializujúci sa na <span class='text-primary underline font-semibold'>vývoj full-stack</span> webových aplikácií a s nadšením vytváram efektívne riešenia. Baví ma pracovať v rôznych oblastiach vrátane vývoja mobilných aplikácií a hier a objavovať nové technológie.",
+    "description": "Som softvérový inžinier špecializujúci sa na vývoj <a href='#' target='_blank'>full-stack webových aplikácií</a> a s nadšením vytváram efektívne riešenia. Baví ma pracovať v rôznych oblastiach vrátane vývoja mobilných aplikácií a hier a objavovať nové technológie.",
     "fields": {
       "application_development": "Vývoj aplikácií",
       "software_engineering": "Softvérové Inžinierstvo",
@@ -125,7 +125,7 @@
     "description": "Vitajte na stránke kontaktu"
   },
   "contact": {
-    "title": "Kontakt",
+    "title": "Spojme sa",
     "description": "Vitajte na stránke kontaktu",
     "text": "V prípade záujmu ma neváhajte kontaktovať:"
   }

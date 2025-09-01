@@ -1,10 +1,8 @@
 <script>
-  import CodeSnippet from '../codeSnippet.svelte'
-  import ContentSection from '../global/contentSection.svelte'
   import { t } from 'svelte-i18n'
 </script>
 
-<ContentSection sectionName="about">
+<section id="about">
   <h2 class="section-heading">{$t('about.title')}</h2>
   <div class="mt-10 ml-auto px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
     <div class="md:w-full md:pr-5">
@@ -20,4 +18,4 @@
   <!-- <div class="absolute bottom-20 left-20 mt-10 opacity-0 transition duration-500 hover:opacity-70">
     <CodeSnippet fontSize="small" />
   </div> -->
-</ContentSection>
+</section>

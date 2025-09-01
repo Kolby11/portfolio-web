@@ -1,197 +1,255 @@
-@import "tailwindcss";
-@layer theme, base, components, utilities;
-@custom-variant dark (&:where(.dark, .dark *));
-@custom-variant ocean (&:where(.ocean, .ocean *));
+  @import "tailwindcss";
+  @layer theme, base, components, utilities;
+  @custom-variant dark (&:where(.dark, .dark *));
+  @custom-variant ocean (&:where(.ocean, .ocean *));
+
+  @theme,
+  .theme-light {
+    /* Light theme (default) */
+    --color-background: #e1e0d3;
+    --color-background-secondary: #9f9f9f;
+    --color-disabled: #9FA1A6;
+    --color-text: #101010;
+    --color-text-light: #383b44;
+    --color-primary: #8637cb;
+    --color-secondary: #9C9A9A;
+    --color-accent: #FF3D00;
+    --color-success: #05df72;
+    --color-failure: #fb2c36;
+    
+    /* Semantic shadow colors for light mode */
+    --color-shadow-light: #FF3D00;
+    --color-shadow-medium: #FF4F24;
+  }
 
 
-@theme,
-.theme-light {
-  /* Light theme (default) */
-  --color-background: #e1e0d3;
-  --color-background-secondary: #9f9f9f;
-  --color-disabled: #9FA1A6;
-  --color-text: #101010;
-  --color-text-light: #45474d;
-  --color-primary: #8637cb;
-  --color-secondary: #9C9A9A;
-  --color-accent: #FF3D00;
-  --color-success: #05df72;
-  --color-failure: #fb2c36;
-  
-  /* Semantic shadow colors for light mode */
-  --color-shadow-light: #FF3D00;
-  --color-shadow-medium: #FF4F24;
-}
+  /* Dark theme */
+  .theme-dark {
+    --color-text-light: #383b44;
+    --color-background: #151a23;
+    --color-background-secondary: #3a434e;
+    --color-disabled: #76787d;
+    --color-text: #ebebeb;
+    --color-text-light: #c4c6cf;
+    --color-primary: #b942f0;
+    --color-secondary: #9C9A9A;
+    --color-accent: #FF4F24;
+
+    /* Different shadow colors for dark mode */
+    --color-shadow-light: #A78BFA;
+    --color-shadow-medium: #8B5CF6;
+  }
+
+  /* Alternative theme example */
+  .theme-purple {
+    --color-background: #2E1A47;
+    --color-text: #F3E8FF;
+    --color-primary: #D6BCFA;
+    --color-secondary: #A78BFA;
+    --color-accent: #8B5CF6;
+
+    /* Semantic shadow colors for purple theme */
+    --color-shadow-light: #A78BFA;
+    --color-shadow-medium: #D6BCFA;
+  }
+
+  *:focus-visible {
+    outline: none;
+  }
+
+  .focus-outline {
+    transition: all    0.3s var(--default-transition-timing-function);
+    &:focus-visible{
+      outline: 2px dashed var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  /* Custom font */
+  body {
+    font-family: 'Inter', sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  /* Custom icons  */
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .button-rounded {
+    @apply rounded-2xl border-2 px-8 py-2
+  }
+
+  /* Custom selection colors */
+  *::selection {
+    background: var(--color-background-secondary);
+    color: var(--color-text);
+  }
+  *::-moz-selection {
+    background: #cc0000;
+    color: #ffffff;
+  }
+  *::-webkit-selection {
+    background: #cc0000;
+    color: #ffffff;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    height: 10px;
+    @apply bg-[var(--color-background)];
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    height: 10px;
+    @apply bg-[var(--color-primary)];
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .safe-area {
+    @apply w-full px-4 sm:px-8 md:px-20 lg:px-32 xl:px-28 max-w-[1250px] mx-auto transition-all;
+  }
 
 
-/* Dark theme */
-.theme-dark {
-  --color-background: #151a23;
-  --color-background-secondary: #3a434e;
-  --color-disabled: #76787d;
-  --color-text: #ebebeb;
-  --color-text-light: #c4c2c9;
-  --color-primary: #b942f0;
-  --color-secondary: #9C9A9A;
-  --color-accent: #FF4F24;
-
-  /* Different shadow colors for dark mode */
-  --color-shadow-light: #A78BFA;
-  --color-shadow-medium: #8B5CF6;
-}
-
-/* Alternative theme example */
-.theme-purple {
-  --color-background: #2E1A47;
-  --color-text: #F3E8FF;
-  --color-primary: #D6BCFA;
-  --color-secondary: #A78BFA;
-  --color-accent: #8B5CF6;
-
-  /* Semantic shadow colors for purple theme */
-  --color-shadow-light: #A78BFA;
-  --color-shadow-medium: #D6BCFA;
-}
-
-/* Custom font */
-body {
-  font-family: 'Inter', sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-  @apply bg-[var(--color-background)] text-[var(--color-text)];
-}
-
-/* Custom icons  */
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-}
-
-/* Custom selection colors */
-*::selection {
-  background: var(--color-background-secondary);
-  color: var(--color-text);
-}
-*::-moz-selection {
-  background: #cc0000;
-  color: #ffffff;
-}
-*::-webkit-selection {
-  background: #cc0000;
-  color: #ffffff;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 0px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-  height: 10px;
-  @apply bg-[var(--color-background)];
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  height: 10px;
-  @apply bg-[var(--color-primary)];
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-.safe-area {
-  @apply w-full px-4 sm:px-8 md:px-20 lg:px-32 xl:px-28 max-w-[1250px] mx-auto transition-all;
-}
-
-h1, h2 {
-  line-height: 0.9;
-  font-family: monospace;
-}
-
-h1{
-  font-size: clamp(50px, 6vw, 80px);
-}
-h2 {
-  font-size: clamp(40px, 4vw, 50px);
-
-  &.section-heading {
+  main {
+    margin: 0px auto;
     width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
+    max-width: 1600px;
+    min-height: 100vh;
+    @apply px-4 sm:px-8 md:px-20 lg:px-32 xl:px-40
+  }
+
+  section {
+    margin: 0px auto;
+    padding: 100px 0px;
+    max-width: 1250px;
+
+    @apply transition-all
+  }
+
+  .section-content {
+    @apply h-fit min-h-[calc(100vh-5rem)] pt-20 sm:pt-28 md:pt-32
+  }
+
+  h1, h2 {
+    line-height: 0.9;
+    font-family: monospace;
+  }
+
+  h1{
+    font-size: clamp(35px, 6vw, 80px);
+  }
+
+  h2 {
+    font-size: clamp(25px, 4vw, 50px);
+
+    &.section-heading {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+
+      
+      /* Default values */
+      --line-before-width: 50px;
+      --line-after-width: 300px;
+      
+      &::after {
+        content: "";
+        width: var(--line-after-width);
+        height: 1px;
+        margin-left: 20px;
+        background-color: var(--color-text-light);
+      }
+      &::before {
+        content: "";
+        width: var(--line-before-width);
+        height: 1px;
+        margin-right: 20px;
+        background-color: var(--color-text-light);
+      }
+
+      /* Modifier for right alignment */
+      &.text-right {
+        --line-before-width: 150px;
+        --line-after-width: 50px;
+        // justify-content: end;
+      }
+    }
+  }
+
+  .underline-expand-start, p a {
+    position: relative;
+    --underline-color: var(--color-text); /* Default color */
     
     &::after {
       content: "";
-      width: 300px;
+      display: block;
+      width: 0px;
       height: 1px;
-      margin-left: 20px;
-      background-color: var(--color-text-light);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: var(--underline-color);
+      opacity: 0.5;
+      transition: width 0.3s var(--default-transition-timing-function);
     }
-    &::before {
+    
+    &:hover::after,
+    &:focus::after,
+    &[aria-current="true"]::after {
+      width: 100%;
+    }
+    
+    &[aria-current="true"]::after {
+      opacity: 1;
+    }
+  }
+
+  /* Override color for paragraph links */
+  p a {
+    color: var(--color-primary);
+    --underline-color: var(--color-primary);
+  }
+
+  .underline-expand-center {
+    position: relative;
+    
+    &::after {
       content: "";
-      width: 50px;
+      display: block;
+      width: 0%;
       height: 1px;
-      margin-right: 20px;
-      background-color: var(--color-text-light);
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--color-text);
+      opacity: 0.5;
+      transition: width 0.3s var(--default-transition-timing-function);
+    }
+    
+    &:hover::after,
+    &:focus::after,
+    &[aria-current="true"]::after {
+      width: 100%;
+    }
+    
+    &[aria-current="true"]::after {
+      opacity: 1;
     }
   }
-}
-
-.underline-expand-start {
-  position: relative;
-  
-  &::after {
-    content: "";
-    display: block;
-    width: 0px;
-    height: 1px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: var(--color-text);
-    opacity: 0.5;
-    transition: width 0.3s var(--default-transition-timing-function);
-  }
-  
-  &:hover::after,
-  &:focus::after,
-  &[aria-current="true"]::after {
-    width: 100%;
-  }
-  
-  &[aria-current="true"]::after {
-    opacity: 1;
-  }
-}
-
-.underline-expand-center {
-  position: relative;
-  
-  &::after {
-    content: "";
-    display: block;
-    width: 0%;
-    height: 1px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--color-text);
-    opacity: 0.5;
-    transition: width 0.3s var(--default-transition-timing-function);
-  }
-  
-  &:hover::after,
-  &:focus::after,
-  &[aria-current="true"]::after {
-    width: 100%;
-  }
-  
-  &[aria-current="true"]::after {
-    opacity: 1;
-  }
-}

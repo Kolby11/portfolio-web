@@ -17,7 +17,7 @@
 </script>
 
 <button
-  class="relative flex size-6 items-center justify-center"
+  class="focus-outline relative flex size-6 items-center justify-center"
   onclick={toggleDarkMode}
   aria-label={$t('controls.theme.toggle')}
 >

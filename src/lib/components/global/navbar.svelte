@@ -95,7 +95,7 @@
         <li>
           <a
             href="#{section}"
-            class="underline-expand-center flex items-center justify-center text-xl transition duration-200 outline-none"
+            class="underline-expand-center flex items-center justify-center text-xl transition duration-200 outline-none focus-visible:outline-none"
           >
             {$t(`navbar.${section}`)}
           </a>

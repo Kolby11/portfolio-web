@@ -1,5 +1,4 @@
 <script lang="ts">
-  import ContentSection from '../global/contentSection.svelte'
   import { json, t } from 'svelte-i18n'
   import WorkShowcase from '../experience/workShowcase.svelte'
   import TabList from '../global/tabList.svelte'
@@ -35,8 +34,8 @@
   })
 </script>
 
-<ContentSection sectionName="experience">
-  <h2 class="section-heading">{$t('experience.title')}</h2>
+<section id="experience">
+  <h2 class="section-heading text-right">{$t('experience.title')}</h2>
   <div class="mt-10 ml-auto flex flex-col gap-x-10 px-4 max-md:space-y-8 md:flex-row md:px-10">
     <TabList
       options={jobs.map(job => job.company.title)}
@@ -45,4 +44,4 @@
     />
     <WorkShowcase work={currentJob} />
   </div>
-</ContentSection>
+</section>

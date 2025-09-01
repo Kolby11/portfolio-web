@@ -40,12 +40,12 @@
   <div class="w-full overflow-hidden">
     <ul
       bind:this={tickerElement}
-      class="newsTicker flex items-center gap-x-2 whitespace-nowrap @md:gap-x-4 @md:text-lg @lg:text-xl @xl:text-2xl"
+      class="newsTicker text-text-light flex items-center gap-x-2 whitespace-nowrap @md:gap-x-4 @md:text-lg @lg:text-xl @xl:text-2xl"
       style="--start-pos: {startPos}px; --end-pos: {endPos}px; --animation-duration: {animationDuration}s;"
     >
       {#each duplicatedItems as item, idx}
         <li class="flex-shrink-0">{$t(item)}</li>
-        <div class="bg-text size-1.5 flex-shrink-0 rounded-full @md:size-2"></div>
+        <div class="bg-text-light size-1.5 flex-shrink-0 rounded-full @md:size-2"></div>
       {/each}
     </ul>
   </div>

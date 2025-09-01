@@ -14,10 +14,12 @@
   })
 </script>
 
-<div class="flex h-full w-full flex-col" id="content">
-  <HomeSection />
-  <AboutSection />
-  <ExperienceSection />
-  <ProjectSection />
-  <ContactSection />
+<div id="content">
+  <main class="fillHeight">
+    <HomeSection />
+    <AboutSection />
+    <ExperienceSection />
+    <ProjectSection />
+    <ContactSection />
+  </main>
 </div>
