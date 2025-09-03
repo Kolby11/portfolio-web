@@ -7,6 +7,8 @@
 
   import { onMount } from 'svelte'
   import { sectionStore } from '$lib/stores/section.svelte'
+  import { socialLinks } from '$lib/data/socials'
+  import Footer from '$lib/components/global/footer.svelte'
 
   onMount(() => {
     sectionStore.initialize()
@@ -22,4 +24,5 @@
     <ProjectSection />
     <ContactSection />
   </main>
+  <Footer {socialLinks} />
 </div>

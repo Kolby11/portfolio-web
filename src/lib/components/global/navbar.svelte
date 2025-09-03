@@ -7,6 +7,8 @@
 
   import { onMount } from 'svelte'
   import ThemeSelection from './themeSelection.svelte'
+  import { fade, slide } from 'svelte/transition'
+  import { innerWidth, scrollY } from 'svelte/reactivity/window'
 
   type NavbarProps = {
     sections: string[]
@@ -15,92 +17,124 @@
   const { sections = [] }: NavbarProps = $props()
 
   let showMenu = $state(false)
+  let showNavbar = $state(true)
+  let lastScrollY = $state(0)
 
-  let sideBar: HTMLDivElement
-  let sideBarWidth: number = $state(0)
+  let sideBar: HTMLDivElement | null = $state(null)
+
+  $effect(() => {
+    if (showMenu) {
+      document.getElementById('content')?.classList.add('blur-xs')
+      document.addEventListener('pointerup', handleClickOutside)
+    } else {
+      document.getElementById('content')?.classList.remove('blur-xs')
+      document.removeEventListener('pointerup', handleClickOutside)
+    }
+  })
+
+  // Handle scroll behavior for navbar visibility
+  $effect(() => {
+    if (innerWidth.current && innerWidth.current < 768 && scrollY.current) {
+      const scrollDifference = scrollY.current - lastScrollY
+
+      if (scrollDifference < 0 || scrollY.current < 10) {
+        showNavbar = true
+      } else if (scrollDifference > 5) {
+        showNavbar = false
+        if (showMenu) {
+          showMenu = false
+        }
+      }
+    } else {
+      showNavbar = true
+    }
+
+    lastScrollY = scrollY.current || 0
+  })
 
   function toggleMenu() {
     showMenu = !showMenu
   }
 
-  function redraw() {
-    if (sideBar) {
-      sideBarWidth = sideBar.getBoundingClientRect().width
+  function handleClickOutside(event: MouseEvent) {
+    if (showMenu && sideBar && !sideBar.contains(event.target as Node)) {
+      const menuButton = (event.target as Element)?.closest('button')
+      const isMenuButton = menuButton && menuButton.onclick === toggleMenu
+
+      if (!isMenuButton) {
+        showMenu = false
+      }
     }
   }
-
-  onMount(() => {
-    window.addEventListener('resize', redraw)
-    if (!sideBar) return
-    sideBarWidth = sideBar.getBoundingClientRect().width
-
-    return () => {
-      window.removeEventListener('resize', redraw)
-    }
-  })
 </script>
 
 <!-- Mobile navbar -->
-<button
-  class={`fixed top-0 right-0 items-center justify-center p-8 transition duration-300 ${showMenu ? 'opacity-0' : 'opacity-100'}`}
-  onclick={toggleMenu}
->
-  <MaterialSymbolsLightMenuRounded style="font-size:x-large;" />
-</button>
-
-<div
-  bind:this={sideBar}
-  style="transform: translateX({showMenu ? 0 : sideBarWidth}px); transition: transform 0.3s ease-in-out;"
-  class={`text-light-primary bg-backkground fixed right-0 z-50 flex h-screen w-fit flex-col items-end px-8 pt-8 text-lg backdrop-blur-2xl md:hidden `}
->
-  <button class="flex h-fit w-fit items-center justify-center" onclick={toggleMenu}>
-    <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
-  </button>
-  <div class="flex h-full flex-col items-center">
-    {#if showMenu}
-      <nav class="mt-4 flex h-fit flex-col items-end gap-y-2">
-        {#each sections as section, i}
-          <a
-            use:smoothScroll
-            href="#{section}"
-            class="border-b border-transparent transition-all duration-200 hover:border-gray-400"
-            onclick={e => {
-              showMenu = false
-            }}
-          >
-            {$t(`navbar.${section}`)}
-          </a>
-        {/each}
-      </nav>
-      <div class="mt-auto mb-4 flex flex-col items-end gap-y-2">
-        <ThemeSelection />
-        <LanguageSelection />
-      </div>
-    {/if}
+{#if showMenu}
+  <div
+    transition:slide={{ axis: 'x' }}
+    bind:this={sideBar}
+    class={`mobile-nav text-light-primary fixed right-0 z-[60] flex h-screen w-fit flex-col items-center px-8 py-6 text-lg backdrop-blur-2xl`}
+  >
+    <button class="flex h-fit w-fit items-center justify-center self-end" onclick={toggleMenu}>
+      <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
+    </button>
+    <nav class="mt-4 flex h-fit flex-col items-center gap-y-2">
+      {#each sections as section, i}
+        <a
+          use:smoothScroll
+          href="#{section}"
+          class="underline-expand-center border-b border-transparent text-xl transition-all duration-200 hover:border-gray-400"
+          onclick={e => {
+            showMenu = false
+          }}
+        >
+          {$t(`navbar.${section}`)}
+        </a>
+      {/each}
+    </nav>
+    <div class="mt-auto flex w-full justify-between gap-y-2">
+      <ThemeSelection />
+      <LanguageSelection />
+    </div>
   </div>
-</div>
+{/if}
 
 <!-- Desktop navbar -->
 <div
-  class="fixed top-0 z-50 hidden h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl md:flex"
+  class="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl transition-transform duration-300 ease-in-out"
+  class:translate-y-0={showNavbar}
+  class:-translate-y-full={!showNavbar}
   use:smoothScroll
 >
-  <div class="flex gap-x-4 lg:gap-x-8">
-    <ThemeSelection />
-    <LanguageSelection />
-  </div>
-  <nav class="ml-auto">
-    <ul class="justify- flex items-center gap-x-6">
-      {#each sections as section, i}
-        <li>
-          <a
-            href="#{section}"
-            class="underline-expand-center flex items-center justify-center text-xl transition duration-200 outline-none focus-visible:outline-none"
-          >
-            {$t(`navbar.${section}`)}
-          </a>
-        </li>
-      {/each}
-    </ul>
-  </nav>
+  {#if innerWidth.current && innerWidth.current >= 768}
+    <div transition:fade class="flex gap-x-4 lg:gap-x-8">
+      <ThemeSelection />
+      <LanguageSelection />
+    </div>
+    <nav transition:fade class="ml-auto">
+      <ul class="justify- flex items-center gap-x-6">
+        {#each sections as section, i}
+          <li>
+            <a
+              href="#{section}"
+              class="underline-expand-center flex items-center justify-center text-xl transition duration-200 outline-none focus-visible:outline-none"
+            >
+              {$t(`navbar.${section}`)}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </nav>
+  {:else if !showMenu && showNavbar}
+    <button transition:fade class="ml-auto" onclick={toggleMenu}>
+      <MaterialSymbolsLightMenuRounded style="font-size:x-large;" />
+    </button>
+  {/if}
 </div>
+
+<style lang="scss">
+  .mobile-nav {
+    width: min(75vw, 250px);
+    box-shadow: -10px 10px 15px -15px var(--color-text-light);
+  }
+</style>
