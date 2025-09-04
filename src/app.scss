@@ -11,7 +11,7 @@
     --color-disabled: #9FA1A6;
     --color-text: #101010;
     --color-text-light: #383b44;
-    --color-primary: #8637cb;
+    --color-primary: #6337cb;
     --color-secondary: #9C9A9A;
     --color-accent: #FF3D00;
     --color-success: #05df72;
@@ -25,13 +25,12 @@
 
   /* Dark theme */
   .theme-dark {
-    --color-text-light: #383b44;
     --color-background: #151a23;
     --color-background-secondary: #3a434e;
     --color-disabled: #76787d;
     --color-text: #ebebeb;
-    --color-text-light: #c4c6cf;
-    --color-primary: #b942f0;
+    --color-text-light: #b4b6be;
+    --color-primary: #9642f0;
     --color-secondary: #9C9A9A;
     --color-accent: #FF4F24;
 
@@ -121,7 +120,7 @@
   }
 
   .safe-area {
-    @apply w-full px-4 sm:px-8 md:px-20 lg:px-32 xl:px-28 max-w-[1250px] mx-auto transition-all;
+    @apply w-full px-4 sm:px-8 md:px-20 lg:px-32 xl:px-28 max-w-[1100px] mx-auto transition-all;
   }
 
 
@@ -135,8 +134,12 @@
 
   section {
     margin: 0px auto;
-    padding: 100px 0px;
-    max-width: 1250px;
+    padding: 60px 0px;
+    width: fit-content;
+    
+    @media (width >= 40rem) {
+      padding: 100px 0px;
+    }
 
     @apply transition-all
   }
@@ -155,7 +158,8 @@
   }
 
   h2 {
-    font-size: clamp(25px, 4vw, 50px);
+    font-size: clamp(27.5px, 6vw, 50px);
+    display: inline-block;
 
     &.section-heading {
       width: 100%;
