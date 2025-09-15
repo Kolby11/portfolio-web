@@ -3,18 +3,15 @@
 </script>
 
 <section id="contact">
-  <div class="mt-10">
-    <p class="text-center">Hello</p>
-    <h2 class="mt-2 text-center font-sans font-bold">{$t('contact.title')}</h2>
-  </div>
+  <h2 class="w-full text-center font-sans font-bold">{$t('contact.title')}</h2>
   <div class="">
-    <div class="flex flex-col items-center justify-center text-center md:text-lg">
-      <p class="md:text-xl">{$t('contact.text')}</p>
-      <div class="mt-20 flex flex-col space-y-2 font-semibold">
-        <p>{$t('personal_info.email')}</p>
-      </div>
-      <a class="email-link" href="mailto:brittany.chiang@gmail.com" rel="noopener noreferrer" target="_blank"
-        >Say Hello</a
+    <div class="flex flex-col items-center justify-center text-center">
+      <p class="text-text-light mt-6 max-w-[700px]">{$t('contact.text')}</p>
+      <a
+        class="border-primary border-primary bg-background hover:drop-shadow-primary focus-visible:drop-shadow-primary mt-14 -skew-x-12 rounded-md border-2 px-5 py-3 font-mono transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-lg focus-visible:-translate-y-0.5 focus-visible:drop-shadow-lg"
+        href="mailto:mato.kollar2004@gmail.com"
+        rel="noopener noreferrer"
+        target="_blank">Contact me</a
       >
     </div>
   </div>

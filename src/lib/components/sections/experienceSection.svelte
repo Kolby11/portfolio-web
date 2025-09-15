@@ -35,8 +35,8 @@
 </script>
 
 <section id="experience">
-  <h2 class="section-heading text-right">{$t('experience.title')}</h2>
-  <div class="mt-10 ml-auto flex flex-col gap-x-10 px-4 max-md:space-y-8 md:flex-row md:px-10">
+  <h2 class=" text-left">{$t('experience.title')}</h2>
+  <div class="mt-6 ml-auto flex flex-col gap-x-10 max-md:space-y-8 md:mt-10 md:flex-row md:px-10">
     <TabList
       options={jobs.map(job => job.company.title)}
       selectedIndex={activeSectionIndex}
