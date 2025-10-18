@@ -8,9 +8,9 @@
   const FIELDS = ['application_development', 'software_engineering', 'dev_ops', 'robotics']
 </script>
 
-<section id="home" class="flex flex-col items-center justify-center">
+<section id="home">
   <div class="flex flex-col">
-    <div class="flex flex-col items-center justify-center gap-x-6 gap-y-20 pt-12 md:flex-row md:pt-20">
+    <div class="flex flex-col items-center gap-x-6 gap-y-20 pt-12 md:flex-row md:justify-center md:pt-20 lg:pb-32">
       <div class="flex w-full grow flex-col justify-start px-4 md:mt-[6%] md:w-1/3 xl:w-2/3">
         <h1 class="border-light-primary dark:border-dark-primary border-b-2 text-nowrap">
           {$t('personal_info.name')}
@@ -18,9 +18,11 @@
         <NewsTicker items={FIELDS.map(item => `home.fields.${item}`)} />
         <p class="mt-8 text-left text-sm md:text-lg">{@html $t('home.description')}</p>
         <div class="mt-10 flex items-stretch gap-x-4 self-start">
-          <button
+          <a
+            href="/static/resume/martin_kollar_resume_en.pdf"
+            target="_blank"
             class="border-primary border-primary bg-background hover:drop-shadow-primary focus-visible:drop-shadow-primary ml-1 -skew-x-12 rounded-md border-2 px-5 py-3 font-mono transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-lg focus-visible:-translate-y-0.5 focus-visible:drop-shadow-lg"
-            title={$t('home.resume')}>{$t('home.resume')}</button
+            title={$t('home.resume')}>{$t('home.resume')}</a
           >
           <a
             use:smoothScroll
@@ -44,7 +46,6 @@
         />
       </div>
     </div>
-    <span class="h-52"></span>
   </div>
 </section>
 
