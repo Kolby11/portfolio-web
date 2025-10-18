@@ -9,5 +9,7 @@ register('de', () => import('./locales/de.json'))
 
 init({
   fallbackLocale: defaultLocale,
-  initialLocale: browser ? window.navigator.language : defaultLocale,
+  initialLocale: browser
+    ? window.navigator.language.split(/[-_]/)[0] // Extract 'sk' from 'sk_SK' or 'sk-SK'
+    : defaultLocale,
 })
