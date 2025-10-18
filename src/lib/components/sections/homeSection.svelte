@@ -1,11 +1,19 @@
 <script>
-  import { t } from 'svelte-i18n'
+  import { locale, t } from 'svelte-i18n'
   import NewsTicker from '../global/newsTicker.svelte'
 
   import MaterialSymbolsKeyboardArrowDownRounded from '~icons/material-symbols/keyboard-arrow-down-rounded'
   import { smoothScroll } from '$lib/actions/smoothScroll'
 
   const FIELDS = ['application_development', 'software_engineering', 'dev_ops', 'robotics']
+
+  let resume_path = $derived.by(() => {
+    const resume_dir = '/static/resume'
+    if ($locale === 'sk') {
+      return `${resume_dir}/martin_kollar_resume_sk.pdf`
+    }
+    return `${resume_dir}/martin_kollar_resume_en.pdf`
+  })
 </script>
 
 <section id="home">
@@ -19,7 +27,7 @@
         <p class="mt-8 text-left text-sm md:text-lg">{@html $t('home.description')}</p>
         <div class="mt-10 flex items-stretch gap-x-4 self-start">
           <a
-            href="/static/resume/martin_kollar_resume_en.pdf"
+            href={resume_path}
             target="_blank"
             class="border-primary border-primary bg-background hover:drop-shadow-primary focus-visible:drop-shadow-primary ml-1 -skew-x-12 rounded-md border-2 px-5 py-3 font-mono transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-lg focus-visible:-translate-y-0.5 focus-visible:drop-shadow-lg"
             title={$t('home.resume')}>{$t('home.resume')}</a
