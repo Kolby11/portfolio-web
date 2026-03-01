@@ -43,6 +43,7 @@
   "about": {
     "title": "Über mich",
     "description": "Willkommen auf der Über mich Seite",
+    "about_me": "",
     "timeline": {
       "title": "Zeitachse",
       "sections": [
@@ -109,8 +110,8 @@
         ]
       },
       "principle_guy": {
-        "role": "Fullstack Web Developer",
-        "range": "2024 - Present",
+        "role": "Freelance Fullstack Web Developer",
+        "range": "2024 - 2026",
         "bulletPoints": [
           "Developed responsive web applications using Next.js with TypeScript, implemented SSR/SSG, performance optimization and SEO, including external API integrations",
           "Deployed and managed production applications on Google Firebase platform, configured CI/CD pipelines, performance monitoring, and automatic scaling",

@@ -23,10 +23,12 @@ export class SectionStore {
 
   private updateSection = () => {
     if (!this.sections) return
-    
+
+    const threshold = window.innerHeight * 0.4
+
     this.sections.forEach((sec: HTMLElement) => {
       const rect = sec.getBoundingClientRect()
-      if (rect.top <= window.scrollY / 4) {
+      if (rect.top <= threshold) {
         if (this.currentSection !== sec.id) {
           this.currentSection = sec.id
         }

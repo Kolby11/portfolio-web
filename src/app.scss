@@ -1,7 +1,6 @@
   @import "tailwindcss";
   @layer theme, base, components, utilities;
   @custom-variant dark (&:where(.dark, .dark *));
-  @custom-variant ocean (&:where(.ocean, .ocean *));
 
   @theme,
   .theme-light {
@@ -62,6 +61,10 @@
       outline: 2px dashed var(--color-primary);
       outline-offset: 2px;
     }
+  }
+
+  html {
+    overflow-x: hidden;
   }
 
   /* Custom font */
@@ -127,7 +130,7 @@
   main {
     margin: 0px auto;
     width: 100%;
-    max-width: 1600px;
+    max-width: 1300px;
     min-height: 100vh;
     @apply px-4 sm:px-8 md:px-20 lg:px-32 xl:px-40
   }

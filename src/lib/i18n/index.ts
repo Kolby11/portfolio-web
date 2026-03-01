@@ -5,7 +5,6 @@ const defaultLocale = 'en'
 
 register('sk', () => import('./locales/sk.json'))
 register('en', () => import('./locales/en.json'))
-register('de', () => import('./locales/de.json'))
 
 init({
   fallbackLocale: defaultLocale,

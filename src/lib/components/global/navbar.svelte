@@ -4,11 +4,10 @@
   import { t } from 'svelte-i18n'
   import MaterialSymbolsLightCloseRounded from '~icons/material-symbols-light/close-rounded'
   import MaterialSymbolsLightMenuRounded from '~icons/material-symbols-light/menu-rounded'
-
-  import { onMount } from 'svelte'
   import ThemeSelection from './themeSelection.svelte'
   import { fade, slide } from 'svelte/transition'
   import { innerWidth, scrollY } from 'svelte/reactivity/window'
+  import { sectionStore } from '$lib/stores/section.svelte'
 
   type NavbarProps = {
     sections: string[]
@@ -73,16 +72,22 @@
   <div
     transition:slide={{ axis: 'x' }}
     bind:this={sideBar}
-    class={`mobile-nav text-light-primary fixed right-0 z-[60] flex h-screen w-fit flex-col items-center px-8 py-6 text-lg backdrop-blur-2xl`}
+    class={`mobile-nav text-light-primary fixed right-0 z-[60] flex h-screen flex-col items-end px-8 py-6 text-lg backdrop-blur-2xl`}
   >
-    <button class="flex h-fit w-fit items-center justify-center self-end" onclick={toggleMenu}>
-      <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
-    </button>
-    <nav class="mt-4 flex h-fit flex-col items-center gap-y-2">
+    <div class="flex w-full items-center justify-between">
+      <button class="flex h-fit w-fit cursor-pointer items-center justify-center">
+        <ThemeSelection />
+      </button>
+      <button class="flex h-fit w-fit cursor-pointer items-center justify-center self-end" onclick={toggleMenu}>
+        <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
+      </button>
+    </div>
+    <nav class="mt-6 flex h-fit flex-col items-end gap-y-2">
       {#each sections as section, i}
         <a
           use:smoothScroll
           href="#{section}"
+          aria-current={sectionStore.currentSection === section ? 'true' : undefined}
           class="underline-expand-center border-b border-transparent text-xl transition-all duration-200 hover:border-gray-400"
           onclick={e => {
             showMenu = false
@@ -92,8 +97,7 @@
         </a>
       {/each}
     </nav>
-    <div class="mt-auto flex w-full justify-between gap-y-2">
-      <ThemeSelection />
+    <div class="mt-auto flex w-full justify-end gap-y-2">
       <LanguageSelection />
     </div>
   </div>
@@ -101,7 +105,7 @@
 
 <!-- Desktop navbar -->
 <div
-  class="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl transition-transform duration-300 ease-in-out"
+  class="fixed top-0 z-50 flex h-16 w-full items-center justify-between px-8 py-6 backdrop-blur-2xl transition-transform duration-300 ease-in-out sm:h-20"
   class:translate-y-0={showNavbar}
   class:-translate-y-full={!showNavbar}
   use:smoothScroll
@@ -117,6 +121,7 @@
           <li>
             <a
               href="#{section}"
+              aria-current={sectionStore.currentSection === section ? 'true' : undefined}
               class="underline-expand-center flex items-center justify-center text-xl transition duration-200 outline-none focus-visible:outline-none"
             >
               {$t(`navbar.${section}`)}
@@ -126,7 +131,7 @@
       </ul>
     </nav>
   {:else if !showMenu && showNavbar}
-    <button transition:fade class="ml-auto" onclick={toggleMenu}>
+    <button transition:fade class="ml-auto cursor-pointer" onclick={toggleMenu}>
       <MaterialSymbolsLightMenuRounded style="font-size:x-large;" />
     </button>
   {/if}
@@ -134,7 +139,7 @@
 
 <style lang="scss">
   .mobile-nav {
-    width: min(75vw, 250px);
-    box-shadow: -10px 10px 15px -15px var(--color-text-light);
+    width: min(75vw, 200px);
+    box-shadow: -10px 10px 15px -15px color-mix(in srgb, var(--color-text-light) 30%, transparent);
   }
 </style>

@@ -1,19 +1,20 @@
 <script>
   import { t } from 'svelte-i18n'
+  import AboutScene from '../about/aboutScene.svelte'
 </script>
 
 <section id="about">
-  <h2 class="section-heading">{$t('about.title')}</h2>
-  <div class="mt-10 ml-auto px-4 max-md:space-y-8 md:flex md:items-start md:justify-between md:px-10">
-    <div class="md:w-full md:pr-5">
-      <!-- <Timeline timeLineItems={timelineItems} /> -->
-    </div>
-    <div class="md:w-1/2 md:pl-5">
-      <h2 class="text-2xl">{$t('about.interestsAndHobbies.title')}</h2>
-      <p>
-        {$t('about.interestsAndHobbies.description')}
+  <div class="flex">
+    <!-- <div class="md:w-full md:pr-5"> -->
+    <!-- <Timeline timeLineItems={timelineItems} /> -->
+    <!-- </div> -->
+    <div class="w-[500px]">
+      <h2>{$t('about.title')}</h2>
+      <p class="mt-6">
+        {$t('about.about_me')}
       </p>
     </div>
+    <AboutScene />
   </div>
   <!-- <div class="absolute bottom-20 left-20 mt-10 opacity-0 transition duration-500 hover:opacity-70">
     <CodeSnippet fontSize="small" />

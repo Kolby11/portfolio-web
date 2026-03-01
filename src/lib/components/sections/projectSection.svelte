@@ -33,7 +33,8 @@
   .projectDisplay {
     width: 100%;
     @media (width >= 40rem) {
-      width: clamp(200px, 100%, 500px);
+      width: 500px;
+      flex-shrink: 0;
     }
   }
   .imageContainer {

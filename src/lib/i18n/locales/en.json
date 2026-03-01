@@ -44,6 +44,7 @@
   "about": {
     "title": "About me",
     "description": "Welcome to the about me page",
+    "about_me": "Hi, my name is Martin and I love building software that helps people. My interest in programming started with a dream to create my own game. Although I haven't managed that yet, it led me down a path of programming that I've been on for over 5 years. <br /> <br /> I'm interested in robotics and space technology, which led me to study robotics at the Slovak University of Technology in Bratislava. Alongside work and studies, I dedicate time to weightlifting and climbing.",
     "timeline": {
       "title": "Timeline",
       "sections": [
@@ -110,8 +111,8 @@
         ]
       },
       "principle_guy": {
-        "role": "Fullstack Web Developer",
-        "range": "2024 - Present",
+        "role": "Freelance Fullstack Web Developer",
+        "range": "2024 - 2026",
         "bulletPoints": [
           "Developed responsive web applications using Next.js with TypeScript, implemented SSR/SSG, performance optimization and SEO, including external API integrations",
           "Deployed and managed production applications on Google Firebase platform, configured CI/CD pipelines, performance monitoring, and automatic scaling",

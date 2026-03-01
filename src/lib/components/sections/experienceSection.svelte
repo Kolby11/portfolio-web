@@ -11,7 +11,7 @@
     },
     {
       id: 'principle_guy',
-      company: { title: 'Principle Guy', link: '' },
+      company: { title: 'Principle Guy', link: 'https://principleguy.com' },
       technologies: ['Web Development', 'Mobile Development', 'Consulting'],
     },
   ]

@@ -14,7 +14,7 @@
 <div class="flex w-fit items-center justify-between gap-x-4 {className}">
   {#each $locales as language}
     <button
-      class="underline-expand-center h-fit transition"
+      class="underline-expand-center h-fit cursor-pointer transition"
       aria-current={$locale === language}
       onclick={() => setLanguage(language)}
     >

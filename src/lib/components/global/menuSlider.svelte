@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { t } from 'svelte-i18n'
-
   type MenuSliderProps = {
     options: string[]
     onSelectionChange?: (selectedOption: string) => void
@@ -72,7 +70,7 @@
       <button
         bind:this={optionElements[index]}
         style="writing-mode: sideways-lr;"
-        class="relative z-10 h-fit w-fit px-4 py-2 whitespace-nowrap transition duration-300"
+        class="relative z-10 h-fit w-fit cursor-pointer px-4 py-2 whitespace-nowrap transition duration-300"
         onclick={() => selectOption(option)}
       >
         {option}

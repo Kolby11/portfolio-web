@@ -1,7 +1,7 @@
 <script lang="ts">
   import { THEME, theme } from '$lib/stores/themeStore'
-  import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols/dark-mode-outline-rounded'
-  import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols/light-mode-outline-rounded'
+  import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols-light/dark-mode-outline-rounded'
+  import MaterialSymbolsLightModeOutlineRounded from '~icons/material-symbols-light/light-mode-outline-rounded'
   import { t } from 'svelte-i18n'
 
   type ThemeSelectionProps = {
@@ -16,7 +16,7 @@
 </script>
 
 <button
-  class="focus-outline relative flex size-6 items-center justify-center"
+  class="focus-outline relative flex size-6 cursor-pointer items-center justify-center"
   onclick={toggleDarkMode}
   aria-label={$t('controls.theme.toggle')}
 >

@@ -5,5 +5,5 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [enhancedImages(), sveltekit(), Icons({ compiler: 'svelte' })],
-  server: { fs: { allow: ['./static/resume'] } },
+  server: { fs: { allow: ['./resume'] } },
 })

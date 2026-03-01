@@ -32,7 +32,7 @@
   },
   "home": {
     "title": "Domov",
-    "description": "Som softvérový inžinier špecializujúci sa na vývoj <a href='#' target='_blank'>full-stack webových aplikácií</a> a s nadšením vytváram efektívne riešenia. Baví ma pracovať v rôznych oblastiach vrátane vývoja mobilných aplikácií a hier a objavovať nové technológie.",
+    "description": "Som softvérový inžinier špecializujúci sa na vývoj <a href='#' target='_blank'>full-stack webových aplikácií</a> a s nadšením vytváram efektívne riešenia. Baví ma pracovať v rôznych oblastiach vývoja softvéru, hier a objavovať nové technológie.",
     "fields": {
       "application_development": "Vývoj aplikácií",
       "software_engineering": "Softvérové Inžinierstvo",
@@ -44,6 +44,7 @@
   "about": {
     "title": "Niečo o mne",
     "description": "Vitajte na stránke o mne",
+    "about_me": "Ahoj, moje meno je Martin a rád vytváram softvér, ktorý pomáha ľuďom. Môj záujem o programovanie začal snom vytvoriť vlastnú hru. To sa mi síce stále nepodarilo, ale doviedlo ma to na cestu programovania, ktorou kráčam už viac ako 5 rokov. <br /> <br /> Zaujímam sa o robotiku a vesmírnu technológiu, čo ma priviedlo k štúdiu robotiky na Slovenskej technickej univerzite v Bratislave. Popri práci a štúdiu sa venujem posilňovaniu a lezeniu.",
     "timeline": {
       "title": "Časová os",
       "sections": [
@@ -60,7 +61,7 @@
         {
           "title": "Dostal som prácu v Binary Confidence s.r.o.",
           "year": 2023,
-          "description": "Dostal som moju prvú prácu ako backend developer v Binary Confidence s.r.o. Pracoval som s technológiami ako Ansible a Hyper-V, kde som pracoval s virtualizáciou a sieťovými technológiami. Vytváral som multiplatformové automatizačné aplikácie v Pythone pre operačné systémy Windows a Linux. Stretol som sa s novými konceptmi, technológiami, zaujímavými projektami a úžasnými ľuďmi, čo ďalej rožšílo moje poznatky."
+          "description": "Dostal som moju prvú prácu ako backend developer v Binary Confidence s.r.o. Pracoval som s technológiami ako Ansible a Hyper-V, kde som pracoval s virtualizáciou a sieťovými technológiami. Vytváral som multiplatformové automatizačné aplikácie v Pythone pre operačné systémy Windows a Linux. Stretol som sa s novými konceptmi, technológiami, zaujímavými projektami a úžasnými ľuďmi, čo ďalej rozšírilo moje poznatky."
         },
         {
           "title": "Absolvoval som strednú školu",
@@ -106,8 +107,8 @@
         ]
       },
       "principle_guy": {
-        "role": "Fullstack Web Developer",
-        "range": "2024 - Súčasnosť",
+        "role": "Freelance Fullstack Web Developer",
+        "range": "2024 - 2026",
         "bulletPoints": [
           "Vývoj responzívnej web aplikácie v Next.js s TypeScript, implementácia SSR/SSG, optimalizácia výkonu a SEO, vrátane integrácie s externými API",
           "Nasadenie a správa produkčných aplikácií na Google Firebase platforme, konfigurácia CI/CD pipeline, monitoring výkonu a automatické škálovanie",

@@ -8,7 +8,7 @@
   const FIELDS = ['application_development', 'software_engineering', 'dev_ops', 'robotics']
 
   let resume_path = $derived.by(() => {
-    const resume_dir = '/static/resume'
+    const resume_dir = '/resume'
     if ($locale === 'sk') {
       return `${resume_dir}/martin_kollar_resume_sk.pdf`
     }
@@ -18,8 +18,10 @@
 
 <section id="home">
   <div class="flex flex-col">
-    <div class="flex flex-col items-center gap-x-6 gap-y-20 pt-12 md:flex-row md:justify-center md:pt-20 lg:pb-32">
-      <div class="flex w-full grow flex-col justify-start px-4 md:mt-[6%] md:w-1/3 xl:w-2/3">
+    <div
+      class="flex flex-col items-center gap-x-6 gap-y-20 pt-4 md:pt-20 lg:flex-row lg:justify-center lg:pt-32 lg:pb-32"
+    >
+      <div class="flex w-full grow flex-col justify-start px-4 md:mt-[6%] lg:w-1/3 xl:w-2/3">
         <h1 class="border-light-primary dark:border-dark-primary border-b-2 text-nowrap">
           {$t('personal_info.name')}
         </h1>
@@ -45,12 +47,12 @@
         </div>
       </div>
       <div
-        class="aspect-square shrink-0 transition max-sm:w-1/2 max-sm:max-w-64 max-sm:min-w-44 sm:w-64 lg:w-72 xl:w-80"
+        class="image-primary-overlay aspect-square shrink-0 overflow-hidden rounded-2xl drop-shadow-2xl transition max-sm:w-1/2 max-sm:max-w-64 max-sm:min-w-44 sm:w-64 lg:w-72 xl:w-80"
       >
         <enhanced:img
           src="/static/martin_kollar_square_dark.jpg"
           alt={$t('personal_info.name')}
-          class="image-primary-overlay overflow-hidden rounded-full drop-shadow-2xl saturate-100 transition duration-500 hover:scale-110"
+          class="h-full w-full object-cover transition duration-500"
         />
       </div>
     </div>
@@ -59,30 +61,34 @@
 
 <style lang="scss">
   #home {
-    width: clamp(200px, 90vw, 800px);
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
-    min-height: 100vh;
     height: fit-content;
+
+    @media (width >= 768px) {
+      min-height: 90vh;
+    }
   }
   .image-primary-overlay {
     position: relative;
-    background-color: var(--color-primary);
-    transition: all 0.5s ease;
-  }
+    background-color: rgba(155, 120, 175, 0.459);
+    transition: background-color 2s ease;
 
-  .image-primary-overlay img {
-    mix-blend-mode: multiply; /* creates the overlay effect */
-    transition: all 0.5s ease;
-  }
+    :global(img) {
+      mix-blend-mode: multiply;
+      filter: grayscale(20%);
+      transition: all 0.5s ease;
+    }
 
-  .image-primary-overlay:hover {
-    background-color: transparent;
-  }
+    &:hover {
+      background-color: transparent;
 
-  .image-primary-overlay:hover img {
-    mix-blend-mode: normal;
-    transform: scale(1.1);
+      :global(img) {
+        mix-blend-mode: normal;
+        filter: grayscale(0%);
+        transform: scale(1.05);
+      }
+    }
   }
 </style>
