@@ -34,11 +34,11 @@
   },
   "home": {
     "title": "Domov",
-    "description": "Som softvérový inžinier špecializujúci sa na vývoj <a href='#' target='_blank'>full-stack webových aplikácií</a> a s nadšením vytváram efektívne riešenia. Baví ma pracovať v rôznych oblastiach vývoja softvéru, hier a objavovať nové technológie.",
+    "description": "Som softvérový inžinier so záberom od embedded systémov a hier až po moderný <a href='#' target='_blank'>full-stack web</a> a DevOps. Navrhujem a budujem komplexné technologické riešenia naprieč platformami.",
     "fields": {
       "application_development": "Vývoj aplikácií",
       "software_engineering": "Softvérové Inžinierstvo",
-      "dev_ops": "Dev Ops",
+      "dev_ops": "DevOps",
       "robotics": "Robotika"
     },
     "resume": "Životopis"

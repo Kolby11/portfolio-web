@@ -19,7 +19,7 @@
 <section id="home">
   <div class="flex flex-col">
     <div
-      class="flex flex-col items-center gap-x-6 gap-y-20 pt-4 md:pt-20 lg:flex-row lg:justify-center lg:pt-32 lg:pb-32"
+      class="flex flex-col items-center gap-x-6 gap-y-20 pt-10 sm:pt-16 md:pt-20 lg:flex-row lg:justify-center lg:pt-32 lg:pb-32"
     >
       <div class="flex w-full grow flex-col justify-start px-4 md:mt-[6%] lg:w-1/3 xl:w-2/3">
         <h1 class="border-light-primary dark:border-dark-primary border-b-2 text-nowrap">
@@ -65,9 +65,14 @@
     justify-content: center;
     -webkit-box-align: center;
     height: fit-content;
+    padding-top: 60px;
 
     @media (width >= 768px) {
       min-height: 90vh;
+    }
+
+    @media (width >= 1200px) {
+      padding-top: 80px;
     }
   }
   .image-primary-overlay {

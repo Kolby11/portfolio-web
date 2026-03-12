@@ -8,6 +8,11 @@
   import { fade, slide } from 'svelte/transition'
   import { innerWidth, scrollY } from 'svelte/reactivity/window'
   import { sectionStore } from '$lib/stores/section.svelte'
+  import { gsap } from 'gsap'
+  import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin'
+  import { onMount } from 'svelte'
+
+  gsap.registerPlugin(MorphSVGPlugin)
 
   type NavbarProps = {
     sections: string[]
@@ -18,6 +23,19 @@
   let showMenu = $state(false)
   let showNavbar = $state(true)
   let lastScrollY = $state(0)
+
+  let menuIconPath: SVGPathElement
+  let menuContainer: HTMLSpanElement
+  let closeContainer: HTMLSpanElement
+
+  function getPath(container: HTMLSpanElement) {
+    return container.querySelector('path') as SVGPathElement
+  }
+
+  onMount(() => {
+    const initial = getPath(menuContainer)
+    if (initial) menuIconPath.setAttribute('d', initial.getAttribute('d') ?? '')
+  })
 
   // Close menu when resizing to desktop
   $effect(() => {
@@ -47,7 +65,14 @@
   })
 
   function toggleMenu() {
-    showMenu = !showMenu
+    const next = !showMenu
+    const target = getPath(next ? closeContainer : menuContainer)
+    gsap.to(menuIconPath, {
+      morphSVG: target,
+      duration: 0.4,
+      ease: 'power2.inOut',
+    })
+    showMenu = next
   }
 </script>
 
@@ -117,14 +142,25 @@
       </ul>
     </nav>
   {:else if showNavbar}
+    <!-- Hidden morph targets -->
+    <span bind:this={menuContainer} aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+      <MaterialSymbolsLightMenuRounded />
+    </span>
+    <span bind:this={closeContainer} aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+      <MaterialSymbolsLightCloseRounded />
+    </span>
+
     <div class="flex w-full items-center justify-between">
       <ThemeSelection />
-      <button class="cursor-pointer" onclick={toggleMenu} title={showMenu ? $t('navbar.close') : $t('navbar.menu')}>
-        {#if showMenu}
-          <MaterialSymbolsLightCloseRounded style="font-size:x-large;" />
-        {:else}
-          <MaterialSymbolsLightMenuRounded style="font-size:x-large;" />
-        {/if}
+      <button
+        class="cursor-pointer"
+        onclick={toggleMenu}
+        title={showMenu ? $t('navbar.close') : $t('navbar.menu')}
+        aria-label={showMenu ? $t('navbar.close') : $t('navbar.menu')}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.5rem;height:1.5rem;">
+          <path bind:this={menuIconPath} />
+        </svg>
       </button>
     </div>
   {/if}

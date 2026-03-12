@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/matok/Desktop/all/projects/PortfolioWeb/node_modules/@iconify-json -type f -name \"*.json\" 2>/dev/null | head -20)"
+    ]
+  }
+}

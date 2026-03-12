@@ -9,7 +9,7 @@
 
   const { items, pixelPerSecond = 100 }: NewsTickerProps = $props()
 
-  let duplicatedItems = $state([...items, ...items, ...items])
+  let duplicatedItems = $derived([...items, ...items, ...items])
   let tickerElement: HTMLUListElement
   let containerWidth = $state(0)
   let contentWidth = $state(0)
@@ -44,8 +44,8 @@
       style="--start-pos: {startPos}px; --end-pos: {endPos}px; --animation-duration: {animationDuration}s;"
     >
       {#each duplicatedItems as item, idx}
-        <li class="flex-shrink-0">{$t(item)}</li>
-        <div class="bg-text-light size-1.5 flex-shrink-0 rounded-full @md:size-2"></div>
+        <li class="shrink-0">{$t(item)}</li>
+        <div class="bg-text-light size-1.5 shrink-0 rounded-full @md:size-2"></div>
       {/each}
     </ul>
   </div>

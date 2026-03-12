@@ -10,6 +10,7 @@
   import { socialLinks } from '$lib/data/socials'
   import Footer from '$lib/components/global/footer.svelte'
   import { initializeTheme } from '$lib/stores/themeStore'
+  import LoadAnimation from '$lib/components/global/loadAnimation.svelte'
 
   onMount(() => {
     initializeTheme()
@@ -18,6 +19,7 @@
   })
 </script>
 
+<LoadAnimation />
 <div id="content">
   <main class="fillHeight">
     <HomeSection />

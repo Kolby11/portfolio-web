@@ -38,7 +38,7 @@
     "fields": {
       "application_development": "Application Developer",
       "software_engineering": "Software Engineering",
-      "dev_ops": "Dev Ops",
+      "dev_ops": "DevOps",
       "robotics": "Robotics"
     }
   },

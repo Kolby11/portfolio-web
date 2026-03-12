@@ -34,11 +34,11 @@
   },
   "home": {
     "title": "Home",
-    "description": "I'm a software engineer specializing in full-stack web application development, passionate about creating efficient solutions. I enjoy working across different fields, including mobile and game development, and I'm always eager to explore new technologies and push my skills further.",
+    "description": "Software Engineer with a focus ranging from embedded systems and game dev to modern <a href='#' target='_blank'>full-stack web</a> and DevOps. I design and build complex technological solutions across multiple platforms.",
     "fields": {
       "application_development": "Application Development",
       "software_engineering": "Software Engineering",
-      "dev_ops": "Dev Ops",
+      "dev_ops": "DevOps",
       "robotics": "Robotics"
     },
     "resume": "Resume"
