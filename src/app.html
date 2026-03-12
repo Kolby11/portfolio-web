@@ -10,10 +10,14 @@
 		<meta name="geo.region" content="SK-BL" />
 
 		<script>
-			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-				document.documentElement.classList.add('dark')
+			const saved = localStorage.getItem('theme');
+			const validThemes = ['light', 'dark', 'purple'];
+			if (saved && validThemes.includes(saved)) {
+				document.documentElement.classList.add('theme-' + saved);
+			} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.classList.add('theme-dark');
 			} else {
-				document.documentElement.classList.remove('dark')
+				document.documentElement.classList.add('theme-light');
 			}
 		</script>
 

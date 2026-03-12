@@ -15,7 +15,7 @@
     },
     "theme": {
       "title": "Theme",
-      "toggle": "Switch between light and dark theme",
+      "toggle": "Switch theme",
       "dark": "Dark",
       "light": "Light"
     }
@@ -25,7 +25,9 @@
     "about": "About me",
     "experience": "Experience",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menu": "Open menu",
+    "close": "Close menu"
   },
   "footer": {
     "text": "Made with ❤️ by Martin Kollár"

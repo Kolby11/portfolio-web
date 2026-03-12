@@ -15,7 +15,7 @@
     },
     "theme": {
       "title": "Téma",
-      "toggle": "Prepnúť medzi svetlým a tmavým režimom",
+      "toggle": "Prepnúť tému",
       "dark": "Tmavý",
       "light": "Svetlý"
     }
@@ -25,7 +25,9 @@
     "about": "O mne",
     "experience": "Skúsenosti",
     "projects": "Projekty",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "menu": "Otvoriť menu",
+    "close": "Zatvoriť menu"
   },
   "footer": {
     "text": "Vytvoril so ❤️ Martin Kollár"

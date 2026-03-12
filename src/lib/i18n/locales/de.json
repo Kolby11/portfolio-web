@@ -25,7 +25,9 @@
     "about": "Über mich",
     "experience": "Fahigkeiten",
     "projects": "Projekten",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "menu": "Menü öffnen",
+    "close": "Menü schließen"
   },
   "footer": {
     "text": "Hergestellt mit ❤️ von Martin Kollár"

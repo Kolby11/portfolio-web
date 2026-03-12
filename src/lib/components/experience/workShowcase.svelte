@@ -17,7 +17,7 @@
   const { work }: WorkShowcaseProps = $props()
 </script>
 
-<div class="max-w-[550px]">
+<div class="max-w-137.5">
   <h3 class="text-xl font-semibold">
     {$t(work.role)}
     <a href={work.company.link} target="_blank" class="text-primary">

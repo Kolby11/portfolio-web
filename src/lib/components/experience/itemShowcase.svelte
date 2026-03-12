@@ -86,8 +86,8 @@
       {#each content as item, index}
         <span
           bind:this={bottomBars[index]}
-          class={`h-[2px]  transition-all duration-300 ease-in-out  ${
-            selectedItemIndex === index ? 'drop-shadow-2xl bg-text' : 'bg-disabled'
+          class={`h-0.5  transition-all duration-300 ease-in-out  ${
+            selectedItemIndex === index ? 'bg-text drop-shadow-2xl' : 'bg-disabled'
           }`}
         ></span>
       {/each}

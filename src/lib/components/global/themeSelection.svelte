@@ -19,6 +19,7 @@
   class="focus-outline relative flex size-6 cursor-pointer items-center justify-center"
   onclick={toggleDarkMode}
   aria-label={$t('controls.theme.toggle')}
+  title={$t('controls.theme.toggle')}
 >
   <MaterialSymbolsDarkModeOutlineRounded
     style="font-size:larger;"

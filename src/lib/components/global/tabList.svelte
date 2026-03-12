@@ -21,7 +21,12 @@
     {#if optionsArray.length > 0}
       {#each optionsArray as option, index}
         <li role="listitem">
-          <button class="tab" aria-current={selectedOption === option} onclick={() => selectOption(option)}>
+          <button
+            class="tab"
+            title={option}
+            aria-current={selectedOption === option}
+            onclick={() => selectOption(option)}
+          >
             {option}
           </button>
         </li>
@@ -67,7 +72,7 @@
     height: 48px;
     background-color: var(--color-primary);
     border-radius: var(--border-radius, 2px);
-    transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0.25s;
+    transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
   ul {
