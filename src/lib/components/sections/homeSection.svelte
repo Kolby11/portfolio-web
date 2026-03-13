@@ -67,10 +67,6 @@
     height: fit-content;
     padding-top: 60px;
 
-    @media (width >= 768px) {
-      min-height: 90vh;
-    }
-
     @media (width >= 1200px) {
       padding-top: 80px;
     }

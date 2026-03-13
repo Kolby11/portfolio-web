@@ -1,13 +1,25 @@
 <script lang="ts">
   import type { Project } from '$lib/types/project'
   import type { HTMLAttributes } from 'svelte/elements'
+  import { onMount } from 'svelte'
 
   type ProjectsDisplayVerticalProps = {
     projects: Project[]
+    speed?: number
     selectedProject: Project
   } & HTMLAttributes<HTMLDivElement>
 
-  let { projects, selectedProject = $bindable(), ...rest }: ProjectsDisplayVerticalProps = $props()
+  let { projects, speed = 50, selectedProject = $bindable(), ...rest }: ProjectsDisplayVerticalProps = $props()
+
+  let scrollEl: HTMLDivElement | undefined = $state()
+  let scrollWidth: number = $state(0)
+
+  // duration = half width / speed
+  let duration: number = $derived(scrollWidth ? scrollWidth / (2 * speed) : 10)
+
+  onMount(() => {
+    if (scrollEl) scrollWidth = scrollEl.offsetWidth
+  })
 
   const handleProjectClick = (e: Event, project: Project) => {
     selectedProject = project
@@ -23,7 +35,7 @@
 </script>
 
 <div {...rest} class={`h-fit overflow-x-visible overflow-y-hidden py-2 ${rest.class}`}>
-  <div class="scroll-content-horizontal">
+  <div bind:this={scrollEl} class="scroll-content-horizontal" style="--duration: {duration}s">
     <div class="flex gap-2 transition">
       {#each fillProjectsForAnimation(projects) as project, i}
         <button
@@ -57,10 +69,10 @@
   }
 
   .scroll-content-horizontal {
-    animation: scrollRight 60s linear infinite;
+    animation: scrollRight var(--duration, 10s) linear infinite;
   }
 
   .scroll-content-horizontal-reverse {
-    animation: scrollLeft 60s linear infinite;
+    animation: scrollLeft var(--duration, 10s) linear infinite;
   }
 </style>

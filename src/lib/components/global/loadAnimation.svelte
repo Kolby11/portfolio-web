@@ -2,11 +2,12 @@
   import { gsap } from 'gsap'
   import { t } from 'svelte-i18n'
 
-  let loader: HTMLDivElement
-  let nameEl: HTMLSpanElement
+  let loader: HTMLDivElement | undefined = $state()
+  let nameEl: HTMLSpanElement | undefined = $state()
   let done = $state(false)
 
   $effect(() => {
+    if (!loader || !nameEl) return
     const tl = gsap.timeline({
       onComplete: () => {
         done = true

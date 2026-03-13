@@ -24,15 +24,16 @@
   let showNavbar = $state(true)
   let lastScrollY = $state(0)
 
-  let menuIconPath: SVGPathElement
-  let menuContainer: HTMLSpanElement
-  let closeContainer: HTMLSpanElement
+  let menuIconPath: SVGPathElement | undefined = $state()
+  let menuContainer: HTMLSpanElement | undefined = $state()
+  let closeContainer: HTMLSpanElement | undefined = $state()
 
   function getPath(container: HTMLSpanElement) {
     return container.querySelector('path') as SVGPathElement
   }
 
   onMount(() => {
+    if (!menuContainer || !menuIconPath) return
     const initial = getPath(menuContainer)
     if (initial) menuIconPath.setAttribute('d', initial.getAttribute('d') ?? '')
   })
@@ -66,7 +67,9 @@
 
   function toggleMenu() {
     const next = !showMenu
-    const target = getPath(next ? closeContainer : menuContainer)
+    const source = next ? closeContainer : menuContainer
+    if (!menuIconPath || !source) { showMenu = next; return }
+    const target = getPath(source)
     gsap.to(menuIconPath, {
       morphSVG: target,
       duration: 0.4,

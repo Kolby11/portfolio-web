@@ -1,19 +1,19 @@
 <script lang="ts">
   import { t } from 'svelte-i18n'
-  import ProjectsDisplay from '../projects/projectsDisplayVertical.svelte'
   import { projects } from '$lib/data/projects'
   import ProjectsDisplayHorizontal from '../projects/projectsDisplayHorizontal.svelte'
   import ProjectsDisplayVertical from '../projects/projectsDisplayVertical.svelte'
 
   let selectedProject = $state(projects[0])
+  const speed = 50
 </script>
 
 <section id="projects">
   <h2>{$t('projects.title')}</h2>
   <div class="mt-6 h-fit w-full md:mt-10">
     <div class="flex w-full flex-col items-start justify-between gap-y-8 md:flex-row">
-      <ProjectsDisplayHorizontal {projects} bind:selectedProject class="md:hidden" />
-      <ProjectsDisplayVertical {projects} bind:selectedProject class="hidden md:block" />
+      <ProjectsDisplayHorizontal {projects} {speed} bind:selectedProject class="md:hidden" />
+      <ProjectsDisplayVertical {projects} {speed} bind:selectedProject class="hidden w-fit md:block" />
       <div class="projectDisplay">
         <h3 class="text-center font-mono text-2xl md:text-3xl">{selectedProject.name}</h3>
         <div class="imageContainer">

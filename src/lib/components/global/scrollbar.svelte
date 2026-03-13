@@ -81,7 +81,10 @@
   let isDragging: boolean = false
 </script>
 
-<div class="dark:text-dark-text fixed top-20 right-0 hidden h-[80%] w-10 flex-col items-start md:flex" id="scrollbar">
+<div
+  class="dark:text-dark-text fixed top-[10vh] right-0 hidden h-[80vh] w-10 flex-col items-start md:flex"
+  id="scrollbar"
+>
   <div class="border-light-secondary dark:border-dark-secondary h-full border-r"></div>
   <div
     class="absolute flex h-1/6 w-full cursor-grab bg-transparent active:cursor-grabbing"
