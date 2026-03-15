@@ -30,10 +30,8 @@
     }
   })
 
-  let startPos = $derived(containerWidth)
   let endPos = $derived(-contentWidth / 3)
-  let totalDistance = $derived(startPos + Math.abs(endPos))
-  let animationDuration = $derived(totalDistance / pixelPerSecond)
+  let animationDuration = $derived(Math.abs(endPos) / pixelPerSecond)
 </script>
 
 <div class="@container grow">
@@ -41,7 +39,7 @@
     <ul
       bind:this={tickerElement}
       class="newsTicker text-text-light flex items-center gap-x-2 whitespace-nowrap @md:gap-x-4 @md:text-lg @lg:text-xl @xl:text-2xl"
-      style="--start-pos: {startPos}px; --end-pos: {endPos}px; --animation-duration: {animationDuration}s;"
+      style="--end-pos: {endPos}px; --animation-duration: {animationDuration}s;"
     >
       {#each duplicatedItems as item, idx}
         <li class="shrink-0">{$t(item)}</li>

@@ -10,7 +10,6 @@
   import { sectionStore } from '$lib/stores/section.svelte'
   import { gsap } from 'gsap'
   import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin'
-  import { onMount } from 'svelte'
 
   gsap.registerPlugin(MorphSVGPlugin)
 
@@ -32,7 +31,7 @@
     return container.querySelector('path') as SVGPathElement
   }
 
-  onMount(() => {
+  $effect(() => {
     if (!menuContainer || !menuIconPath) return
     const initial = getPath(menuContainer)
     if (initial) menuIconPath.setAttribute('d', initial.getAttribute('d') ?? '')

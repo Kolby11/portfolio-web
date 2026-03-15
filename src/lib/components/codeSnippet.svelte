@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  export let fontSize: 'small' | 'medium' | 'large' = 'medium'
+  export let fontSize: 'extra-small' | 'small' | 'medium' | 'large' = 'medium'
 
   let fontClasses = {
+    'extra-small': 'text-xs',
     small: 'text-sm',
     medium: 'text-base',
     large: 'text-lg',

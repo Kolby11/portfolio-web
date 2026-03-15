@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { HTMLAttributes } from 'svelte/elements'
   import type { Project } from '$lib/types/project'
-  import { onMount } from 'svelte'
 
   type ProjectsDisplayVerticalProps = {
     columnCount?: number
@@ -47,10 +46,14 @@
     return newColumns
   })
 
-  onMount(() => {
-    if (container) {
-      containerHeight = container.getBoundingClientRect().height
-    }
+  $effect(() => {
+    if (!container) return
+    containerHeight = container.getBoundingClientRect().height
+    const ro = new ResizeObserver(() => {
+      containerHeight = container!.getBoundingClientRect().height
+    })
+    ro.observe(container)
+    return () => ro.disconnect()
   })
 
   const handleProjectClick = (e: Event, project: Project) => {

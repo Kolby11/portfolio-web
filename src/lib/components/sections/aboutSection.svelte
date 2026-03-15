@@ -1,5 +1,8 @@
 <script>
   import { t } from 'svelte-i18n'
+  import AboutScene from '../about/aboutScene.svelte'
+  import { programmingLangugagesLogos } from '$lib/data/programmingLanguages'
+  import CodeSnippet from '../codeSnippet.svelte'
 </script>
 
 <section id="about">
@@ -13,9 +16,6 @@
         {$t('about.about_me')}
       </p>
     </div>
-    <!-- <AboutScene /> -->
+    <AboutScene logos={programmingLangugagesLogos} />
   </div>
-  <!-- <div class="absolute bottom-20 left-20 mt-10 opacity-0 transition duration-500 hover:opacity-70">
-    <CodeSnippet fontSize="small" />
-  </div> -->
 </section>

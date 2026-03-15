@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { type Project } from '$lib/types/project'
+  import ProjectPreview from '../projects/ProjectPreview.svelte'
+
   import { t } from 'svelte-i18n'
   import { projects } from '$lib/data/projects'
-  import ProjectsDisplayHorizontal from '../projects/projectsDisplayHorizontal.svelte'
-  import ProjectsDisplayVertical from '../projects/projectsDisplayVertical.svelte'
+  import ProjectsDisplayVertical from '$lib/components/projects/ProjectsDisplayVertical.svelte'
+  import MaterialSymbolsFolder from '~icons/material-symbols/folder'
+  import ProjectsDisplayHorizontal from '$lib/components/projects/ProjectsDisplayHorizontal.svelte'
 
-  let selectedProject = $state(projects[0])
+  let selectedProject: Project = $state(projects[0])
   const speed = 50
 </script>
 
@@ -12,64 +16,19 @@
   <h2>{$t('projects.title')}</h2>
   <div class="mt-6 h-fit w-full md:mt-10">
     <div class="flex w-full flex-col items-start justify-between gap-y-8 md:flex-row">
-      <ProjectsDisplayHorizontal {projects} {speed} bind:selectedProject class="md:hidden" />
-      <ProjectsDisplayVertical {projects} {speed} bind:selectedProject class="hidden w-fit md:block" />
-      <div class="projectDisplay">
-        <h3 class="text-center font-mono text-2xl md:text-3xl">{selectedProject.name}</h3>
-        <div class="imageContainer">
-          {#each selectedProject.images as image}
-            <img src={image} alt={image} class="mt-2 aspect-video w-full rounded-xl object-cover" />
-          {/each}
-        </div>
-        <p class="bg-background-secondary w-2/3 text-end">
-          {selectedProject.description}
-        </p>
+      <div class="flex w-fit flex-col items-end">
+        <ProjectsDisplayHorizontal {projects} {speed} bind:selectedProject class="md:hidden" />
+        <ProjectsDisplayVertical {projects} {speed} bind:selectedProject class="hidden w-fit md:block" />
+        <a
+          href="/projects"
+          class="text-primary flex items-center justify-center gap-2 px-4 py-4 font-mono text-sm underline transition duration-300 hover:drop-shadow-lg focus-visible:-translate-y-0.5 focus-visible:drop-shadow-lg"
+          title={$t('projects.view_all')}
+        >
+          <MaterialSymbolsFolder />
+          <span>{$t('projects.view_all')}</span>
+        </a>
       </div>
+      <ProjectPreview {selectedProject} />
     </div>
   </div>
 </section>
-
-<style lang="scss">
-  .projectDisplay {
-    width: 100%;
-    @media (width >= 40rem) {
-      width: 500px;
-      flex-shrink: 0;
-    }
-  }
-  .imageContainer {
-    padding: 8px;
-    position: relative;
-    width: 100%;
-    height: 225px;
-
-    img {
-      position: absolute;
-      width: clamp(150px, 65%, 250px);
-      max-height: 250px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s var(--default-transition-timing-function);
-      object-fit: cover;
-
-      &:nth-child(1) {
-        top: 0px;
-        left: 0px;
-        z-index: 2;
-        transform: rotate(-5deg);
-      }
-      &:nth-child(2) {
-        top: 60px;
-        right: 0px;
-        z-index: 1;
-        transform: rotate(3deg);
-      }
-
-      &:hover {
-        z-index: 100;
-        transform: scale(1.1) rotate(0deg);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      }
-    }
-  }
-</style>

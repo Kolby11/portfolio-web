@@ -6,6 +6,8 @@
 
   const loader = new GLTFLoader()
 
+  const { logos }: { logos: LogoObject[] } = $props()
+
   const defaultCameraPosition = 5
   const lookAtSensitivity = 0.05 // How quickly models turn to follow mouse (0-1)
   const lookAtDistance = 2 // How far ahead of the model to look

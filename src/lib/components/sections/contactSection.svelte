@@ -1,12 +1,13 @@
 <script lang="ts">
   import { t } from 'svelte-i18n'
+  import CodeSnippet from '../codeSnippet.svelte'
 </script>
 
 <section id="contact">
   <h2 class="w-full text-center font-sans font-bold">{$t('contact.title')}</h2>
   <div class="">
     <div class="flex flex-col items-center justify-center text-center">
-      <p class="text-text-light mt-6 max-w-[700px]">{$t('contact.text')}</p>
+      <p class="text-text-light mt-6 max-w-175">{$t('contact.text')}</p>
       <a
         class="border-primary border-primary bg-background hover:drop-shadow-primary focus-visible:drop-shadow-primary mt-14 -skew-x-12 rounded-md border-2 px-5 py-3 font-mono transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-lg focus-visible:-translate-y-0.5 focus-visible:drop-shadow-lg"
         href="mailto:mato.kollar2004@gmail.com"
@@ -15,6 +16,9 @@
       >
     </div>
   </div>
+  <!-- <div class="hidden py-6 opacity-0 transition duration-500 hover:opacity-70 lg:block">
+    <CodeSnippet fontSize="extra-small" />
+  </div> -->
 </section>
 
 <style lang="scss">

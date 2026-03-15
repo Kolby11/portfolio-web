@@ -125,6 +125,7 @@
   },
   "projects": {
     "title": "Projects",
+    "view_all": "View all projects",
     "description": "Welcome to the contact page"
   },
   "contact": {

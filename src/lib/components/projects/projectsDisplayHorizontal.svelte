@@ -1,24 +1,24 @@
 <script lang="ts">
   import type { Project } from '$lib/types/project'
   import type { HTMLAttributes } from 'svelte/elements'
-  import { onMount } from 'svelte'
 
-  type ProjectsDisplayVerticalProps = {
+  type ProjectsDisplayHorizontalProps = {
     projects: Project[]
     speed?: number
     selectedProject: Project
   } & HTMLAttributes<HTMLDivElement>
 
-  let { projects, speed = 50, selectedProject = $bindable(), ...rest }: ProjectsDisplayVerticalProps = $props()
+  let { projects, speed = 50, selectedProject = $bindable(), ...rest }: ProjectsDisplayHorizontalProps = $props()
 
-  let scrollEl: HTMLDivElement | undefined = $state()
-  let scrollWidth: number = $state(0)
+  let secondCopy: HTMLDivElement | undefined = $state()
+  let copyWidth: number = $state(0)
 
-  // duration = half width / speed
-  let duration: number = $derived(scrollWidth ? scrollWidth / (2 * speed) : 10)
+  // distance = exact pixel offset where copy 2 starts → perfectly seamless loop
+  let duration: number = $derived(copyWidth ? copyWidth / speed : 10)
 
-  onMount(() => {
-    if (scrollEl) scrollWidth = scrollEl.offsetWidth
+  $effect(() => {
+    if (!secondCopy) return
+    copyWidth = secondCopy.offsetLeft
   })
 
   const handleProjectClick = (e: Event, project: Project) => {
@@ -32,14 +32,26 @@
     }
     return filledProjects
   }
+
+  let filledProjects = $derived(fillProjectsForAnimation(projects))
 </script>
 
-<div {...rest} class={`h-fit overflow-x-visible overflow-y-hidden py-2 ${rest.class}`}>
-  <div bind:this={scrollEl} class="scroll-content-horizontal" style="--duration: {duration}s">
-    <div class="flex gap-2 transition">
-      {#each fillProjectsForAnimation(projects) as project, i}
+<div {...rest} class={`h-fit overflow-hidden py-2 ${rest.class}`}>
+  <div class="scroll-track" style="--duration: {duration}s; --copy-width: {copyWidth}px">
+    <div class="scroll-copy">
+      {#each filledProjects as project}
         <button
           onclick={e => handleProjectClick(e, project)}
+          class={`size-20 shadow-gray-50 transition duration-300 md:size-24 lg:size-28 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
+        >
+          <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
+        </button>
+      {/each}
+    </div>
+    <div bind:this={secondCopy} class="scroll-copy" aria-hidden="true">
+      {#each filledProjects as project}
+        <button
+          tabindex="-1"
           class={`size-20 shadow-gray-50 transition duration-300 md:size-24 lg:size-28 ${selectedProject.name === project.name ? 'scale-110' : 'hover:scale-105'}`}
         >
           <img src={project.images[0]} alt={project.name} class="aspect-square rounded-lg object-cover" />
@@ -51,28 +63,23 @@
 
 <style lang="scss">
   @keyframes scrollRight {
-    0% {
-      transform: translateX(0%);
+    from {
+      transform: translateX(0px);
     }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  @keyframes scrollLeft {
-    0% {
-      transform: translateX(-50%);
-    }
-    100% {
-      transform: translateX(0%);
+    to {
+      transform: translateX(calc(-1 * var(--copy-width)));
     }
   }
 
-  .scroll-content-horizontal {
+  .scroll-track {
+    display: flex;
+    gap: 0.5rem;
+    width: max-content;
     animation: scrollRight var(--duration, 10s) linear infinite;
   }
 
-  .scroll-content-horizontal-reverse {
-    animation: scrollLeft var(--duration, 10s) linear infinite;
+  .scroll-copy {
+    display: flex;
+    gap: 0.5rem;
   }
 </style>

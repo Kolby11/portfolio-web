@@ -2,11 +2,10 @@ import type { Project } from '$lib/types/project'
 
 export const projects: Project[] = [
   {
-    name: 'Cook Smart 1',
-    images: [
-      'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
-    ],
-    description: 'My first larger scale web app',
+    name: 'Robotic manipulator',
+    images: ['projects/robotic_manipulator_closeup.jpg', 'projects/robotic_manipulator_showcase.jpg'],
+    description:
+      'A robotic manipulator simulator built using three js as a demonstration of my knowledge of matrix transformations.',
   },
   {
     name: '2D shooter',
@@ -22,16 +21,6 @@ export const projects: Project[] = [
     images: [
       'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_1793,h_860/https://www.partnersoft.sk/wp-content/uploads/2020/04/mockup-vyvoj-mobilnych-app1.jpg',
     ],
-    description: 'My first larger scale web app',
-  },
-  {
-    name: 'PHP server',
-    images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s'],
-    description: 'My first larger scale web app',
-  },
-  {
-    name: 'Test 2',
-    images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4s8e6QUZaCZz452smjz7HWppjK1VoPuOUvh3OcxbDw&s'],
     description: 'My first larger scale web app',
   },
   {
