@@ -6,7 +6,7 @@
   }
 
   const { options, selectedIndex = 0, onSelectionChange }: TabListProps = $props()
-  const optionsArray = options || []
+  const optionsArray = $derived(options || [])
 
   // Use the selectedIndex prop to determine the current selection
   const selectedOption = $derived(optionsArray[selectedIndex] || (optionsArray.length > 0 ? optionsArray[0] : ''))

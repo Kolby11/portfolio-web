@@ -32,7 +32,7 @@
   "css.customData": [".vscode/tailwind.json"],
   "css.lint.unknownAtRules": "ignore",
   "scss.lint.unknownAtRules": "ignore",
-  "tailwindCSS.experimental.configFile": "./src/app.scss",
+  "tailwindCSS.experimental.configFile": "./src/app.css",
   "tailwindCSS.includeLanguages": {
     "svelte": "svelte",
   },

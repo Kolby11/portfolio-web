@@ -1,5 +1,5 @@
 <script lang="ts">
-  import '../app.scss'
+  import '../app.css'
   import '$lib/i18n' // Needed for i18n to work
 
   import Navbar from '$lib/components/global/navbar.svelte'
