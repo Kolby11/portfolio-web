@@ -4,9 +4,9 @@
 
   import { t } from 'svelte-i18n'
   import { projects } from '$lib/data/projects'
+  import ProjectsDisplayHorizontal from '$lib/components/projects/ProjectsDisplayHorizontal.svelte'
   import ProjectsDisplayVertical from '$lib/components/projects/ProjectsDisplayVertical.svelte'
   import MaterialSymbolsFolder from '~icons/material-symbols/folder'
-  import ProjectsDisplayHorizontal from '$lib/components/projects/ProjectsDisplayHorizontal.svelte'
 
   let selectedProject: Project = $state(projects[0])
   const speed = 50
