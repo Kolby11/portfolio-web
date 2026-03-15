@@ -4,8 +4,8 @@
 
   import { t } from 'svelte-i18n'
   import { projects } from '$lib/data/projects'
-  import ProjectsDisplayHorizontal from '$lib/components/projects/ProjectsDisplayHorizontal.svelte'
-  import ProjectsDisplayVertical from '$lib/components/projects/ProjectsDisplayVertical.svelte'
+  import ProjectsDisplayHorizontal from '$lib/components/projects/projectsDisplayHorizontal.svelte'
+  import ProjectsDisplayVertical from '$lib/components/projects/projectsDisplayVertical.svelte'
   import MaterialSymbolsFolder from '~icons/material-symbols/folder'
 
   let selectedProject: Project = $state(projects[0])
