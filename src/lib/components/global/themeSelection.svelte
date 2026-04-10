@@ -1,6 +1,6 @@
 <script lang="ts">
   import { THEME, theme } from '$lib/stores/themeStore'
-  import { t } from 'svelte-i18n'
+  import { t } from '$lib/i18n'
   import { gsap } from 'gsap'
   import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin'
   import MaterialSymbolsDarkModeOutlineRounded from '~icons/material-symbols-light/dark-mode-outline-rounded'

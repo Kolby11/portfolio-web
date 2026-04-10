@@ -1,6 +1,6 @@
 <script lang="ts">
   import { gsap } from 'gsap'
-  import { t } from 'svelte-i18n'
+  import { t } from '$lib/i18n'
 
   let loader: HTMLDivElement | undefined = $state()
   let nameEl: HTMLSpanElement | undefined = $state()

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { seniority } from '$lib/data/translations'
+  import type { seniority } from '$lib/data/translations'
 
   type Coordinates = {
     x: number

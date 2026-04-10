@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { t } from 'svelte-i18n'
+  import { t } from '$lib/i18n'
 
   type NewsTickerProps = {
     items: string[]

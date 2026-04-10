@@ -1,11 +1,10 @@
 <script lang="ts">
   import '../app.css'
-  import '$lib/i18n' // Needed for i18n to work
 
   import Navbar from '$lib/components/global/navbar.svelte'
   import Scrollbar from '$lib/components/global/scrollbar.svelte'
 
-  import { t } from 'svelte-i18n'
+  import { t } from '$lib/i18n'
   import SocialsDisplay from '$lib/components/global/socialsDisplay.svelte'
   import { socialLinks } from '$lib/data/socials'
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import LanguageSelection from './languageSelection.svelte'
   import { smoothScroll } from '$lib/actions/smoothScroll'
-  import { t } from 'svelte-i18n'
+  import { t } from '$lib/i18n'
   import MaterialSymbolsLightCloseRounded from '~icons/material-symbols-light/close-rounded'
   import MaterialSymbolsLightMenuRounded from '~icons/material-symbols-light/menu-rounded'
   import ThemeSelection from './themeSelection.svelte'

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { json, t } from 'svelte-i18n'
+  import { json, t } from '$lib/i18n'
   import WorkShowcase from '../experience/workShowcase.svelte'
   import TabList from '../global/tabList.svelte'
 

@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { t } from 'svelte-i18n'
-
   type WorkShowcaseProps = {
     work: {
       role: string
@@ -19,7 +17,7 @@
 
 <div class="max-w-137.5">
   <h3 class="text-xl font-semibold">
-    {$t(work.role)}
+    {work.role}
     <a href={work.company.link} target="_blank" class="text-primary">
       @ {work.company.title}
     </a>

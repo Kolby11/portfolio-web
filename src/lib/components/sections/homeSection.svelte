@@ -1,5 +1,5 @@
 <script>
-  import { locale, t } from 'svelte-i18n'
+  import { locale, t } from '$lib/i18n'
   import NewsTicker from '../global/newsTicker.svelte'
 
   import MaterialSymbolsKeyboardArrowDownRounded from '~icons/material-symbols/keyboard-arrow-down-rounded'

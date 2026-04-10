@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { locale, locales } from 'svelte-i18n'
+  import { locale, locales } from '$lib/i18n'
   type LanguageSelectionProps = {
     class?: string
   }

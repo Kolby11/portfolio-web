@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { t } from 'svelte-i18n'
+  import { t } from '$lib/i18n'
   import CodeSnippet from '../codeSnippet.svelte'
 </script>
 
