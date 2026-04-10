@@ -17,11 +17,11 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@inlang/paraglide-js": "^2.15.3",
-		"@inlang/plugin-message-format": "^4.4.0",
 		"@iconify-json/lucide": "1.2.97",
 		"@iconify-json/material-symbols": "1.2.62",
 		"@iconify-json/material-symbols-light": "1.2.62",
+		"@inlang/paraglide-js": "^2.15.3",
+		"@inlang/plugin-message-format": "^4.4.0",
 		"@sveltejs/adapter-auto": "7.0.1",
 		"@sveltejs/adapter-node": "5.5.4",
 		"@sveltejs/enhanced-img": "0.10.3",
