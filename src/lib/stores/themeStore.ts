@@ -7,6 +7,10 @@ export enum THEME {
   purple = 'purple',
 }
 
+type DocumentWithViewTransition = Document & {
+  startViewTransition?: (callback: () => void) => { finished: Promise<void> }
+}
+
 function generateThemeClass(value: THEME) {
   return 'theme-' + value
 }
@@ -38,6 +42,23 @@ function applyThemeClass(value: THEME) {
   }
 }
 
+function updateThemeClass(value: THEME, withTransition = false) {
+  if (!browser) {
+    return
+  }
+
+  const documentWithViewTransition = document as DocumentWithViewTransition
+
+  if (!withTransition || typeof documentWithViewTransition.startViewTransition !== 'function') {
+    applyThemeClass(value)
+    return
+  }
+
+  documentWithViewTransition.startViewTransition(() => {
+    applyThemeClass(value)
+  })
+}
+
 export function initializeTheme() {
   if ('theme' in localStorage && isValidTheme(localStorage.theme)) {
     applyThemeClass(localStorage.getItem('theme') as THEME)
@@ -51,13 +72,15 @@ export function initializeTheme() {
 
 // Initialize theme on store creation
 if (browser) {
-  applyThemeClass(get(theme))
+  updateThemeClass(get(theme))
 }
 
 // Reactively update and store the theme selection
+let hasMountedTheme = false
 theme.subscribe(value => {
   if (browser) {
     localStorage.setItem('theme', value)
-    applyThemeClass(value)
+    updateThemeClass(value, hasMountedTheme)
+    hasMountedTheme = true
   }
 })
