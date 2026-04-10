@@ -31,17 +31,17 @@
           <a
             href={resume_path}
             target="_blank"
-            class="border-primary border-primary bg-background hover:drop-shadow-primary focus-visible:drop-shadow-primary ml-1 -skew-x-12 rounded-md border-2 px-5 py-3 font-mono transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-lg focus-visible:-translate-y-0.5 focus-visible:drop-shadow-lg"
+            class="home-cta home-cta-primary ml-1 bg-background px-5 py-3 font-mono"
             title={$t('home.resume')}>{$t('home.resume')}</a
           >
           <a
             use:smoothScroll
             href="#about"
-            class="bg-background border-text group hover:drop-shadow-text focus-visible:drop-shadow-text flex h-12 w-12 -skew-x-12 items-center justify-center overflow-hidden rounded-md border-2 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-lg focus-visible:-translate-y-0.5 focus-visible:drop-shadow-lg"
+            class="home-cta home-cta-text group bg-background flex h-12 w-12 items-center justify-center overflow-hidden"
           >
             <MaterialSymbolsKeyboardArrowDownRounded
               font-size={35}
-              class="text-text mt-1 transition group-focus-visible:translate-y-0.5"
+              class="home-cta-icon text-text mt-1"
             />
           </a>
         </div>
@@ -90,6 +90,61 @@
         filter: grayscale(0%);
         transform: scale(1.05);
       }
+    }
+  }
+
+  .home-cta {
+    transform: translateY(-2px) skewX(-12deg);
+    border-radius: 0.375rem;
+    border: 2px solid var(--color-text);
+    filter: drop-shadow(0 12px 18px color-mix(in srgb, var(--color-text) 12%, transparent));
+    transition:
+      transform 0.16s var(--expo-out),
+      filter 0.16s var(--expo-out),
+      box-shadow 0.16s var(--expo-out);
+    will-change: transform, filter;
+
+    &:hover,
+    &:focus-visible {
+      animation: home-cta-hover 1.2s ease-in-out infinite alternate;
+    }
+
+    &:active {
+      animation: none;
+      transform: translateY(0) skewX(-12deg);
+      filter: none;
+    }
+  }
+
+  .home-cta-primary {
+    border-color: var(--color-primary);
+    filter: drop-shadow(0 12px 18px color-mix(in srgb, var(--color-primary) 45%, transparent));
+  }
+
+  .home-cta-text {
+    border-color: var(--color-text);
+    filter: drop-shadow(0 12px 18px color-mix(in srgb, var(--color-text) 30%, transparent));
+  }
+
+  :global(.home-cta-icon) {
+    transition: transform 0.16s var(--expo-out);
+  }
+
+  .home-cta:hover :global(.home-cta-icon),
+  .home-cta:focus-visible :global(.home-cta-icon) {
+    transform: translateY(2px);
+  }
+
+  .home-cta:active :global(.home-cta-icon) {
+    transform: translateY(0);
+  }
+
+  @keyframes home-cta-hover {
+    from {
+      transform: translateY(-2px) skewX(-12deg);
+    }
+    to {
+      transform: translateY(-5px) skewX(-12deg);
     }
   }
 </style>
