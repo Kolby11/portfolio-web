@@ -2,7 +2,6 @@
   import { t } from '$lib/i18n'
   import AboutScene from '../about/aboutScene.svelte'
   import { programmingLangugagesLogos } from '$lib/data/programmingLanguages'
-  import CodeSnippet from '../codeSnippet.svelte'
 </script>
 
 <section id="about">

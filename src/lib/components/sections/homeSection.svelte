@@ -4,6 +4,7 @@
 
   import MaterialSymbolsKeyboardArrowDownRounded from '~icons/material-symbols/keyboard-arrow-down-rounded'
   import { smoothScroll } from '$lib/actions/smoothScroll'
+  import MonoScramble from '$lib/components/global/monoScramble.svelte'
 
   const FIELDS = ['application_development', 'software_engineering', 'dev_ops', 'robotics']
 
@@ -26,7 +27,15 @@
           {$t('personal_info.name')}
         </h1>
         <NewsTicker items={FIELDS.map(item => `home.fields.${item}`)} />
-        <p class="mt-8 text-left text-sm md:text-lg">{@html $t('home.description')}</p>
+        <p class="mt-8 text-left text-sm md:text-lg">
+          {$t('home.description_before')}<MonoScramble
+            text={$t('home.description_link')}
+            tag="a"
+            href="#"
+            target="_blank"
+            class="text-primary underline-expand-start"
+          />{$t('home.description_after')}
+        </p>
         <div class="mt-10 flex items-stretch gap-x-4 self-start">
           <a
             href={resume_path}

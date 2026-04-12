@@ -9,17 +9,41 @@
   const { logos }: { logos: LogoObject[] } = $props()
 
   const defaultCameraPosition = 5
-  const lookAtSensitivity = 0.05 // How quickly models turn to follow mouse (0-1)
-  const lookAtDistance = 2 // How far ahead of the model to look
+  const lookAtSensitivity = 0.05
+  const lookAtDistance = 2
+
+  // Floating animation
+  const floatAmplitude = 0.12
+  const floatSpeed = 0.6
+
+  // Mouse push
+  const pushRadius = 1
+  const pushStrength = 2.5
+  const springStrength = 0.02
+  const damping = 0.88
+
+  // Cursor dot-sphere
+  const dotSphereRadius = 0.5
+  const dotCount = 120
+
+  interface LogoData {
+    model: THREE.Object3D
+    basePosition: THREE.Vector3
+    velocity: THREE.Vector3
+    timeOffset: number
+  }
 
   let node: HTMLDivElement
   let scene: THREE.Scene
   let camera: THREE.PerspectiveCamera
   let renderer: THREE.WebGLRenderer
-  let logoModels: THREE.Object3D[] = []
+  let logoData: LogoData[] = []
+  let startTime = 0
+  let cursorGroup: THREE.Group
 
   let mousePosition = $state(new THREE.Vector2(0, 0))
   let worldMousePosition = $state(new THREE.Vector3())
+  let mouseOverCanvas = false
 
   onMount(() => {
     if (typeof window === 'undefined' || !node) {
@@ -32,6 +56,8 @@
 
     window.addEventListener('resize', onWindowResize)
     window.addEventListener('mousemove', handleMouseMove)
+    node.addEventListener('mouseenter', () => { mouseOverCanvas = true })
+    node.addEventListener('mouseleave', () => { mouseOverCanvas = false })
 
     return () => {
       window.removeEventListener('resize', onWindowResize)
@@ -48,6 +74,7 @@
 
   async function initializeAndRender() {
     await setupScene()
+    startTime = performance.now()
     animate()
   }
 
@@ -69,6 +96,37 @@
 
     await Promise.all(logos.map(loadLogo))
 
+    // --- Cursor: 3D dot sphere ---
+    cursorGroup = new THREE.Group()
+
+    // Distribute dots evenly on a sphere using Fibonacci lattice
+    const positions = new Float32Array(dotCount * 3)
+    const golden = Math.PI * (3 - Math.sqrt(5))
+    for (let i = 0; i < dotCount; i++) {
+      const y = 1 - (i / (dotCount - 1)) * 2
+      const r = Math.sqrt(1 - y * y)
+      const theta = golden * i
+      positions[i * 3]     = Math.cos(theta) * r * dotSphereRadius
+      positions[i * 3 + 1] = y * dotSphereRadius
+      positions[i * 3 + 2] = Math.sin(theta) * r * dotSphereRadius
+    }
+
+    const geo = new THREE.BufferGeometry()
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+    const mat = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.045,
+      transparent: true,
+      opacity: 0.7,
+      sizeAttenuation: true
+    })
+
+    const dots = new THREE.Points(geo, mat)
+    cursorGroup.add(dots)
+    cursorGroup.visible = false
+    scene.add(cursorGroup)
+
     camera.position.z = defaultCameraPosition
   }
 
@@ -79,12 +137,9 @@
 
       const model = gltf.scene
 
-      // Random positioning within a defined area (X and Y only)
-      const spreadX = 4 // How wide the random area should be
-      const spreadY = 3 // How tall the random area should be
-
-      // Generate random positions with some minimum distance between models
-      const minDistance = 1.5 // Minimum distance between models
+      const spreadX = 4
+      const spreadY = 3
+      const minDistance = 1.5
       let validPosition = false
       let attempts = 0
       let randomX = 0,
@@ -94,8 +149,7 @@
         randomX = (Math.random() - 0.5) * spreadX
         randomY = (Math.random() - 0.5) * spreadY
 
-        // Check distance from other models (only X and Y)
-        validPosition = logoModels.every(existingModel => {
+        validPosition = logoData.every(({ model: existingModel }) => {
           const distance = new THREE.Vector2(randomX, randomY).distanceTo(
             new THREE.Vector2(existingModel.position.x, existingModel.position.y)
           )
@@ -105,7 +159,6 @@
         attempts++
       }
 
-      // If we couldn't find a valid random position, fall back to grid
       if (!validPosition) {
         const spacing = 2
         const itemsPerRow = Math.ceil(Math.sqrt(logos.length))
@@ -135,7 +188,12 @@
       })
 
       scene.add(model)
-      logoModels.push(model)
+      logoData.push({
+        model,
+        basePosition: model.position.clone(),
+        velocity: new THREE.Vector3(),
+        timeOffset: Math.random() * Math.PI * 2
+      })
     } catch (error) {
       console.error(`Error loading logo: ${logo.glbPath}`, error)
     }
@@ -182,21 +240,52 @@
   function animate() {
     requestAnimationFrame(animate)
 
-    logoModels.forEach(model => {
-      const modelPosition = model.position.clone()
-      const targetPosition = worldMousePosition.clone()
+    const elapsed = (performance.now() - startTime) / 1000
 
+    logoData.forEach(({ model, basePosition, velocity, timeOffset }) => {
+      // --- Floating: sine/cosine drift around base position ---
+      const floatX = Math.cos(elapsed * floatSpeed * 0.7 + timeOffset) * floatAmplitude
+      const floatY = Math.sin(elapsed * floatSpeed + timeOffset) * floatAmplitude
+      const floatTarget = basePosition.clone().add(new THREE.Vector3(floatX, floatY, 0))
+
+      // --- Mouse repulsion ---
+      const toMouse = model.position.clone().sub(worldMousePosition)
+      toMouse.z = 0
+      const dist = toMouse.length()
+      if (dist < pushRadius && dist > 0.001) {
+        const force = ((pushRadius - dist) / pushRadius) * pushStrength
+        velocity.addScaledVector(toMouse.normalize(), force * 0.016)
+      }
+
+      // --- Spring back toward float target ---
+      const toTarget = floatTarget.clone().sub(model.position)
+      velocity.addScaledVector(toTarget, springStrength)
+
+      // --- Damping & integrate ---
+      velocity.multiplyScalar(damping)
+      model.position.add(velocity)
+
+      // --- LookAt mouse ---
       const currentLookAt = new THREE.Vector3()
       model.getWorldDirection(currentLookAt)
-
-      const desiredDirection = targetPosition.clone().sub(modelPosition).normalize()
-
-      // Smooth interpolation between current direction and desired direction
+      const desiredDirection = worldMousePosition.clone().sub(model.position).normalize()
       currentLookAt.lerp(desiredDirection, lookAtSensitivity)
-
-      // Apply the lookAt
-      model.lookAt(modelPosition.clone().add(currentLookAt))
+      model.lookAt(model.position.clone().add(currentLookAt))
     })
+
+    // --- Cursor dot sphere ---
+    if (cursorGroup) {
+      cursorGroup.visible = mouseOverCanvas
+      if (mouseOverCanvas) {
+        cursorGroup.position.copy(worldMousePosition)
+        // Two-axis slow rotation for a 3D globe feel
+        cursorGroup.rotation.y = elapsed * 0.5
+        cursorGroup.rotation.x = elapsed * 0.3
+        // Subtle pulse on the dot opacity
+        const dots = cursorGroup.children[0] as THREE.Points
+        ;(dots.material as THREE.PointsMaterial).opacity = 0.55 + Math.sin(elapsed * 2.5) * 0.15
+      }
+    }
 
     renderer.render(scene, camera)
   }
