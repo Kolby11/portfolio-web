@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import { onMount, tick } from 'svelte'
   import { t } from '$lib/i18n'
 
   type NewsTickerProps = {
@@ -7,45 +7,53 @@
     pixelPerSecond?: number
   }
 
-  const { items, pixelPerSecond = 100 }: NewsTickerProps = $props()
+  const { items, pixelPerSecond = 70 }: NewsTickerProps = $props()
 
   let duplicatedItems = $derived([...items, ...items, ...items])
-  let tickerElement: HTMLUListElement
-  let containerWidth = $state(0)
+  let tickerElement: HTMLUListElement | undefined = $state()
+  let containerElement: HTMLDivElement
   let contentWidth = $state(0)
+  let animationKey = $state(0)
 
   onMount(() => {
     const updateDimensions = () => {
-      if (tickerElement) {
-        containerWidth = tickerElement.parentElement?.offsetWidth || 0
+      if (!tickerElement) return
+      // Temporarily remove animation so scrollWidth reflects natural content size
+      tickerElement.style.animation = 'none'
+      requestAnimationFrame(() => {
+        if (!tickerElement) return
         contentWidth = tickerElement.scrollWidth
-      }
+        tickerElement.style.animation = ''
+        animationKey++
+      })
     }
+
+    const observer = new ResizeObserver(updateDimensions)
+    if (containerElement) observer.observe(containerElement)
 
     updateDimensions()
-    window.addEventListener('resize', updateDimensions)
 
-    return () => {
-      window.removeEventListener('resize', updateDimensions)
-    }
+    return () => observer.disconnect()
   })
 
   let endPos = $derived(-contentWidth / 3)
-  let animationDuration = $derived(Math.abs(endPos) / pixelPerSecond)
+  let animationDuration = $derived(contentWidth > 0 ? Math.abs(endPos) / pixelPerSecond : 0)
 </script>
 
 <div class="@container grow">
-  <div class="w-full overflow-hidden">
-    <ul
-      bind:this={tickerElement}
-      class="newsTicker text-text-light flex items-center gap-x-2 whitespace-nowrap @md:gap-x-4 @md:text-lg @lg:text-xl @xl:text-2xl"
-      style="--end-pos: {endPos}px; --animation-duration: {animationDuration}s;"
-    >
-      {#each duplicatedItems as item, idx}
-        <li class="shrink-0">{$t(item)}</li>
-        <div class="bg-text-light size-1.5 shrink-0 rounded-full @md:size-2"></div>
-      {/each}
-    </ul>
+  <div bind:this={containerElement} class="w-full overflow-hidden">
+    {#key animationKey}
+      <ul
+        bind:this={tickerElement}
+        class="newsTicker text-text-light flex items-center gap-x-2 whitespace-nowrap @md:gap-x-4 @md:text-lg @lg:text-xl @xl:text-2xl"
+        style="--end-pos: {endPos}px; --animation-duration: {animationDuration}s;"
+      >
+        {#each duplicatedItems as item}
+          <li class="shrink-0">{$t(item)}</li>
+          <div class="bg-text-light size-1.5 shrink-0 rounded-full @md:size-2"></div>
+        {/each}
+      </ul>
+    {/key}
   </div>
 </div>
 

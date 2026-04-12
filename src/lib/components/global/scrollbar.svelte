@@ -9,24 +9,47 @@
   let scrollbar: HTMLElement | null
   let scrollbarThumb: HTMLElement | null
 
+  function getScrollHeight() {
+    return Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    ) - window.innerHeight
+  }
+
   onMount(() => {
     scrollbar = document.getElementById('scrollbar')
     scrollbarThumb = document.getElementById('scrollbarThumb')
 
-    windowHeight = document.body.scrollHeight - window.innerHeight
     currentPos = window.scrollY
+    windowHeight = getScrollHeight()
+
+    // Re-measure after first paint so late-loading content is included
+    requestAnimationFrame(() => {
+      windowHeight = getScrollHeight()
+      updateScrollBarPos()
+    })
 
     window.addEventListener('scroll', () => {
+      windowHeight = getScrollHeight()
       currentPos = window.scrollY
       updateScrollBarPos()
     })
 
     window.addEventListener('resize', () => {
-      windowHeight = document.body.scrollHeight - window.innerHeight
+      windowHeight = getScrollHeight()
       updateScrollBarPos()
     })
 
+    // Catch dynamic height changes (images loading, sections expanding)
+    const ro = new ResizeObserver(() => {
+      windowHeight = getScrollHeight()
+      updateScrollBarPos()
+    })
+    ro.observe(document.body)
+
     updateScrollBarPos()
+
+    return () => ro.disconnect()
   })
 
   function updateScrollBarPos() {
@@ -40,6 +63,7 @@
 
   function handleMouseDown(e: MouseEvent) {
     if (!isDragging && scrollbarThumb && scrollbar) {
+      windowHeight = getScrollHeight()
       isDragging = true
       startYOffset = e.clientY - scrollbarThumb.getBoundingClientRect().top
       window.addEventListener('mousemove', handleDrag)
